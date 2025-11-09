@@ -1,5 +1,5 @@
 <header class="py-4 sticky top-0 left-0 w-full bg-white  z-10 shadow-md">
-    <nav x-data="open: false" class="w-full"></nav>
+    <nav class="w-full"></nav>
     <div class="max-w-6xl mx-auto px-5 flex justify-between  items-center">
 
         <!-- Logo -->
