@@ -5,8 +5,6 @@ namespace Database\Seeders;
 use App\Models\User;
 use Database\Seeders\Core\CareersSeeder;
 use Database\Seeders\Core\GeographySeeder;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Database\Seeders\Core\UpdateBoliviaStatesToSpanishSeeder;
 use Illuminate\Database\Seeder;
 use Database\Seeders\Core\PermissionSeeder;
 use Database\Seeders\Core\ShiftsSeeder;
