@@ -18,9 +18,9 @@
         <x-landing.ui.menu-option href="#testimonios">
             Testimonios
         </x-landing.ui.menu-option>
-        <x-landing.ui.menu-option href="#contactos">
+        {{-- <x-landing.ui.menu-option href="#contactos">
             Contactos
-        </x-landing.ui.menu-option>
+        </x-landing.ui.menu-option> --}}
         @auth
             <x-landing.ui.menu-option-important href="{{ route('dashboard') }}">
                 Ingresar

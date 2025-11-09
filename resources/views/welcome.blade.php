@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
+    class="scroll-smooth">
 
 <head>
     <meta charset="utf-8">
@@ -22,7 +23,7 @@
     <x-landing.caracteristicas></x-landing.caracteristicas>
     <x-landing.citas></x-landing.citas>
     <x-landing.testimonios></x-landing.testimonios>
-    <x-landing.contacto></x-landing.contacto>
+    {{-- <x-landing.contacto></x-landing.contacto> --}}
     <x-landing.footer></x-landing.footer>
 </body>
 
