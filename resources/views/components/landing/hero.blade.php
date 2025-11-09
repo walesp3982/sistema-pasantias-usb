@@ -1,4 +1,4 @@
-<section id="inicio" class="pt-20 pb-20 bg-gradient-to-br from-gray-100 to-blue-100">
+<section id="inicio" class="pt-40 pb-40 bg-gradient-to-br from-gray-100 to-blue-100">
 
     <div class="max-w-6xl mx-auto px-5 flex flex-col md:flex-row items-center justify-between">
     <!-- Contenido -->
