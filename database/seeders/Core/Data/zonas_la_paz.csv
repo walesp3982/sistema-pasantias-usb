@@ -1,0 +1,189 @@
+id,zona,distrito
+0,Obispo Bosque,4
+1,Pasankeri,4
+2,Tupac Amaru,4
+3,Inca Llojeta,4
+4,Alpacoma,4
+5,Las Lomas,4
+6,Sopocachi Alto,3
+7,Villa Nuevo Potosí,5
+8,San Pedro Alto,6
+9,Llojeta,4
+10,Bajo Llojeta,4
+11,Tembladerani,4
+12,Pacasa,14
+13,Alto Obrajes,21
+14,Cotahuma,4
+15,Faro Murillo,5
+16,Alto Pura Pura,10
+17,Bello Horizonte,6
+18,Alto Pura Pura San Sebastián,10
+19,Central,1
+20,El Rosario,1
+21,San Sebastián,1
+22,Santa Barbara,1
+23,San Jorge,1
+24,Miraflores,2
+25,Miraflores Sur,2
+26,Huacallani,20
+27,Alto Tacagua,5
+28,Achachicala,11
+29,Agua de la Vida,11
+30,Villa Antofagasta,9
+31,Alto Vino Tinto,11
+32,Sagrado Corazón de Jesús,7
+33,Challapampa,11
+34,Las Nieves,11
+35,Mariscal Santa Cruz,8
+36,14 de Septiembre,7
+37,Limanipata,11
+38,El Tejar,8
+39,Plan Autopista,11
+40,Callampaya,8
+41,Huacataqui,9
+42,Tangani,11
+43,La Portada,9
+44,Munaypata,9
+45,Villa de la Cruz,11
+46,Chijini,7
+47,Alto Villa Victoria,9
+48,Kantutani Bajo Llojeta,21
+49,Chualluma,9
+50,Kamirpata,11
+51,Villa 18 de Mayo,11
+52,Villa Victoria,8
+53,Villa Pabón,11
+54,3 de Mayo,13
+55,Pampahasi,16
+56,Chuquiaguillo,13
+57,Huaychani,13
+58,Poqueni,12
+59,Santa Rosa de Tiji,12
+60,Sopocachi,3
+61,Sopocachi Bajo,3
+62,San Antonio,15
+63,23 de Marzo La Hoyada,7
+64,Barrio Lindo,7
+65,Villa Fátima,13
+66,Chamoco Chico,7
+67,Gran Poder,7
+68,Los Andes,7
+69,Obispo Indaburo,7
+70,Achumani,18
+71,Huayllani,18
+72,Kupini,17
+73,Meseta Achumani,18
+74,San Simón,14
+75,Kellumani,18
+76,Valle de las Flores,16
+77,Chasquipampa,19
+78,Alto Següencoma,21
+79,Obrajes,21
+80,Achumani Porvenir Kantutas,18
+81,Següencoma Bajo,21
+82,Pedregal,19
+83,Ventilla,21
+84,Vino Tinto,11
+85,Casegural,19
+86,Zona Norte,11
+87,Cupilupaca,12
+88,Las Delicias,12
+89,Huancané,19
+90,Huanu Huanuni,21
+91,San Juan Lazareto,12
+92,Santa Rosa,12
+93,Kesini,19
+94,Rosasani,12
+95,San Juan,12
+96,Los Pinos,18
+97,Santiago de Lacaya,12
+98,San Miguel,18
+99,Virgen de la Merced,19
+100,Kalajahuira,13
+101,Kochapampa,13
+102,El Vergel,18
+103,Villa El Carmen,13
+104,Amor de Dios,20
+105,Alto Mcal. Santa Cruz,9
+106,Alto Munaypata Cusicancha,9
+107,Unión Alianza,9
+108,Rincón La Portada,9
+109,Alto Tejar,9
+110,24 de Junio,14
+111,Condorini,13
+112,Valle Hermoso,14
+113,Villa Copacabana,14
+114,Primavera,16
+115,Villa Salomé,16
+116,8 de Diciembre,3
+117,Cuarto Centenario,17
+118,Belén,6
+119,Alto Achumani,18
+120,Alto Irpavi,18
+121,Calacoto,18
+122,Ciudadela Stronguista,18
+123,Condores Lakota,18
+124,Cota Cota,18
+125,San Juan de Cotahuma,5
+126,San Pedro,6
+127,Huantaqui,18
+128,Irpavi,18
+129,Tacagua,5
+130,Irpavi II,18
+131,Jurenko,18
+132,Chijipata,18
+133,Koani,18
+134,Los Rosales,18
+135,Jardines del Sur,18
+136,Ovejuyo,19
+137,Ovejuyo El Arenal,19
+138,Villa Apaña,19
+139,Wilacota,19
+140,Lomas de Achumani,19
+141,Aranjuéz,20
+142,Isla Verde,20
+143,Alto Ciudadela,10
+144,Agua de la Vida Norte,12
+145,Caja Ferroviaria,10
+146,Alto La Merced,13
+147,Ciudadela Ferroviaria,10
+148,Jupapina,20
+149,Pura Pura,10
+150,27 de Mayo,12
+151,Alto Las Delicias,12
+152,Barrio Gráfico,13
+153,Barrio Petrolero,13
+154,Mallasa,20
+155,La Mercéd,13
+156,Mallasilla,20
+157,Miraflores Alto,12
+158,Urkupiña,13
+159,Ciudad del Niño,16
+160,Chiaraque,20
+161,Callapa,17
+162,Escobar Uría,15
+163,Aruntaya,18
+164,San Isidro,17
+165,Auquisamaña,18
+166,Alto Calacoto,18
+167,Villa Armonía,17
+168,Villa Litoral,17
+169,Bella Vista,21
+170,Bolognia,21
+171,Caliri,21
+172,Coqueni,19
+173,Gramadal,21
+174,Virgen de Copacabana,19
+175,Rosas de Calacalani,19
+176,Kupillani,19
+177,La Florida,18
+178,Los Rosales Alto Calacoto,19
+179,Alto Sagrado Corazón de Jesús,7
+180,Alto La Florida,18
+181,Santa Rita,18
+182,San Alberto,21
+183,Chinchaya,22
+184,Chicani,22
+185,Alto Pura Pura Alto San Pedro,10
+186,Lipari,20
+187,Kantutani,3
