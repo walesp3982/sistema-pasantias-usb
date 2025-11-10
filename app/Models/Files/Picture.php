@@ -13,6 +13,9 @@ class Picture extends Model
         'uuid',
         'name',
         'description',
+        'path',
+        'path_medium',
+        'path_thumbnail',
     ];
 
     public function pictureable() {

@@ -3,6 +3,9 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Enums\RolesEnum;
+use App\Models\Files\Picture;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -45,5 +48,15 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function profile() {
+        return $this->morphOne(Picture::class, 'pictureable');
+    }
+
+    public function role() {
+        $roleName = $this->getRoleNames()->first();
+        $roleEnum = RolesEnum::from($roleName);
+        return $roleEnum;
     }
 }
