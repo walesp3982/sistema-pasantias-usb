@@ -13,7 +13,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="antialiased">
+<body class="antialiased scroll-smooth">
     <x-landing.navbar>
     </x-landing.navbar>
     <x-landing.hero></x-landing.hero>

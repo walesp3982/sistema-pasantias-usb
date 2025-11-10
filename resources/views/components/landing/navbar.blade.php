@@ -1,4 +1,4 @@
-<header class="py-4 sticky top-0 left-0 w-full bg-white  z-10 shadow-md">
+<header class="py-4 sticky top-0 left-0 w-full bg-white  z-20 shadow-md">
     <nav x-data="open: false" class="w-full">
         <x-landing.ui.menu>
         </x-landing.ui.menu>
@@ -44,8 +44,10 @@
             const isOpen = mobileMenu.classList.contains('translate-y-0');
 
             if (isOpen) {
+                mobileMenu.style.pointerEvents='none';
                 closeMenu();
             } else {
+                mobileMenu.style.pointerEvents='auto';
                 openMenu();
             }
         }
