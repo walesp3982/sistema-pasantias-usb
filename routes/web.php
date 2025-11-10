@@ -14,9 +14,14 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
-Route::middleware('auth')->group( function() {
+Route::middleware('auth')->group(function () {
     Route::get('imagenes/private/{id}', [ImageController::class, 'show'])
         ->name('private.image');
+});
+
+Route::middleware('role:student')->group(function () {
+    Route::view('configuracion', 'config')->name('config');
+    Route::view('pasantias', 'estudiante.pasantias')->name('search.intership');
 });
 
 Route::post('register/send', [StudentController::class, "create"])
@@ -24,4 +29,4 @@ Route::post('register/send', [StudentController::class, "create"])
 // Route::get('test', function () {
 //     return $asdf;
 // });
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

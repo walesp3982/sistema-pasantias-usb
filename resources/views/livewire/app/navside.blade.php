@@ -5,12 +5,12 @@
                 @livewire('app.navbar-profile')
             </div>
             <ul class="list-none p-0 m-0">
-                <x-ui-app.options-navside icon="fa-solid fa-house" href="#">
+                <x-ui-app.options-navside icon="fa-solid fa-house" href="{{ route('dashboard') }}">
                     Inicio
                 </x-ui-app.options-navside>
 
-                <x-ui-app.options-navside icon="fa-solid fa-file-lines" href="#">
-                    Informes
+                <x-ui-app.options-navside icon="fa-solid fa-file-lines" href="{{ route('search.intership') }}">
+                    Buscar pasantías
                 </x-ui-app.options-navside>
 
                 <x-ui-app.options-navside icon="fa-solid fa-list-check" href="#">
@@ -21,7 +21,7 @@
                     Reportes
                 </x-ui-app.options-navside>
 
-                <x-ui-app.options-navside icon="fa-solid fa-gear" href="#">
+                <x-ui-app.options-navside icon="fa-solid fa-gear" href="{{ route('config') }}">
                     Configuraciones
                 </x-ui-app.options-navside>
             </ul>

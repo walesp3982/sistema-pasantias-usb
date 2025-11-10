@@ -41,7 +41,7 @@ return new class extends Migration
                 ->constrained()
                 ->onDelete('cascade');
             $table->timestamps();
-
+            $table->integer('ru')->unique();
             $table->foreignId("management_id")->nullable()->constrained()->onDelete('cascade');
             $table->integer('semester');
             $table->foreignId("career_id")->constrained()->onDelete('cascade');
