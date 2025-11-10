@@ -137,6 +137,9 @@
                 <i class="fa-solid fa-bars"></i>
             </div>
             <div>
+                <img src="{{ Vite::asset("resources/images/logo-usb.png") }}" alt="" class="h-12 w-auto ml-5">
+            </div>
+            <div>
                 <h1 class="text-xl text-blue-600 pl-5 mb-1">Universidad Salesiana de Bolivia</h1>
                 <h2 class="text-base text-gray-500 pl-5 font-normal">Sistema Web de Control de Pasantías</h2>
             </div>
