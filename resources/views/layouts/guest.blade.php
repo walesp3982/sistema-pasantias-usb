@@ -20,8 +20,8 @@
 
     <x-guest.navbar></x-guest.navbar>
 
-    <section class="h-[calc(100vh-80px)] flex items-center justify-center bg-gray-100">
-        <div class="flex flex-col lg:flex-row w-full max-w-5xl bg-white rounded-3xl shadow-lg overflow-hidden">
+    <section class="flex items-center justify-center bg-gray-100 min-h-screen">
+        <div class="flex flex-col lg:flex-row w-full max-w-5xl bg-white rounded-3xl shadow-lg">
             <div class="flex justify-center items-center w-full lg:w-1/2 p-8 md:p-12">
                 <div class="w-full max-w-md">
                     {{ $slot }}

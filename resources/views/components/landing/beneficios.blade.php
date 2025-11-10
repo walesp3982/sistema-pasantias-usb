@@ -33,9 +33,11 @@
                     </ul>
                 </div>
 
-                <button class="w-full text-center bg-blue-600 py-2 px-4 mt-4 text-white">
-                    Formulario Estudiantes
-                </button>
+                <a href="{{ route('register.student') }}">
+                    <button class="w-full text-center bg-blue-600 py-2 px-4 mt-4 text-white">
+                        Formulario Estudiantes
+                    </button>
+                </a>
             </div>
             <!-- Empresas -->
             <div
@@ -65,14 +67,15 @@
                     </ul>
                 </div>
 
-                <button class="w-full text-center bg-blue-600 py-2 px-4 mt-4 text-white">
-                    Formulario Empresa
-                </button>
+                <a href="{{ route('register.company') }}">
+                    <button class="w-full text-center bg-blue-600 py-2 px-4 mt-4 text-white">
+                        Formulario Empresa
+                    </button>
+                </a>
             </div>
 
             <!-- Universidad -->
-            <div
-                class="bg-gray-50 rounded-xl p-8 text-center shadow-md hover:-translate-y-2 transition">
+            <div class="bg-gray-50 rounded-xl p-8 text-center shadow-md hover:-translate-y-2 transition">
                 <div class="mb-5 flex justify-center">
                     <svg xmlns="http://www.w3.org/2000/svg" height="100px" viewBox="0 -960 960 960" width="100px"
                         fill="#2563EB">

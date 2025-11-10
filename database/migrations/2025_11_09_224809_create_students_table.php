@@ -42,14 +42,15 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->timestamps();
 
-            $table->foreignId("management_id")->constrained()->onDelete('cascade');
+            $table->foreignId("management_id")->nullable()->constrained()->onDelete('cascade');
+            $table->integer('semester');
             $table->foreignId("career_id")->constrained()->onDelete('cascade');
-            $table->foreignId("shifts_id")->constrained()->onDelete('cascade');
+            $table->foreignId("shift_id")->constrained()->onDelete('cascade');
 
             $table->unique(['first_name', 'last_name']);
         });
 
-        
+
     }
 
     /**

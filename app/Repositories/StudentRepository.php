@@ -43,6 +43,6 @@ class StudentRepository implements StudentRepositoryInterface {
     public function findByName(string $firstName, string $lastName):bool {
         $student = $this->model->where('first_name', "=", $firstName)
             ->where('last_name', "=", $lastName)->first();
-        return is_null($student);
+        return !is_null($student);
     }
 }

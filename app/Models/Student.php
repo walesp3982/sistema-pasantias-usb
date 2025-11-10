@@ -18,10 +18,11 @@ class Student extends Model
         "first_name",
         "last_name",
         "identity_card",
-        "phone_id",
-        "location_id",
-        "curriculum_vitae_id",
-        "user_id"
+        "user_id",
+        "semester",
+        "career_id",
+        "shift_id"
+
     ];
 
     public function user() {

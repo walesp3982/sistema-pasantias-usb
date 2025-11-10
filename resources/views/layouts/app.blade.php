@@ -35,54 +35,6 @@
     </div>
     <!-- Menú lateral -->
     @livewire('app.navside')
-    {{-- <nav id="sidebar"
-        class="fixed top-0 left-0 w-64 h-full bg-white border-r border-gray-300 flex flex-col justify-between shadow-xl z-40  transform -translate-x-full transition-transform duration-300 ease-in-out">
-        <div>
-            <div class="text-center pt-[7rem] pb-5 px-0 bg-gray-50 border-b border-gray-200">
-                @livewire('app.navbar-profile')
-            </div>
-
-            <ul class="list-none p-0 m-0">
-                <li>
-                    <a href="#"
-                        class="flex items-center px-5 py-3 text-gray-800 no-underline text-base hover:bg-blue-50 hover:border-l-4 hover:border-blue-600 transition-all">
-                        <i class="fa-solid fa-house mr-2.5 text-blue-600"></i> Inicio
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#"
-                        class="flex items-center px-5 py-3 text-gray-800 no-underline text-base hover:bg-blue-50 hover:border-l-4 hover:border-blue-600 transition-all">
-                        <i class="fa-solid fa-file-lines mr-2.5 text-blue-600"></i> Informes
-                    </a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="flex items-center px-5 py-3 text-gray-800 no-underline text-base hover:bg-blue-50 hover:border-l-4 hover:border-blue-600 transition-all">
-                        <i class="fa-solid fa-list-check mr-2.5 text-blue-600"></i> Seguimiento
-                    </a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="flex items-center px-5 py-3 text-gray-800 no-underline text-base hover:bg-blue-50 hover:border-l-4 hover:border-blue-600 transition-all">
-                        <i class="fa-solid fa-chart-line mr-2.5 text-blue-600"></i> Reportes
-                    </a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="flex items-center px-5 py-3 text-gray-800 no-underline text-base hover:bg-blue-50 hover:border-l-4 hover:border-blue-600 transition-all">
-                        <i class="fa-solid fa-gear mr-2.5 text-blue-600"></i> Configuración
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-        <div class="text-center p-4 border-t border-gray-200 bg-gray-50">
-            <a href="#" class="no-underline text-gray-800 hover:text-blue-600 transition-colors">
-                <i class="fa-solid fa-right-from-bracket mr-2"></i> Salir
-            </a>
-        </div>
-    </nav> --}}
 
     <!-- Encabezado superior -->
     <header
@@ -96,23 +48,17 @@
             <div>
                 <img src="{{ Vite::asset("resources/images/logo-usb.png") }}" alt="" class="h-12 w-auto ml-5">
             </div>
-            <div>
+            <div class="hidden md:block">
                 <h1 class="text-xl text-blue-600 pl-5 mb-1">Universidad Salesiana de Bolivia</h1>
                 <h2 class="text-base text-gray-500 pl-5 font-normal">Sistema Web de Control de Pasantías</h2>
             </div>
 
         </div>
-
-        {{-- <div>
-            <img id="userPhoto"
-                class="w-11 h-11 rounded-full cursor-pointer object-cover border-2 border-gray-300 hover:scale-105 transition-transform"
-                src="https://i.pinimg.com/736x/d9/7b/bb/d97bbb08017ac2309307f0822e63d082.jpg" alt="User">
-            <input type="file" id="fileInput" accept="image/*" class="hidden">
-        </div> --}}
     </header>
 
     <!-- Contenido principal -->
-    <main id="mainContent" class="w-full h-full pt-32 px-40 pb-20 transition-all duration-400">
+    <main id="mainContent" class="w-full h-full pt-32 px-20 pb-20 transition-all duration-400
+         md:px-32 lg:px-40">
 
         {{ $slot }}
     </main>

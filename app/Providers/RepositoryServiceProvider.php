@@ -4,10 +4,12 @@ namespace App\Providers;
 
 use App\Repositories\DocumentRepository;
 use App\Repositories\Interfaces\DocumentRepositoryInterface;
+use App\Repositories\Interfaces\LocationRepositoryInterface;
 use App\Repositories\Interfaces\PhoneRepositoryInterface;
 use App\Repositories\Interfaces\PictureRepositoryInterface;
 use App\Repositories\Interfaces\StudentRepositoryInterface;
 use App\Repositories\Interfaces\UserRepositoryInterface;
+use App\Repositories\LocationRepository;
 use App\Repositories\PhoneRepository;
 use App\Repositories\PictureRepository;
 use App\Repositories\StudentRepository;
@@ -41,6 +43,10 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             PictureRepositoryInterface::class,
             PictureRepository::class
+        );
+        $this->app->bind(
+            LocationRepositoryInterface::class,
+            LocationRepository::class
         );
     }
 

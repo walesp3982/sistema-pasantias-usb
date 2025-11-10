@@ -16,15 +16,16 @@ class StudentService
     public function __construct(
         private readonly StudentRepositoryInterface $studentRepository,
         private readonly UserService $userService,
-        private readonly PhoneService $phoneService
+        private readonly PhoneService $phoneService,
+        private readonly LocationService $locationService
     ) {}
 
-    public function create(array $data): Student
+    public function create(array $data):Student
     {
 
         if ($this->studentRepository->findByName(
             $data['first_name'],
-            $data['second_name']
+            $data['last_name']
         )) {
             throw new \Exception("El estudiante ya ha sido registrado");
         }
@@ -33,17 +34,22 @@ class StudentService
             $student = $this->studentRepository->create([
                 'first_name' => $data['first_name'],
                 'last_name' => $data['last_name'],
-                'identity_card' => $data['identity_card']
+                'identity_card' => $data['identity_card'],
+                'semester' => $data['semester'],
+                'shift_id' => $data['shift_id'],
+                'career_id' => $data['career_id']
             ]);
-            $phone = $this->phoneService->create(
-                [
-                    'country_id' => $data['country_id'],
-                    'phone_number' => $data['phone_number']
-                ]
-            );
-            $student->phone()->associate($phone);
+
+            $newUser = $this->userService->create([
+                'email' => $data['email'],
+                'password' => $data['password'],
+                'name' => $student->full_name
+            ], RolesEnum::STUDENT);
+
+            $student->user()->associate($newUser);
             $student->save();
-            return $student->load(['phone']);
+
+            return $student;
         });
     }
 

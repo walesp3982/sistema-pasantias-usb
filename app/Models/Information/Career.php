@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Career extends Model
 {
+    public $timestamps = false;
+
+    protected $fillable = [
+        'name',
+    ];
     //
     public function postulations() {
         return $this->belongsTo(Postulation::class);

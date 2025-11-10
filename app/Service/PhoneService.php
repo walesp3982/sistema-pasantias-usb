@@ -25,8 +25,9 @@ class PhoneService
         return DB::transaction(
             function () use ($data) {
                 $phone = $this->phoneRepository->create([
-                    "country_id" => $data['country_id'],
-                    'phone_number' => $data['phone_number']
+                    "code_phone" => $data['code_phone'],
+                    'phone_number' => $data['phone_number'],
+                    'notifications' => $data['notifications']
                 ]);
 
                 return $phone;
