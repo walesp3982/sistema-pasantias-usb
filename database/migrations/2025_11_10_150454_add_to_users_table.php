@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             //
             $table->boolean('active')->default(true);
+            $table->softDeletes();
         });
     }
 
@@ -25,6 +26,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             //
             $table->dropColumn('active');
+            $table->dropSoftDeletes();
         });
     }
 };

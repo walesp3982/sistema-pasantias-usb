@@ -35,7 +35,6 @@ return new class extends Migration
             $table->string("first_name");
             $table->string("last_name");
             $table->integer("identity_card")->unique();
-            // $table->foreignId("phone_id")->constrained();
             $table->foreignId('user_id')
                 ->nullable()
                 ->constrained()

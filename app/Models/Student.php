@@ -21,7 +21,8 @@ class Student extends Model
         "user_id",
         "semester",
         "career_id",
-        "shift_id"
+        "shift_id",
+        "ru",
 
     ];
 

@@ -22,7 +22,7 @@ class CareersSeeder extends Seeder
             'Psicomotricidad, Salud, Education y Deportes',
             'Técnico Superior en Educación Parvularia',
             'Técnica Superior en Educación Especial Inclusiva',
-            'Técnico Superior en Pedagagía de Atención al Adulto Mayor',
+            'Técnico Superior en Pedagogía al Adulto Mayor',
             'Ingeniería Comercial y Desarrollo de Negocios',
             'Gastronomia y Gestión de Restaurantes'
         ];
