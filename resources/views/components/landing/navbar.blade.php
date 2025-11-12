@@ -1,5 +1,5 @@
 <header class="py-4 sticky top-0 left-0 w-full bg-white  z-20 shadow-md">
-    <nav x-data="open: false" class="w-full">
+    <nav x-data="{open: false}" class="w-full">
         <x-landing.ui.menu>
         </x-landing.ui.menu>
         <!-- Menú móvil -->
@@ -32,7 +32,7 @@
         </x-landing.ui.menu-mobile>
     </nav>
 
-    <script>
+    {{-- <script>
         const menuToggle = document.getElementById('menuToggle');
         const mobileMenu = document.getElementById('mobileMenu');
         const line1 = document.getElementById('line1');
@@ -81,5 +81,5 @@
                 closeMenu();
             }
         });
-    </script>
+    </script> --}}
 </header>

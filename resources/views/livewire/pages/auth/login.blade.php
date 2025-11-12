@@ -77,9 +77,9 @@ new #[Layout('layouts.guest')] class extends Component {
     @csrf
     <!-- Dirección de correo-->
     @error('form.email')
-      <x-ui.error-notification>
+      <x-ui.msg.warning>
         {{ $message }}
-      </x-ui.error-notification>
+      </x-ui.msg.warning>
     @enderror
     <div class="mb-4">
       <label for="email" class="block text-gray-600 mb-2">Correo electrónico</label>
@@ -88,9 +88,9 @@ new #[Layout('layouts.guest')] class extends Component {
     </div>
     <!-- Contraseña-->
     @error('form.password')
-      <x-ui.error-notification>
+      <x-ui.msg.warning>
         {{ $message }}
-      </x-ui.error-notification>
+      </x-ui.msg.warning>
     @enderror
     <div class="mb-4">
       <label for="password" class="block text-gray-600 mb-2">Contraseña</label>

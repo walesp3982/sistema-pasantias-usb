@@ -1,4 +1,4 @@
-<div class="max-w-6xl mx-auto px-5 flex justify-between  items-center">
+<div class="max-w-6xl mx-auto px-5 flex justify-between  items-center z-20">
 
     <!-- Logo -->
     <x-landing.ui.menu-logo-usb>

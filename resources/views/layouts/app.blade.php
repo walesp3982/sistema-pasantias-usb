@@ -24,7 +24,7 @@
     </style>
 </head>
 
-<body class="m-0 bg-gradient-to-br from-blue-50 to-blue-100 text-gray-800">
+<body class="m-0 bg-gradient-to-br min-h-screen from-blue-50 to-blue-200 text-gray-800">
 
     <!-- Botón del menú -->
 
@@ -38,7 +38,7 @@
 
     <!-- Encabezado superior -->
     <header
-        class="fixed top-0 left-0 right-0 bg-white border-b border-gray-200 flex justify-between items-center px-8 py-3 shadow-sm z-[500]">
+        class="sticky top-0 left-0 right-0 bg-white border-b border-gray-200 flex justify-between items-center px-8 py-3 shadow-sm z-[500]">
 
         <div class="flex flex-row">
             <div onclick="toggleMenu()"
@@ -46,7 +46,7 @@
                 <i class="fa-solid fa-bars"></i>
             </div>
             <div>
-                <img src="{{ Vite::asset("resources/images/logo-usb.png") }}" alt="" class="h-12 w-auto ml-5">
+                <img src="{{ asset("images/logo-usb.png") }}" alt="" class="hidden h-12 w-auto ml-5 md:block">
             </div>
             <div class="hidden md:block">
                 <h1 class="text-xl text-blue-600 pl-5 mb-1">Universidad Salesiana de Bolivia</h1>
@@ -57,7 +57,7 @@
     </header>
 
     <!-- Contenido principal -->
-    <main id="mainContent" class="w-full h-full pt-32 px-20 pb-20 transition-all duration-400
+    <main id="mainContent" class="w-full h-full pt-20 px-10 pb-20 transition-all duration-400
          md:px-32 lg:px-40">
 
         {{ $slot }}

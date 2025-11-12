@@ -1,5 +1,5 @@
 <x-app-layout>
-    <section class="bg-white rounded-xl p-20 shadow-lg text-center">
+    <section class="bg-white rounded-xl p-10 shadow-lg text-center md:p-20">
 
         <h2 class="text-blue-600 text-2xl font-semibold mb-4">Bienvenido al Sistema Web de Control de Pasantías
         </h2>

@@ -26,7 +26,7 @@ $imageUrl = computed(function() {
 });
 
 $avatarDefault = function() {
-    return Vite::asset("resources/images/default/avatar_default.webp");
+    return asset("images/default/avatar_default.webp");
 };
 ?>
 
