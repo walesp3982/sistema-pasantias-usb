@@ -1,59 +1,185 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🚀 Aplicación Laravel 12 con Breeze, Volt y Livewire
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Este proyecto está desarrollado con **Laravel 12**, utilizando **Breeze** como sistema de autenticación, **Volt** como motor de componentes modernos, **Livewire** para la interactividad sin recargar la página y **Tailwind CSS** para los estilos.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 📋 Requisitos Previos
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Asegúrate de tener instaladas las siguientes herramientas antes de iniciar:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **PHP >= 8.2**
+- **Composer** → [https://getcomposer.org/](https://getcomposer.org/)
+- **Node.js >= 18.x** y **npm** (o Yarn)
+- **MySQL / MariaDB**
+- **Git**
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## ⚙️ Instalación del Proyecto
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 1️⃣ Clonar el Repositorio
 
-## Laravel Sponsors
+```bash
+https://github.com/walesp3982/sistema-pasantias-usb.git
+cd sistema-pasantias-usb
+````
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 2️⃣ Instalar Dependencias de PHP
 
-### Premium Partners
+```bash
+composer install
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### 3️⃣ Instalar Dependencias de Frontend
 
-## Contributing
+```bash
+npm install
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 4️⃣ Configurar el Archivo `.env`
 
-## Code of Conduct
+Copia el archivo de entorno de ejemplo y configura tus credenciales:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+cp .env.example .env
+```
 
-## Security Vulnerabilities
+Edita `.env` con tu configuración local:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```env
+APP_NAME="Mi Aplicación Laravel"
+APP_ENV=local
+APP_KEY=
+APP_DEBUG=true
+APP_URL=http://localhost
 
-## License
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=nombre_bd
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
+
+## 🔑 Generar la Clave de la Aplicación
+
+```bash
+php artisan key:generate
+```
+
+---
+
+## 🧱 Ejecutar Migraciones y Seeders
+
+Crea las tablas de la base de datos y, si existen, los datos iniciales:
+
+```bash
+php artisan migrate --seed
+```
+
+---
+
+## 🧩 Compilar los Assets Frontend
+
+Para desarrollo:
+
+```bash
+npm run dev
+```
+
+Para producción:
+
+```bash
+npm run build
+```
+
+---
+
+## 💻 Ejecutar el Servidor Local
+
+Inicia el servidor de desarrollo de Laravel:
+
+```bash
+php artisan serve
+```
+
+Tu aplicación estará disponible en:
+👉 [http://localhost:8000](http://localhost:8000)
+
+---
+
+## ⚡ Características del Proyecto
+
+✅ **Laravel 12** — Framework PHP moderno y robusto
+✅ **Breeze** — Autenticación simple y lista para usar
+✅ **Volt** — Motor de componentes reactivos de Laravel (basado en Livewire 3)
+✅ **Livewire** — Interactividad sin JavaScript manual
+✅ **Tailwind CSS** — Framework CSS utility-first
+✅ **Vite** — Compilación rápida de assets
+
+---
+
+## 🧩 Estructura Principal del Proyecto
+
+```
+app/
+ ├── Livewire/          → Componentes Livewire y Volt
+ ├── Models/            → Modelos de Eloquent
+ ├── Http/Controllers/  → Controladores de la aplicación
+ |-- Repositories       → Repositorios 
+ |-- Services           → Servicios de la aplicación
+database/
+ ├── migrations/        → Migraciones de base de datos
+ ├── seeders/           → Datos iniciales
+resources/
+ ├── views/             → Vistas Blade
+ ├── livewire/          → Componentes Livewire
+ ├── js/                → Código JavaScript
+ ├── css/               → Estilos 
+routes/
+ ├── web.php            → Rutas web
+public/                 → Archivos públicos
+```
+
+---
+
+## ⚙️ Comandos Útiles
+
+| Acción                                      | Comando                                  |
+| ------------------------------------------- | ---------------------------------------- |
+| Limpiar cachés de la app                    | `php artisan optimize:clear`             |
+| Compilar vistas, rutas y config             | `php artisan optimize`                   |
+| Crear un nuevo componente Volt              | `php artisan make:volt NombreComponente` |
+
+---
+
+## 🧩 Autenticación con Breeze
+
+El sistema de autenticación está manejado por **Laravel Breeze**, el cual incluye:
+
+* Registro de usuarios
+* Inicio y cierre de sesión
+* Recuperación de contraseña
+* Verificación de email (opcional)
+* Diseño con **Tailwind CSS**
+
+---
+
+## 📦 Despliegue en Producción
+
+Antes de subir el proyecto, asegúrate de ejecutar:
+
+```bash
+php artisan migrate --force
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+npm run build
+```
+
+Configura el servidor web (Apache o Nginx) apuntando al directorio `public/`.
+
+---
