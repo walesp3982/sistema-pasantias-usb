@@ -15,8 +15,8 @@
 </head>
 
 <body class="antialiased scroll-smooth">
-    <x-landing.navbar>
-    </x-landing.navbar>
+    <x-navigation.navbar.welcome>
+    </x-navigation.navbar.welcome>
     <x-landing.hero></x-landing.hero>
     <x-landing.beneficios></x-landing.beneficios>
     <x-landing.caracteristicas></x-landing.caracteristicas>
