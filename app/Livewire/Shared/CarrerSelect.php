@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Livewire\Forms;
+namespace App\Livewire\Shared;
 
 use App\Models\Information\Career;
 use Livewire\Component;
-class CareerSelect extends Component
+
+class CarrerSelect extends Component
 {
     public $careerId = null;
     public $careers;
@@ -15,8 +16,9 @@ class CareerSelect extends Component
     public function updatedCareerId() {
         $this->dispatch('careerSelected'  );
     }
+
     public function render()
     {
-        return view('livewire.forms.career-select');
+        return view('livewire.shared.carrer-select');
     }
 }

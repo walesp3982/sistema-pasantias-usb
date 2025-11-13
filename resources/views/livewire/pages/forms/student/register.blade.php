@@ -8,7 +8,7 @@ use Livewire\Attributes\Layout;
 use App\Service\StudentService;
 use Livewire\Volt\Component;
 
-new #[Layout('layouts.guest')] class extends Component {
+new #[Layout('components.layouts.guest')] class extends Component {
     public $first_name = '';
     public $last_name = '';
     public $identity_card = '';
@@ -21,8 +21,6 @@ new #[Layout('layouts.guest')] class extends Component {
     public string $password = '';
     public string $password_confirmation = '';
 
-
-    protected $listeners = ['career-selected' => 'handleCarrerSelected'];
     // Select de turnos
     public $shifts = [];
 
@@ -50,9 +48,6 @@ new #[Layout('layouts.guest')] class extends Component {
      * Handle an incoming registration request.
      */
 
-    public function handleCareerSelected($careerId) {
-        $this->career_id = $careerId;
-    }
 
     protected $rules = [
         'first_name' => ['required', 'string', 'max:50'],
@@ -124,16 +119,7 @@ new #[Layout('layouts.guest')] class extends Component {
             placeholder="ej: 63872" type="number"></x-form.input>
         </div>
         <div>
-            {{-- <x-form.select id="career_id" model="career_id">
-                <option value="">Seleccione la carrera...</option>
-                @foreach ($carreras as $carrera)
-                    <option value="{{ $carrera->id }}"> {{ $carrera->name }}</option>
-                @endforeach
-            </x-form.select> --}}
-            <livewire:pages.forms.partials.career-select
-                wire:model="career_id">
-
-            </livewire:pages.forms.partials.career-select>
+            <livewire:forms.career-select :careerId="$career_id"/>
         </div>
         <div class="grid grid-cols-2 gap-4">
             <div>

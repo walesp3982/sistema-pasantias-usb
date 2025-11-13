@@ -4,8 +4,12 @@ use App\Livewire\Forms\LoginForm;
 use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
+use function Livewire\Volt\layout;
 
-new #[Layout('layouts.guest')] class extends Component {
+
+new 
+#[Layout('components.layouts.guest')]
+class extends Component {
   public LoginForm $form;
 
   /**
