@@ -21,7 +21,7 @@ Asegúrate de tener instaladas las siguientes herramientas antes de iniciar:
 ### 1️⃣ Clonar el Repositorio
 
 ```bash
-https://github.com/walesp3982/sistema-pasantias-usb.git
+git clone https://github.com/walesp3982/sistema-pasantias-usb.git
 cd sistema-pasantias-usb
 ````
 
