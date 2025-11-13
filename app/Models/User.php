@@ -3,15 +3,21 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Enums\RolesEnum;
+use App\Models\Files\Picture;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
-
+    use HasRoles;
+    use SoftDeletes;
     /**
      * The attributes that are mass assignable.
      *
@@ -44,5 +50,15 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function profile() {
+        return $this->morphOne(Picture::class, 'pictureable');
+    }
+
+    public function role() {
+        $roleName = $this->getRoleNames()->first();
+        $roleEnum = RolesEnum::from($roleName);
+        return $roleEnum;
     }
 }
