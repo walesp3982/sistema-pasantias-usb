@@ -18,7 +18,7 @@
 
 <body class="font-sans text-gray-900 antialiased">
 
-    <x-guest.navbar></x-guest.navbar>
+    <x-navigation.navbar.guest></x-navigation.navbar.guest>
 
     <section class="flex items-center justify-center bg-gray-100 min-h-screen">
         <div class="flex flex-col lg:flex-row w-full max-w-5xl bg-white rounded-3xl shadow-lg">
