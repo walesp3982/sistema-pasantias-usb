@@ -1,7 +1,7 @@
 # 🚀 Sistema de Gestión de Pasantías Salesiana de Bolivia con Laravel 12
 
 Este proyecto está desarrollado con **Laravel 12**, utilizando **Breeze** como sistema de autenticación, **Volt** como motor de componentes modernos, **Livewire** para la interactividad sin recargar la página y **Tailwind CSS** para los estilos.
-
+////////////////El presente proyecto se encargara de gestionar las pasantias de los estudiante de la universidad salesiana de bolivia de la carrera de ingenieria de sistemas optimizando el tiempo de postulacion y t5ambien optimizando el uso de papeles //////////////
 ---
 
 ## 📋 Requisitos Previos
