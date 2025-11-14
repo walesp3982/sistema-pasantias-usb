@@ -9,7 +9,8 @@ Este proyecto está desarrollado con **Laravel 12**, utilizando **Breeze** como 
 Asegúrate de tener instaladas las siguientes herramientas antes de iniciar:
 
 - **PHP >= 8.2**
-- **Composer** → [https://getcomposer.org/](https://getcomposer.org/)
+- **Composer** → [https://getcomposer.org/](https://getcomposer.org/) Revisar los 
+requerimientos que pida el composer
 - **Node.js >= 18.x** y **npm** (o Yarn)
 - **MySQL / MariaDB**
 - **Git**
