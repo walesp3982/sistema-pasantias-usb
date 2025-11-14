@@ -13,6 +13,7 @@ Asegúrate de tener instaladas las siguientes herramientas antes de iniciar:
 - **Node.js >= 18.x** y **npm** (o Yarn)
 - **MySQL / MariaDB**
 - **Git**
+- **Sugerencia: instalar xampp**
 
 ---
 
