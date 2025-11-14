@@ -96,7 +96,8 @@ Para producción:
 ```bash
 npm run build
 ```
-
+Nota usar esto solo para cuando el proyecto esté en 
+producción
 ---
 
 ## 💻 Ejecutar el Servidor Local
