@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\StatePostulationEnum;
+use App\Enums\StatusIntershipEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,34 +16,30 @@ return new class extends Migration
     {
         Schema::create('interships', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->foreignId('company_id')->constrained()->onDelete('cascade');
             $table->foreignId("career_id")->constrained()->onDelete('cascade');
             $table->date('start_date');
-            $table->date('postulation_limit_date');
             $table->date('end_date');
+            $table->date('postulation_limit_date');
             $table->time("entry_time");
             $table->time("exit_time");
             $table->integer("vacant");
-            $table->string("description")->nullable();
             $table->foreignId('location_id')
                 ->constrained();
-            $table->enum('status', ["pending", "progress", "finished", "suspend"]);
+            $table->enum('status', StatePostulationEnum::cases());
+            $table->timestamps();
         });
-
-        $status_postulation = StatePostulationEnum::cases();
 
         Schema::create('type_document_postulations', function(Blueprint $table) {
             $table->id();
             $table->string("name")->unique();
         });
 
-        Schema::create('postulations', function (Blueprint $table)
-        use ($status_postulation) {
+        Schema::create('postulations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('student_id')->constrained()->onDelete('cascade');
             $table->foreignId('intership_id')->constrained()->onDelete('cascade');
-            $table->enum('status', $status_postulation)
+            $table->enum('status', StatePostulationEnum::cases())
                 ->default(StatePostulationEnum::CREATED);
             $table->timestamps();
         });

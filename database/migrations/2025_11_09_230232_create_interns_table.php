@@ -26,11 +26,10 @@ return new class extends Migration
         Schema::create('reports', function(Blueprint $table) {
             $table->id();
             $table->string("descripcion");
-            $table->string("autor");
+            $table->foreignId("user_id")->constrained();
             $table->foreignId('type_report_id')->constrained()->onDelete('cascade');
             $table->date('date_create');
             $table->foreignId('intern_id')->constrained()->onDelete('cascade');
-            $table->foreignId('document_id')->constrained()->onDelete('cascade');
             $table->boolean('verify')->default(false);
         });
     }

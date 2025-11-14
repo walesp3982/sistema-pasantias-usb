@@ -16,12 +16,6 @@ return new class extends Migration
             $table->string("name")->unique();
         });
 
-        Schema::create("management", function (Blueprint $table) {
-            $table->id();
-            $table->year("year");
-            $table->integer("number");
-        });
-
         Schema::create("shifts", function (Blueprint $table) {
             $table->id();
             $table->string("name");
@@ -34,19 +28,15 @@ return new class extends Migration
             $table->id();
             $table->string("first_name");
             $table->string("last_name");
-            $table->integer("identity_card")->unique();
             $table->foreignId('user_id')
                 ->nullable()
                 ->constrained()
                 ->onDelete('cascade');
-            $table->timestamps();
             $table->integer('ru')->unique();
-            $table->foreignId("management_id")->nullable()->constrained()->onDelete('cascade');
             $table->integer('semester');
             $table->foreignId("career_id")->constrained()->onDelete('cascade');
             $table->foreignId("shift_id")->constrained()->onDelete('cascade');
-
-            $table->unique(['first_name', 'last_name']);
+            $table->timestamps();
         });
 
 
