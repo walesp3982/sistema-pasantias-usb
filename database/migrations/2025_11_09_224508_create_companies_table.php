@@ -19,14 +19,14 @@ return new class extends Migration
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
             $table->string("name")->unique();
+            $table->string("email")->unique();
             $table->foreignId("sector_id")
                 ->constrained()
                 ->onDelete('cascade');
-            $table->string("email")->unique();
             $table->timestamps();
         });
 
-        Schema::create('company_location', function(Blueprint $table) {
+        Schema::create('company_location', function (Blueprint $table) {
             $table->id();
             $table->foreignId('location_id')->constrained()->onDelete('cascade');
             $table->foreignId('company_id')->constrained()->onDelete('cascade');
