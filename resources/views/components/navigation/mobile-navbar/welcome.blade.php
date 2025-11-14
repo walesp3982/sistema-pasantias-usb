@@ -1,30 +1,26 @@
-<nav >
+<nav>
     <!-- Menú móvil -->
-    <x-landing.ui.menu-mobile>
-        <x-landing.ui.menu-option-mobile href="#inicio">
+    <x-navigation.mobile-navbar.box>
+        <x-navigation.mobile-navbar.item href="#inicio">
             Inicio
-        </x-landing.ui.menu-option-mobile>
-        <x-landing.ui.menu-option-mobile href="#beneficios">
+        </x-navigation.mobile-navbar.item>
+        <x-navigation.mobile-navbar.item href="#beneficios">
             Beneficios
-        </x-landing.ui.menu-option-mobile>
-        <x-landing.ui.menu-option-mobile href="#caracteristicas">
+        </x-navigation.mobile-navbar.item>
+        <x-navigation.mobile-navbar.item href="#caracteristicas">
             Caracteristicas
-        </x-landing.ui.menu-option-mobile>
-        <x-landing.ui.menu-option-mobile href="#testimonios">
+        </x-navigation.mobile-navbar.item>
+        <x-navigation.mobile-navbar.item href="#testimonios">
             Testimonios
-        </x-landing.ui.menu-option-mobile>
-        {{-- <x-landing.ui.menu-option-mobile href="#contacto">
-            Contacto
-        </x-landing.ui.menu-option-mobile> --}}
+        </x-navigation.mobile-navbar.item>
         @auth
-            <x-landing.ui.menu-option-important-mobile href="{{ route('dashboard') }}">
+            <x-navigation.mobile-navbar.item-important href="{{ route('dashboard') }}">
                 Ingresar
-            </x-landing.ui.menu-option-important-mobile>
+            </x-navigation.mobile-navbar.item-important>
         @else
-            <x-landing.ui.menu-option-important-mobile href="{{ route('login') }}">
+            <x-navigation.mobile-navbar.item-important href="{{ route('login') }}">
                 Iniciar sesión
-            </x-landing.ui.menu-option-important-mobile>
+            </x-navigation.mobile-navbar.item-important>
         @endauth
-
-    </x-landing.ui.menu-mobile>
+    </x-navigation.mobile-navbar.box>
 </nav>

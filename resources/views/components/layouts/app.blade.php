@@ -34,7 +34,7 @@
         class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden transition-opacity duration-300">
     </div>
     <!-- Menú lateral -->
-    @livewire('app.navside')
+    <x-navigation.navside.app></x-navigation.navside.app>
 
     <!-- Encabezado superior -->
     <header

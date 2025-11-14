@@ -2,7 +2,7 @@
     class="fixed top-0 left-0 w-64 h-full bg-white border-r border-gray-300 flex flex-col justify-between shadow-xl z-40  transform -translate-x-full transition-transform duration-300 ease-in-out">
     <div>
         <div class="text-center pt-[7rem] pb-5 px-0 bg-gray-50 border-b border-gray-200">
-            @livewire('app.navbar-profile')
+            @livewire('auth.profile')
         </div>
         <ul class="list-none p-0 m-0">
             <x-ui-app.options-navside icon="fa-solid fa-house" href="{{ route('dashboard') }}">
@@ -27,5 +27,5 @@
         </ul>
     </div>
 
-    @livewire('app.navside-logout')
+    @livewire('auth.logout')
 </nav>
