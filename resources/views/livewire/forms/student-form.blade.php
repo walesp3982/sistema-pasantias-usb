@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
 use App\Service\StudentService;
 use Livewire\Volt\Component;
+use Livewire\Attributes\On;
 
 new #[Layout('components.layouts.guest')] class extends Component {
     public $first_name = '';
@@ -70,6 +71,11 @@ new #[Layout('components.layouts.guest')] class extends Component {
         $this->redirect(route('dashboard'));
     }
 
+    #[On('careerSelected')]
+    public function updateCareer($careerId) {
+        $this->career_id = $careerId;
+    }
+
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
@@ -119,7 +125,7 @@ new #[Layout('components.layouts.guest')] class extends Component {
             placeholder="ej: 63872" type="number"></x-form.input>
         </div>
         <div>
-            <livewire:forms.career-select :careerId="$career_id"/>
+            <livewire:forms.shared.career-select :careerId="$career_id"/>
         </div>
         <div class="grid grid-cols-2 gap-4">
             <div>

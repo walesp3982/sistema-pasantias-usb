@@ -1,8 +1,6 @@
 <?php
 
-use Livewire\Volt\Component;
 use App\Service\UserService;
-use App\Models\User;
 
 use function Livewire\Volt\{state, mount, computed};
 
