@@ -112,11 +112,6 @@ Tu aplicación estará disponible en:
 
 ---
 
-## ⚡ Comandos importantes
-
-- php artisan migrate:fresh --seed
-
----
 ## ⚡ Características del Proyecto
 
 ✅ **Laravel 12** — Framework PHP moderno y robusto
@@ -189,3 +184,13 @@ npm run build
 Configura el servidor web (Apache o Nginx) apuntando al directorio `public/`.
 
 ---
+
+Nombres de los integrantes: 
+
+* Apaza Condori Jherson Eduardo
+* Arias Mamani Carlos David
+* Copa Churqui Denilson Edgar
+* Espejo Guarachi Josue Walter
+* Titirico Rojas Ariel Jorge
+* Ticona Ramos Mayqui Alan
+
