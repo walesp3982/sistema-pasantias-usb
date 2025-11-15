@@ -20,13 +20,11 @@ class Student extends Model
     protected $fillable = [
         "first_name",
         "last_name",
-        "identity_card",
         "user_id",
         "semester",
         "career_id",
         "shift_id",
         "ru",
-
     ];
 
     public function user() {

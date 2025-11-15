@@ -45,4 +45,9 @@ class StudentRepository implements StudentRepositoryInterface {
             ->where('last_name', "=", $lastName)->first();
         return !is_null($student);
     }
+
+    public function findByRu(int $ru): ?Student {
+        $student = $this->model->where('ru', "=", $ru)->first();
+        return $student;
+    }
 }
