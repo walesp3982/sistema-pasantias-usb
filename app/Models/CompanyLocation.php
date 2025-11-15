@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 
 
-class CompanyLocationDetail extends Model
+class CompanyLocation extends Model
 {
     protected $fillable = [
         'location_id',
@@ -36,6 +36,6 @@ class CompanyLocationDetail extends Model
     }
 
     public function phone() {
-        return $this->belongsTo(Phone::class);
+        return $this->morphOne(Phone::class, 'phoneable');
     }
 }

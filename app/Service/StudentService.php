@@ -16,7 +16,6 @@ class StudentService
     public function __construct(
         private readonly StudentRepositoryInterface $studentRepository,
         private readonly UserService $userService,
-        private readonly PhoneService $phoneService,
         private readonly LocationService $locationService
     ) {}
 
