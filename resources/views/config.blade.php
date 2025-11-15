@@ -1,7 +1,7 @@
 <x-app-layout>
 
     <form>
-        <div class="bg-white shadow-md rounded-xl pl-40 pr-40 pt-8 pb-8 w-full max-w-5xl mt-4">
+        <div class="bg-white shadow-md rounded-xl px-10 pt-8 pb-8 w-full max-w-5xl md:px-20">
             <h1 class="text-2xl font-semibold border-y-4 border-sky-500 text-center pb-3 mb-6">
                 ACTUALIZACIÓN DE DATOS
             </h1>

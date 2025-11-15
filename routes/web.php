@@ -19,7 +19,7 @@ Route::middleware('auth')->group(function () {
         ->name('private.image');
 });
 
-Route::middleware('role:student')->group(function () {
+Route::middleware(['auth','role:student'])->group(function () {
     Route::view('configuracion', 'config')->name('config');
     Route::view('pasantias', 'estudiante.pasantias')->name('search.intership');
 });

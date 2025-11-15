@@ -14,10 +14,9 @@ return new class extends Migration
         Schema::create('phones', function (Blueprint $table) {
             $table->id();
             $table->morphs('phoneable');
-            $table->integer("code_number", false)->default(591);
             $table->string("phone_number", 10);
-            $table->boolean("notifications");
         });
+        
         Schema::create('municipalities', function (Blueprint $table) {
             $table->id();
             $table->string("name");

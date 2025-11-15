@@ -6,7 +6,7 @@
 
         <div class="flex flex-col lg:flex-row items-center gap-10">
             <div class="flex-1">
-                <img src="{{ Vite::asset("resources/images/estudiantes.jpg") }}" alt="Sistema de Pasantías"
+                <img src="{{ asset("images/estudiantes.jpg") }}" alt="Sistema de Pasantías"
                     class="rounded-xl shadow-lg w-full">
             </div>
 

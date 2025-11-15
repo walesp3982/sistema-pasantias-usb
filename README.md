@@ -1,4 +1,4 @@
-# 🚀 Aplicación Laravel 12 con Breeze, Volt y Livewire
+# 🚀 Sistema Web de Gestion y Control de Pasantias de la Universidad Salesiana de Bolivia 
 
 Este proyecto está desarrollado con **Laravel 12**, utilizando **Breeze** como sistema de autenticación, **Volt** como motor de componentes modernos, **Livewire** para la interactividad sin recargar la página y **Tailwind CSS** para los estilos.
 
@@ -13,6 +13,7 @@ Asegúrate de tener instaladas las siguientes herramientas antes de iniciar:
 - **Node.js >= 18.x** y **npm** (o Yarn)
 - **MySQL / MariaDB**
 - **Git**
+- **Sugerencia: instalar xampp**
 
 ---
 
@@ -111,6 +112,11 @@ Tu aplicación estará disponible en:
 
 ---
 
+## ⚡ Comandos importantes
+
+- php artisan migrate:fresh --seed
+
+---
 ## ⚡ Características del Proyecto
 
 ✅ **Laravel 12** — Framework PHP moderno y robusto
