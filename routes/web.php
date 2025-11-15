@@ -29,4 +29,6 @@ Route::post('register/send', [StudentController::class, "create"])
 // Route::get('test', function () {
 //     return $asdf;
 // });
+// Creando rutas para pruebas
+Route::view('prueba', 'prueba');
 require __DIR__ . '/auth.php';
