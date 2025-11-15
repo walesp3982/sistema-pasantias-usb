@@ -8,6 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Company extends Model
 {
     //
+    public $timestamps = true;
+    
+    protected $fillable = [
+        'name',
+        'sector_id',
+        'email',
+    ];
     public function locations() {
         return $this->hasMany(CompanyLocation::class);
     }
