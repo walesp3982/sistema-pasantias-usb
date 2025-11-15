@@ -21,6 +21,24 @@
                     Reportes
                 </x-navigation.navside.option>
             @endrole
+            @role("carrer-department")
+            <x-navigation.navside.option icon="fa-solid fa-chart-line" href="#">
+                    Reportes pasantes
+                </x-navigation.navside.option>
+
+                <x-navigation.navside.option icon="fa-solid fa-chart-line" href="#">
+                    Evaluaciones 
+                </x-navigation.navside.option>
+
+                <x-navigation.navside.option icon="fa-solid fa-chart-line" href="#">
+                    Seguimiento pasantes
+                </x-navigation.navside.option>
+            @endrole
+            @role("agreements-departament")
+            <x-navigation.navside.option icon="fa-solid fa-chart-line" href="#">
+                    Reportes
+                </x-navigation.navside.option>
+            @endrole
             <x-navigation.navside.option icon="fa-solid fa-gear" href="{{ route('config') }}">
                 Configuraciones
             </x-navigation.navside.option>
