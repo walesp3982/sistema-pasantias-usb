@@ -19,13 +19,13 @@
         <x-ui.notif.error dismissible>
             Por favor, contacte al administrador del sistema para obtener ayuda.
         </x-ui.notif.error>
-        <x-ui.msg.peligro dismissible>
+        <x-ui.notif.danger dismissible>
             Por favor, contacte al administrador del sistema para obtener ayuda.
-        </x-ui.msg.peligro>
-        <x-ui.notif.success>
+        </x-ui.notif.danger>
+        <x-ui.notif.success dismissible>
             Se completó el formulario
         </x-ui.notif.success>
-        <x-ui.notif.info>
+        <x-ui.notif.info dismissible>
             Nueva actualización disponible
         </x-ui.notif.info>
     </div>
