@@ -52,7 +52,7 @@
         <x-form.label>
             Referencia(Opcional)
         </x-form.label>
-        <x-form.input wire:model="reference" placeholder="Frente al Multicine"></x-form.input>
+        <x-form.input wire:model.live="reference" placeholder="Frente al Multicine"></x-form.input>
     </div>
 
 </div>
