@@ -5,6 +5,7 @@ namespace App\Livewire\Forms\Shared;
 use App\Models\Geography\Municipality;
 use App\Models\Geography\Zone;
 use Livewire\Component;
+use Livewire\Attributes\On;
 
 class Location extends Component
 {
@@ -35,6 +36,17 @@ class Location extends Component
             'street' => $this->street,
             'number_door' => $this->number_door,
             'reference' => $this->reference,
+        ]);
+    }
+
+    #[On('reset-child-component')]
+    public function resetAll() {
+        $this->reset([
+            'municipio_id',
+            'zona_id',
+            'street',
+            'number_door',
+            'reference',
         ]);
     }
     public function render()

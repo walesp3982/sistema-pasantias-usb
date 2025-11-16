@@ -1,6 +1,6 @@
 <div>
-    <div class="grid grid-cols-3 gap-4">
-        <div class="col-span-1">
+    <div>
+        <div>
             <x-form.label>
                 Municipio
             </x-form.label>
@@ -12,7 +12,7 @@
                 @endforeach
             </x-form.select>
         </div>
-        <div class="col-span-2">
+        <div>
             <x-form.label>
                 Zona
             </x-form.label>
@@ -34,23 +34,23 @@
             @endif
         </div>
     </div>
-    <div class="grid grid-cols-3 gap-4">
-        <div class="col-span-1">
+    <div>
+        <div>
             <x-form.label>
                 Calle
             </x-form.label>
             <x-form.input wire:model.live="street" placeholder="Av. 16 de Julio"></x-form.input>
         </div>
-        <div class="col-span-2">
+        <div>
             <x-form.label>
                 Número puerta
             </x-form.label>
-            <x-form.input wire:model.live="number_door" placeholder="132" type="number"></x-form.input>
+            <x-form.input wire:model.live="number_door" placeholder="Ej: 1324" type="number"></x-form.input>
         </div>
     </div>
     <div>
         <x-form.label>
-            Referencia(Opcional)
+            Referencia (Opcional)
         </x-form.label>
         <x-form.input wire:model.live="reference" placeholder="Frente al Multicine"></x-form.input>
     </div>

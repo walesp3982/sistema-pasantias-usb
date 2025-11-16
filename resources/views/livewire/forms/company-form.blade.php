@@ -40,6 +40,8 @@ new #[Layout('components.layouts.guest')] class extends Component {
         $service->create($validate);
         session()->flash('message', 'Formulario enviado correctamente');
         $this->reset();
+
+        $this->dispatch("reset-child-component");
     }
 
     #[On('location-updated')]
