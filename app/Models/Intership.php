@@ -20,7 +20,7 @@ class Intership extends Model
     }
 
     public function career() {
-        return $this->hasOne(Career::class);
+        return $this->belongsTo(Career::class);
     }
 
     public function location() {

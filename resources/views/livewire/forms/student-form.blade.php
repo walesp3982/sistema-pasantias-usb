@@ -12,7 +12,6 @@ use Livewire\Attributes\On;
 new #[Layout('components.layouts.guest')] class extends Component {
     public $first_name = '';
     public $last_name = '';
-    public $identity_card = '';
     public $semester = null;
     public $shift_id = null;
     public $career_id = null;
@@ -32,28 +31,15 @@ new #[Layout('components.layouts.guest')] class extends Component {
         $this->service = $studentService;
 
         $this->shifts = Shift::orderBy('id')->get();
-
-        $this->municipios = Municipality::orderBy('name')->get();
-
-        $this->zonas = collect();
     }
 
-    public function updatedMunicipioId($id)
-    {
-        $this->zona_id = null;
-        $this->zonas = $id ?
-            Zone::where('municipality_id', $id)->orderBy('name')->get()
-            : collect();
-    }
     /**
      * Handle an incoming registration request.
      */
 
-
     protected $rules = [
         'first_name' => ['required', 'string', 'max:50'],
         'last_name' => ['required', 'string', 'max:50'],
-        'identity_card' => 'required|integer',
         'ru' => 'required|unique:students',
         'semester' => 'required|integer|min:1|max:10',
         'shift_id' => 'required|exists:shifts,id',
@@ -111,13 +97,6 @@ new #[Layout('components.layouts.guest')] class extends Component {
             </x-form.label>
             <x-form.input wire:model="last_name" placeholder="Quispe Mamani" type="text"></x-form.input>
         </div>
-        <div>
-            <x-form.label>
-                Numero de carnet:
-            </x-form.label>
-            <x-form.input wire:model="identity_card"
-                placeholder="123456789" type="number"></x-form.input>
-        </div>
         <x-form.section>Datos académicos</x-form.section>
         <div>
             <x-form.label>Registro Universitario:</x-form.label>
@@ -173,12 +152,12 @@ new #[Layout('components.layouts.guest')] class extends Component {
         <div class="flex items-center justify-end mt-4">
             <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 href="{{ route('login') }}" wire:navigate>
-                {{ __('Already registered?') }}
+                ¿Ya se encuentra registrado?
             </a>
 
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
+            <x-ui.btn.primary class="ms-4">
+                Registrarse
+            </x-ui.btn.primary>
         </div>
     </form>
 </div>

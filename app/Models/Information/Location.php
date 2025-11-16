@@ -3,8 +3,9 @@
 namespace App\Models\Information;
 
 use App\Models\Company;
-use App\Models\CompanyLocationDetail;
+use App\Models\CompanyLocation;
 use App\Models\Geography\Zone;
+use App\Models\Geography\Municipality;
 use App\Models\Postulation;
 use App\Models\Student;
 use Illuminate\Database\Eloquent\Model;
@@ -13,10 +14,11 @@ class Location extends Model
     // public function city() {
     //     return $this->hasOne(City::class);
     // }
+    public $timestamps = false;
     protected $fillable = [
         'locatable_id',
         'locatable_type',
-        'zone',
+        'zone_id',
         'street',
         'number_door',
         'reference',
@@ -27,7 +29,7 @@ class Location extends Model
 
     public function companyDetails()
     {
-        return $this->hasOne(CompanyLocationDetail::class);
+        return $this->hasOne(CompanyLocation::class);
     }
 
     public function postulations() {
@@ -38,8 +40,12 @@ class Location extends Model
         return $this->belongsTo(Zone::class);
     }
 
+    public function municipality() {
+        return $this->through('zone')->has('municipality');
+    }
+
     public function getFullAddressAttribute() {
-        return "{$this->street} #{$this->number_door}";
+        return "{$this->street} #{$this->number_door}, zona {$this->zone->name}";
     }
 
     public function isCompanyLocation() {

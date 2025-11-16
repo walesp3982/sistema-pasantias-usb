@@ -14,5 +14,5 @@ interface PhoneRepositoryInterface {
 
     public function search(string $code): Collection;
 
-    public function find(string $phone_number, int $country_id): bool;
+    public function find(string $phone_number): bool;
 }

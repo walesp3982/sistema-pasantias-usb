@@ -33,9 +33,8 @@ class PhoneRepository implements PhoneRepositoryInterface{
         return $phones;
     }
 
-    public function find(string $phone_number, int $country_id): bool {
-        $phone = $this->model->where('code_phone', "=", $phone_number)
-            ->where("country_id", "=", $country_id)->first();
-        return !is_null($phone);
+    public function find(string $phone_number): bool {
+        $phone = $this->model->where('phone_number',"=", $phone_number);
+        return is_null($phone);
     }
 }

@@ -8,6 +8,9 @@ use App\Models\Information\Management;
 use App\Models\Information\Phone;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property-read string $full_name
+ */
 class Student extends Model
 {
     protected $table = 'students';
@@ -17,13 +20,11 @@ class Student extends Model
     protected $fillable = [
         "first_name",
         "last_name",
-        "identity_card",
         "user_id",
         "semester",
         "career_id",
         "shift_id",
         "ru",
-
     ];
 
     public function user() {
@@ -42,11 +43,7 @@ class Student extends Model
         return $this->hasMany(Postulation::class);
     }
 
-    public function managements() {
-        return $this->hasMany(Management::class);
-    }
-
-    public function getFullNameAttribute() {
-        return $this->first_name." ".$this->last_name;
+    public function getFullNameAttribute(): string {
+        return trim("{$this->first_name} {$this->last_name}");
     }
 }

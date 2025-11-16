@@ -8,18 +8,11 @@ class Intern extends Model
 {
     //
     public function postulation() {
-        return $this->hasOne(Postulation::class);
+        return $this->belongsTo(Postulation::class);
     }
 
     public function reports() {
         return $this->hasMany(Report::class);
     }
 
-    public function student() {
-        return $this->hasOneThrough(Student::class, Postulation::class);
-    }
-
-    public function company() {
-        return $this->hasOneThrough(Company::class, Postulation::class);
-    }
 }

@@ -3,21 +3,25 @@
 namespace App\Models;
 
 use App\Models\Files\Picture;
-use App\Models\Information\Location;
-use App\Models\Information\Phone;
 use Illuminate\Database\Eloquent\Model;
 
 class Company extends Model
 {
     //
+    public $timestamps = true;
+    
+    protected $fillable = [
+        'name',
+        'sector_id',
+        'email',
+    ];
     public function locations() {
-        return $this->morphMany(Location::class, 'locatable');
+        return $this->hasMany(CompanyLocation::class);
     }
 
-    public function locationDetails() {
-        return $this->hasMany(CompanyLocationDetail::class);
+    public function sector() {
+        return $this->belongsTo(Sector::class);
     }
-
     public function logo() {
         return $this->hasOne(Picture::class);
     }
@@ -32,9 +36,4 @@ class Company extends Model
                 $query->where('active', true);
             });
     }
-
-    public function phones() {
-        return $this->morphMany(Phone::class, 'phoneable');
-    }
-
 }

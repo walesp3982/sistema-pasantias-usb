@@ -16,7 +16,6 @@ class StudentService
     public function __construct(
         private readonly StudentRepositoryInterface $studentRepository,
         private readonly UserService $userService,
-        private readonly PhoneService $phoneService,
         private readonly LocationService $locationService
     ) {}
 
@@ -34,7 +33,6 @@ class StudentService
             $student = $this->studentRepository->create([
                 'first_name' => $data['first_name'],
                 'last_name' => $data['last_name'],
-                'identity_card' => $data['identity_card'],
                 'semester' => $data['semester'],
                 'ru' => $data['ru'],
                 'shift_id' => $data['shift_id'],
