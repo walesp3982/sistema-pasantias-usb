@@ -13,9 +13,21 @@
 
 <body>
     <div class="m-11">
-        <x-ui.msg.advertencia title="Errorrrrr" message="Hola mundo" dismissible>
+        <x-ui.notif.warning dismissible>
             Ha ocurrido un error inesperado.
-        </x-ui.msg.advertencia>
+        </x-ui.notif.warning>
+        <x-ui.notif.error dismissible>
+            Por favor, contacte al administrador del sistema para obtener ayuda.
+        </x-ui.notif.error>
+        <x-ui.msg.peligro dismissible>
+            Por favor, contacte al administrador del sistema para obtener ayuda.
+        </x-ui.msg.peligro>
+        <x-ui.notif.success>
+            Se completó el formulario
+        </x-ui.notif.success>
+        <x-ui.notif.info>
+            Nueva actualización disponible
+        </x-ui.notif.info>
     </div>
 
 </body>

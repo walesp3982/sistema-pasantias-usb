@@ -1,4 +1,4 @@
-props([
+@props([
     'title' => 'Error',
     'message' => '',
     'dismissible' => false
