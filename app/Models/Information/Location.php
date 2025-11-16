@@ -14,10 +14,11 @@ class Location extends Model
     // public function city() {
     //     return $this->hasOne(City::class);
     // }
+    public $timestamps = false;
     protected $fillable = [
         'locatable_id',
         'locatable_type',
-        'zone',
+        'zone_id',
         'street',
         'number_door',
         'reference',

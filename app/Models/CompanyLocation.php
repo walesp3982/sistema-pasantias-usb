@@ -11,11 +11,12 @@ use Illuminate\Database\Eloquent\Attributes\Scope;
 
 class CompanyLocation extends Model
 {
+    public $timestamps = false;
     protected $fillable = [
-        'location_id',
         'company_id',
         'active',
-        'name_administrator',
+        'name_administrador',
+        'principal'
     ];
 
     protected $casts = [
@@ -23,7 +24,7 @@ class CompanyLocation extends Model
     ];
 
     public function location() {
-        return $this->belongsTo(Location::class);
+        return $this->morphOne(Location::class,'locatable');
     }
 
     public function company() {

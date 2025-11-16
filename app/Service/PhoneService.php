@@ -17,7 +17,6 @@ class PhoneService
         if ($this->phoneRepository
             ->find(
                 $data['phone_number'],
-                $data['country_id']
             )
         ) {
             throw new \Exception('Numero ya existente! Ingrese otro número');
@@ -25,9 +24,7 @@ class PhoneService
         return DB::transaction(
             function () use ($data) {
                 $phone = $this->phoneRepository->create([
-                    "code_phone" => $data['code_phone'],
                     'phone_number' => $data['phone_number'],
-                    'notifications' => $data['notifications']
                 ]);
 
                 return $phone;

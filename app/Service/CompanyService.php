@@ -24,25 +24,22 @@ class CompanyService
                 "sector_id" => $data["sector_id"]
             ]);
 
-            $location = $this->locationService->create([
+            $locationcompany = $this->companyLocationRepository->create([
+                'company_id' => $company->id,
+                'name_administrador' => $data['name_administrador'],
+                'principal' => true,
+            ]);
+
+            $locationcompany->location()->create([
                 'street' => $data['street'],
                 'zone_id' => $data['zone_id'],
                 'reference' => $data['reference'],
                 'number_door' => $data['number_door']
             ]);
 
-            $phone = $this->phoneService->create([
-                'number' => $data['phone_number'],
+            $locationcompany->phone()->create([
+                "phone_number" => $data["phone_number"]
             ]);
-
-            $locationcompany = $this->companyLocationRepository->create([
-                'location_id' => $location->id,
-                'company_id' => $company->id,
-                'name_administrador' => $data['name_administrador'],
-                'principal' => true,
-            ]);
-
-            $locationcompany->phone()->save($phone);
         });
     }
 }

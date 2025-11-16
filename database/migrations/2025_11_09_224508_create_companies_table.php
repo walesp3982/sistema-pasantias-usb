@@ -26,14 +26,12 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('company_location', function (Blueprint $table) {
+        Schema::create('company_locations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('location_id')->constrained()->onDelete('cascade');
             $table->foreignId('company_id')->constrained()->onDelete('cascade');
             $table->boolean('active')->default(true);
             $table->string("name_administrador");
             $table->boolean("principal");
-            $table->index(["location_id", "company_id"]);
         });
     }
 
@@ -42,7 +40,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists("company_location");
+        Schema::dropIfExists("company_locations");
         Schema::dropIfExists('companies');
         Schema::dropIfExists('sectors');
     }
