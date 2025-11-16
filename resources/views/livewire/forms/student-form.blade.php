@@ -12,7 +12,6 @@ use Livewire\Attributes\On;
 new #[Layout('components.layouts.guest')] class extends Component {
     public $first_name = '';
     public $last_name = '';
-    public $identity_card = '';
     public $semester = null;
     public $shift_id = null;
     public $career_id = null;
