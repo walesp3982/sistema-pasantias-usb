@@ -54,5 +54,11 @@
         </x-form.label>
         <x-form.input wire:model.live="reference" placeholder="Frente al Multicine"></x-form.input>
     </div>
+    <div>
+        <x-form.label>
+            Telefono
+        </x-form.label>
+        <x-form.input wire:model.live="phone_number" placeholder="Ej: 63174767"></x-form.input>
+    </div>
 
 </div>

@@ -18,8 +18,8 @@ new #[Layout('components.layouts.guest')] class extends Component {
     public ?int $zone_id = null;
     public string $reference = '';
     public ?int $number_door = null;
-    public string $phone_number = '';
-    public string $name_administrador = '';
+    public ?string $phone_number = '';
+    public string $name_manager = '';
 
     protected $rules = [
         'name' => ['required', 'string', 'max:50'],
@@ -30,7 +30,7 @@ new #[Layout('components.layouts.guest')] class extends Component {
         'reference' => ['string', 'max:50'],
         'number_door' => ['required', 'integer', 'max:999999'],
         'phone_number' => ['required', 'string', 'max:10'],
-        'name_administrador' => ['required', 'string', 'max:50'],
+        'name_manager' => ['required', 'string', 'max:50'],
     ];
 
     public function submit(CompanyService $service): void
@@ -51,6 +51,7 @@ new #[Layout('components.layouts.guest')] class extends Component {
         $this->street = $data['street'];
         $this->number_door = $data['number_door'];
         $this->reference = $data['reference'];
+        $this->phone_number = $data['phone_number'];
     }
 
     #[On('sectorSelected')]
@@ -97,7 +98,7 @@ new #[Layout('components.layouts.guest')] class extends Component {
             <x-form.label>
                 Nombre del encargado
             </x-form.label>
-            <x-form.input wire:model="name_administrador" placeholder="Juan Quispe Gomez">
+            <x-form.input wire:model="name_manager" placeholder="Juan Quispe Gomez">
             </x-form.input>
         </div>
         <div>
@@ -120,13 +121,6 @@ new #[Layout('components.layouts.guest')] class extends Component {
         <livewire:forms.shared.location :zona_id="$zone_id" :number_door="$number_door" :street="$street"
             :reference="$reference">
         </livewire:forms.shared.location>
-        <div>
-            <x-form.label>
-                Número de teléfono
-            </x-form.label>
-            <x-form.input wire:model="phone_number" placeholder="61234567">
-            </x-form.input>
-        </div>
 
         <div class="flex items-center justify-end mt-4">
             <x-primary-button class="ms-4">

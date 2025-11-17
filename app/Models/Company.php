@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Files\Picture;
+use App\Models\Information\Location;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,10 +17,13 @@ class Company extends Model
         'name',
         'sector_id',
         'email',
+        'name_manager',
     ];
-    public function companyLocations() {
-        return $this->hasMany(CompanyLocation::class);
+
+    public function locations() {
+        return $this->morphMany(Location::class,'locatable');
     }
+
 
     public function sector() {
         return $this->belongsTo(Sector::class);

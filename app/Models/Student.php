@@ -33,10 +33,6 @@ class Student extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function phone() {
-        return $this->morphTo(Phone::class);
-    }
-
     public function location() {
         return $this->morphOne(Location::class, 'locatable');
     }

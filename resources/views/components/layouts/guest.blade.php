@@ -21,28 +21,10 @@
     <x-navigation.navbar.guest></x-navigation.navbar.guest>
 
     <section class="flex items-center justify-center bg-gray-100 min-h-screen">
-        <div class="flex flex-col lg:flex-row w-full max-w-5xl bg-white rounded-3xl shadow-lg">
-            <div class="flex justify-center items-center w-full lg:w-1/2 p-8 md:p-12">
-                <div class="w-full max-w-md">
+        <div class="flex w-full max-w-3xl bg-white rounded-3xl shadow-lg">
+            <div class="flex justify-center items-center w-full p-8 md:p-12">
+                <div class="w-full max-w-lg">
                     {{ $slot }}
-                </div>
-            </div>
-
-
-            <!-- Panel Derecho: Misión y Visión -->
-            <div
-                class="hidden lg:flex items-center justify-center w-1/2 bg-gradient-to-br from-blue-600 to-blue-800 text-white p-10">
-                <div>
-                    <h4 class="text-2xl font-semibold mb-4">Misión</h4>
-                    <p class="text-sm mb-6">
-                        Formar profesionales competentes, buenos cristianos y honrados ciudadanos,
-                        contribuyendo al desarrollo social y cultural del país.
-                    </p>
-                    <h4 class="text-2xl font-semibold mb-4">Visión</h4>
-                    <p class="text-sm">
-                        Ser reconocida como una institución educativa de excelencia y formación humana,
-                        un centro de referencia académica, espiritual y cultural.
-                    </p>
                 </div>
             </div>
         </div>

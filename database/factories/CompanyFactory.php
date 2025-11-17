@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Faker\CompanyProvider;
+use App\Models\Company;
+use App\Models\Information\Location;
 use App\Models\Sector;
 use Faker\Factory as FakerFactory;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -24,11 +26,19 @@ class CompanyFactory extends Factory
         $preffix = $this->faker->prefix();
         $name = strtolower($this->faker->firstName().".".$this->faker->lastName());
         $email = strtolower($name."@".$lastName.".com");
+        $name_manager = $this->faker->name();
         return [
             //
             "name" => "$preffix $lastName $suffix",
             "email" => "$email",
             "sector_id" => Sector::inRandomOrder()->first()->id,
+            'name_manager' => $name_manager,
         ];
+    }
+
+    public function withLocation(): static {
+        return $this->afterCreating(function (Company $company) {
+            $company->locations()->save(Location::factory()->make());
+        });
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Models\Information;
 
 use App\Models\Company;
-use App\Models\CompanyLocation;
 use App\Models\Geography\Zone;
 use App\Models\Geography\Municipality;
 use App\Models\Postulation;
@@ -29,14 +28,11 @@ class Location extends Model
         'street',
         'number_door',
         'reference',
+        'principal',
+        'phone_number'
     ];
     public function locatable() {
         return $this->morphTo();
-    }
-
-    public function companyDetails()
-    {
-        return $this->hasOne(CompanyLocation::class);
     }
 
     public function postulations() {
@@ -53,10 +49,6 @@ class Location extends Model
 
     public function getFullAddressAttribute() {
         return "{$this->street} #{$this->number_door}, zona {$this->zone->name}";
-    }
-
-    public function isCompanyLocation() {
-        return $this->locatable_type == Company::class;
     }
 
     public function isStudentLocation() {

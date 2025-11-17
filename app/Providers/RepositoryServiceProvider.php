@@ -37,10 +37,6 @@ class RepositoryServiceProvider extends ServiceProvider
             DocumentRepository::class
         );
         $this->app->bind(
-            PhoneRepositoryInterface::class,
-            PhoneRepository::class
-        );
-        $this->app->bind(
             PictureRepositoryInterface::class,
             PictureRepository::class
         );
