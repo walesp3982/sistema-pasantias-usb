@@ -5,12 +5,14 @@ namespace App\Models;
 use App\Models\Information\Location;
 use App\Models\Information\Phone;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 
 
 class CompanyLocation extends Model
 {
+    use HasFactory;
     public $timestamps = false;
     protected $fillable = [
         'company_id',
@@ -21,6 +23,7 @@ class CompanyLocation extends Model
 
     protected $casts = [
         'active' => 'boolean',
+        'principal' => 'boolean',
     ];
 
     public function location() {

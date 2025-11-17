@@ -8,9 +8,16 @@ use App\Models\Geography\Zone;
 use App\Models\Geography\Municipality;
 use App\Models\Postulation;
 use App\Models\Student;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+
+use Illuminate\Database\Eloquent\Attributes\UseFactory;
+use Database\Factories\LocationFactory;
+
+#[UseFactory(LocationFactory::class)]
 class Location extends Model
 {
+    use HasFactory;
     // public function city() {
     //     return $this->hasOne(City::class);
     // }

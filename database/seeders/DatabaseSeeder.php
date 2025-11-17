@@ -11,6 +11,9 @@ use Database\Seeders\Core\ShiftsSeeder;
 use Database\Seeders\Core\TypeDocumentsSeeder;
 use Database\Seeders\Core\TypeReportsSeeder;
 use Database\Seeders\Core\TypeSectorsSeeder;
+use Database\Seeders\Fake\CompanySeeder;
+use Database\Seeders\Fake\StudentSeeder;
+use Illuminate\Support\Facades\App;
 
 class DatabaseSeeder extends Seeder
 {
@@ -28,7 +31,13 @@ class DatabaseSeeder extends Seeder
             ShiftsSeeder::class,
             TypeSectorsSeeder::class,
             PermissionSeeder::class,
-            TypeDocumentsSeeder::class
+            TypeDocumentsSeeder::class,
         ]);
+        if(App::environment("local")) {
+            $this->call([
+                StudentSeeder::class,
+                CompanySeeder::class
+            ]);
+        }
     }
 }

@@ -3,11 +3,13 @@
 namespace App\Models;
 
 use App\Models\Files\Picture;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Company extends Model
 {
     //
+    use HasFactory;
     public $timestamps = true;
     
     protected $fillable = [
@@ -15,7 +17,7 @@ class Company extends Model
         'sector_id',
         'email',
     ];
-    public function locations() {
+    public function companyLocations() {
         return $this->hasMany(CompanyLocation::class);
     }
 

@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Company;
 use App\Repositories\Interfaces\CompanyRepositoryInterface;
-use com_exception;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class CompanyRepository implements CompanyRepositoryInterface {
     public function __construct(
@@ -27,6 +27,11 @@ class CompanyRepository implements CompanyRepositoryInterface {
     public function update(int $id, array $data): bool {
         $company = $this->model->findOrFail($id);
         return $company->update($data);
+    }
+
+    public function paginate(int $perPage = 15): LengthAwarePaginator
+    {
+        return $this->model->latest()->paginate($perPage);
     }
 
 }

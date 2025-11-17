@@ -6,6 +6,7 @@ use App\Models\Files\Document;
 use App\Models\Information\Location;
 use App\Models\Information\Management;
 use App\Models\Information\Phone;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -13,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Student extends Model
 {
+    use HasFactory;
     protected $table = 'students';
 
     public $timestamps = true;
