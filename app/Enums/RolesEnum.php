@@ -5,7 +5,7 @@ namespace App\Enums;
 enum RolesEnum: string
 {
     case STUDENT = "student";
-    case CAREER = "carrer-department";
+    case CAREER = "carrer-departmen";
     case AGREEMENTS = "agreements-departament";
 
     case ADMIN = "admin";

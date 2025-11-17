@@ -19,11 +19,22 @@ Route::middleware('auth')->group(function () {
         ->name('private.image');
 });
 
-Route::middleware(['auth','role:student'])->group(function () {
-    Route::view('configuracion', 'config')->name('config');
-    Route::view('pasantias', 'estudiante.pasantias')->name('search.intership');
+Route::middleware(middleware: ['auth','role:student'])->group(callback: function (): void {
+    Route::view(uri: 'configuracion', view: 'config')->name('config');
+    Route::view(uri: 'postulation', view: 'config')->name('posttulation');
+    Route::view(uri: 'gestion-solicitudes', view: 'config')->name('gestion.solicitudes');
+    Route::view(uri: 'informes', view: 'config')->name('informes');    
+    Route::view(uri: 'pasantias', view: 'estudiante.pasantias')->name('search.intership');
 });
-
+Route::middleware(middleware: ['auth','role:carrer-departmen'])->group(callback: function (): void {
+    Route::view(uri: 'departamentos', view: 'config')->name('departament');
+    Route::view(uri: 'information', view: 'config')->name('information');
+    Route::view(uri: 'pasantias', view: 'estudiante.pasantias')->name('search.intership');
+});
+Route::middleware(middleware: ['auth','role:agreements-departament'])->group(callback: function (): void {
+    Route::view(uri: 'convenios', view: 'config')->name('convenios');
+    Route::view(uri: 'pasantias', view: 'estudiante.pasantias')->name('search.intership');
+});
 Route::post('register/send', [StudentController::class, "create"])
     ->name('register.student.send');
 // Route::get('test', function () {
