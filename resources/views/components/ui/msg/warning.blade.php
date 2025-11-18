@@ -1,4 +1,4 @@
-<div class="flex items-start gap-3 bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+<div class="flex items-start my-2 gap-3 bg-yellow-50 border border-yellow-200 rounded-lg p-1">
     <div class="flex-shrink-0 w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center">
         <i class="fas fa-exclamation-triangle text-white text-sm"></i>
     </div>
