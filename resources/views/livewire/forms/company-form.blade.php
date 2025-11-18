@@ -32,6 +32,17 @@ new #[Layout('components.layouts.guest')] class extends Component {
         'phone_number' => ['required', 'string', 'max:10'],
         'name_manager' => ['required', 'string', 'max:50'],
     ];
+    protected $messages = [
+        'name.required' => "Ingrese nombre de la empresa",
+        'email.required' => "Ingrese correo electronico de la empresa",
+        'sector_id.required' => "seleccione el sector",
+        'street.required' => "Ingrese la calle",
+        'zone_id.required' => "ingrese la zona",
+        'number_door.required' => "Ingrese el numero de puerta",
+        'phone_number.required' => "Ingrese numero de telefono",
+        'name_manager.required' => "Ingrese nombre del encargado",   
+               
+    ];
 
     public function submit(CompanyService $service): void
     {
@@ -93,6 +104,11 @@ new #[Layout('components.layouts.guest')] class extends Component {
             </x-form.label>
             <x-form.input wire:model="name" placeholder="Toyota S.R.L">
             </x-form.input>
+
+            @error('name')
+                <x-ui.msg.warning>{{ $message }}</x-ui.msg.warning>
+            @enderror
+
         </div>
         <div>
             <x-form.label>
@@ -100,6 +116,11 @@ new #[Layout('components.layouts.guest')] class extends Component {
             </x-form.label>
             <x-form.input wire:model="name_manager" placeholder="Juan Quispe Gomez">
             </x-form.input>
+
+            @error('name_manager')
+                <x-ui.msg.warning>{{ $message }}</x-ui.msg.warning>
+            @enderror
+
         </div>
         <div>
             <x-form.label>
@@ -107,6 +128,11 @@ new #[Layout('components.layouts.guest')] class extends Component {
             </x-form.label>
             <x-form.input wire:model="email" placeholder="correo@ejemplo.com">
             </x-form.input>
+
+            @error('email')
+                <x-ui.msg.warning>{{ $message }}</x-ui.msg.warning>
+            @enderror
+
         </div>
         <div>
             <x-form.label>
@@ -114,6 +140,11 @@ new #[Layout('components.layouts.guest')] class extends Component {
             </x-form.label>
             <livewire:forms.shared.sector-select :sector_id="$sector_id">
             </livewire:forms.shared.sector-select>
+
+            @error('$sector_id')
+                <x-ui.msg.warning>{{ $message }}</x-ui.msg.warning>
+            @enderror
+
         </div>
         <x-form.section>
             Ubicación geográfica
@@ -121,6 +152,18 @@ new #[Layout('components.layouts.guest')] class extends Component {
         <livewire:forms.shared.location :zona_id="$zone_id" :number_door="$number_door" :street="$street"
             :reference="$reference">
         </livewire:forms.shared.location>
+
+        @error('$zone_id')
+                <x-ui.msg.warning>{{ $message }}</x-ui.msg.warning>
+            @enderror
+
+            @error('$number_door')
+                <x-ui.msg.warning>{{ $message }}</x-ui.msg.warning>
+            @enderror
+
+            @error('$street')
+                <x-ui.msg.warning>{{ $message }}</x-ui.msg.warning>
+            @enderror
 
         <div class="flex items-center justify-end mt-4">
             <x-primary-button class="ms-4">

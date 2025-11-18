@@ -48,6 +48,19 @@ new #[Layout('components.layouts.guest')] class extends Component {
         'password' => ['required', 'string', 'confirmed'],
         'password_confirmation' => ['required', 'string']
     ];
+
+    protected $messages = [
+        'first_name.required' => "Ingrese su nombre",
+        'last_name.required' => "Ingrese su apellido",
+        'ru.required' => "Ingrese su ru (codigo universitario)",
+        'semester.required' => "Ingrese su sumestre",
+        'shift_id.required' => "ingrese su turno",
+        'career.required' => "Ingrese su carrera",
+        'email.required' => "Ingrese su correo electronico",
+        'password.required' => "Ingrese su contraseña",
+        'password_confirmation.required' => "Ingrese confirmacion de contraseña",    
+               
+    ];
     public function submit(StudentService $service): void
     {
         $validate = $this->validate();
@@ -69,13 +82,6 @@ new #[Layout('components.layouts.guest')] class extends Component {
 }; ?>
 
 <div>
-    @if($errors->any())
-        <ul class="mb-0">
-            @foreach($errors->all() as $error)
-                <x-ui.msg.warning>{{ $error }}</x-ui.msg.warning>
-            @endforeach
-        </ul>
-    @endif
     <form wire:submit="submit">
         <!-- Name -->
         <x-form.title>
@@ -90,18 +96,27 @@ new #[Layout('components.layouts.guest')] class extends Component {
                 Nombres:
             </x-form.label>
             <x-form.input wire:model="first_name" placeholder="Juan Pedro" type="text"></x-form.input>
+            @error('first_name')
+                <x-ui.msg.warning>{{ $message }}</x-ui.msg.warning>
+            @enderror
         </div>
         <div>
             <x-form.label>
                 Apellidos:
             </x-form.label>
             <x-form.input wire:model="last_name" placeholder="Quispe Mamani" type="text"></x-form.input>
-        </div>
+            @error('last_name')
+                <x-ui.msg.warning>{{ $message }}</x-ui.msg.warning>
+            @enderror
+        </div>      
         <x-form.section>Datos académicos</x-form.section>
         <div>
             <x-form.label>Registro Universitario:</x-form.label>
             <x-form.input wire:model="ru"
             placeholder="ej: 63872" type="number"></x-form.input>
+            @error('ru')
+                <x-ui.msg.warning>{{ $message }}</x-ui.msg.warning>
+            @enderror
         </div>
         <div>
             <livewire:forms.shared.career-select :careerId="$career_id"/>
@@ -117,6 +132,7 @@ new #[Layout('components.layouts.guest')] class extends Component {
                         <option value="{{ $i }}">{{$i}}° Semestre </option>
                     @endfor
                 </x-form.select>
+
             </div>
             <div>
                 <x-form.label>
@@ -128,6 +144,9 @@ new #[Layout('components.layouts.guest')] class extends Component {
                         <option value="{{ $shift->id }}"> {{ $shift->name }}</option>
                     @endforeach
                 </x-form.select>
+                @error('shift_id')
+                <x-ui.msg.warning>{{ $message }}</x-ui.msg.warning>
+            @enderror
             </div>
         </div>
         <div>
@@ -135,18 +154,27 @@ new #[Layout('components.layouts.guest')] class extends Component {
                 Email
             </x-form.label>
             <x-form.input wire:model="email" type="email" placeholder="example@gmail.com"></x-form>
+            @error('email')
+                <x-ui.msg.warning>{{ $message }}</x-ui.msg.warning>
+            @enderror
         </div>
         <div>
             <x-form.label>
                 Contraseña:
             </x-form.label>
             <x-form.input wire:model="password" type="password"></x-form>
+            @error('password')
+                <x-ui.msg.warning>{{ $message }}</x-ui.msg.warning>
+            @enderror
         </div>
         <div>
             <x-form.label>
                 Confirmar Contraseña:
             </x-form.label>
             <x-form.input wire:model="password_confirmation" type="password"></x-form>
+            @error('password_confirmation')
+                <x-ui.msg.warning>{{ $message }}</x-ui.msg.warning>
+            @enderror
         </div>
 
         <div class="flex items-center justify-end mt-4">
