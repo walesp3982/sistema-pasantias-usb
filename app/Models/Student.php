@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Files\Document;
+use App\Models\Information\Career;
 use App\Models\Information\Location;
 use App\Models\Information\Management;
 use App\Models\Information\Phone;
@@ -43,5 +44,9 @@ class Student extends Model
 
     public function getFullNameAttribute(): string {
         return trim("{$this->first_name} {$this->last_name}");
+    }
+
+    public function career() {
+        return $this->belongsTo(Career::class);
     }
 }

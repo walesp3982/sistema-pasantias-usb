@@ -6,12 +6,16 @@ namespace App\Models;
 
 use App\Enums\RolesEnum;
 use App\Models\Files\Picture;
+use App\Models\CareerDepartament;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
+/**
+ * @property-read CareerDepartament|null $careerDepartament
+ */
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -61,4 +65,12 @@ class User extends Authenticatable
         $roleEnum = RolesEnum::from($roleName);
         return $roleEnum;
     }
+
+    public function student() {
+        return $this->hasOne(Student::class);
+    }
+
+    public function careerDepartament() {
+        return $this->hasOne(CareerDepartament::class);
+    }    
 }

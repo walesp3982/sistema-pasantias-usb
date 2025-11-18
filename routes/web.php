@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\RolesEnum;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
@@ -19,10 +20,16 @@ Route::middleware('auth')->group(function () {
         ->name('private.image');
 });
 
-Route::middleware(['auth','role:student'])->group(function () {
+Route::middleware(['auth', 'role:student'])->group(function () {
     Route::view('configuracion', 'config')->name('config');
     Route::view('pasantias', 'estudiante.pasantias')->name('search.intership');
 });
+
+Route::middleware(['auth', 'role:' . RolesEnum::CAREER->value])
+    ->group(function () {
+        Route::view('interships', 'career-departament.intership')->name('career.intership');
+        Route::view('students', 'career-departament.students')->name('career.students');
+    });
 
 Route::post('register/send', [StudentController::class, "create"])
     ->name('register.student.send');

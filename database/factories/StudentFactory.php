@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Enums\CareerEnum;
+use App\Enums\RolesEnum;
 use App\Enums\ShiftEnum;
 use App\Models\Information\Career;
 use App\Models\Information\Shift;
@@ -28,6 +29,7 @@ class StudentFactory extends Factory
             $student->user->update([
                 'name' => "{$student->first_name} {$student->last_name}"
             ]);
+            $student->user->assignRole(RolesEnum::STUDENT);
         });
     }
     public function definition(): array

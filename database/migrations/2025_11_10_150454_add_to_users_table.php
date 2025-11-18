@@ -17,7 +17,7 @@ return new class extends Migration
             $table->softDeletes();
         });
 
-        Schema::create('career_departments', function (Blueprint $table) {
+        Schema::create('career_departaments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('career_id')->constrained()->onDelete('cascade');

@@ -21,4 +21,19 @@ enum CareerEnum: int
         return Career::findOrFail($this->value)
             ->name;
     }
+
+    public function email() {
+        return match($this) {
+            self::EDUCACION => 'educacion@gmail.com',
+            self::SISTEMAS => 'sistemas@gmail.com',
+            self::CONTADURIA => 'contaduria@gmail.com',
+            self::DERECHO => 'derecho@gmail.com',
+            self::PSICOMOTRICIDAD => 'psicomotricidad@gmail.com',
+            self::PARVULARIA => 'parvularia@gmail.com',
+            self::EDUCACIÓN_INCLUSIVA => 'educacion_inclusiva@gmail.com',
+            self::PEDAGOGIA_ADULTO => 'pedagogia_adulto@gmail.com',
+            self::COMERCIAL => 'comercial@gmail.com',
+            self::GASTRONOMIA => 'gastronomia@gmail.com',
+        };
+    }
 }

@@ -80,4 +80,14 @@ class UserService
             $this->desactive($id);
         }));
     }
+
+    public function getCareer(int $id) {
+        
+        $user = $this->repository->findById($id);
+        if(!$user->hasRole(RolesEnum::CAREER)) {
+            throw new \Exception("No tiene el rol correcto");
+        }
+        $career = $user->careerDepartament->career;
+        return $career;
+    }
 }
