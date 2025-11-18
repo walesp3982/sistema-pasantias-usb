@@ -1,9 +1,18 @@
 <x-app-layout>
     <section>
         <x-ui.section>
-            <x-ui.title>
-                Empresas
-            </x-ui.title>
+            <div class="flex justify-between">
+                <x-ui.title>
+                    Empresas
+                </x-ui.title>
+                <a href="{{ route('create.company') }}">
+                    <x-ui.btn.primary>
+                        <i class="fa-solid fa-plus"></i> Empresa
+                    </x-ui.btn.primary>
+                </a>
+                
+            </div>
+
         </x-ui.section>
     </section>
 

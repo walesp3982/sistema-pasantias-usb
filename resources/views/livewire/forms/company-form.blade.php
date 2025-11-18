@@ -11,15 +11,15 @@ use Livewire\Volt\Component;
 use Livewire\Attributes\On;
 
 new #[Layout('components.layouts.guest')] class extends Component {
-    public string $name = '';
-    public string $email = '';
+    public ?string $name = '';
+    public ?string $email = '';
     public ?int $sector_id = null;
-    public string $street = '';
+    public ?string $street = '';
     public ?int $zone_id = null;
-    public string $reference = '';
+    public ?string $reference = '';
     public ?int $number_door = null;
     public ?string $phone_number = '';
-    public string $name_manager = '';
+    public ?string $name_manager = '';
 
     protected $rules = [
         'name' => ['required', 'string', 'max:50'],

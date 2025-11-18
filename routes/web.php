@@ -34,6 +34,7 @@ Route::middleware(['auth', 'role:' . RolesEnum::CAREER->value])
 Route::middleware(['auth', 'role:' . RolesEnum::AGREEMENTS->value])
     ->group(function () {
         Route::view('company', 'agreement-deparment.companies')->name('agreements.company');
+        Route::view('create/company', 'agreement-deparment.company-form')->name('create.company');
     });
 
 Route::post('register/send', [StudentController::class, "create"])
