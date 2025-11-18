@@ -30,4 +30,15 @@ class CompanyService
             ]);
         });
     }
+
+    public function find(int $id) {
+        $company = $this->repository->get($id);
+
+        if(is_null($company)) {
+            throw new \Exception("No se encontro la company con $id");
+        }
+
+        return $company;
+
+    }
 }

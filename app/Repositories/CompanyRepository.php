@@ -34,4 +34,6 @@ class CompanyRepository implements CompanyRepositoryInterface {
         return $this->model->latest()->paginate($perPage);
     }
 
+
+
 }

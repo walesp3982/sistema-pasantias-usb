@@ -1,8 +1,10 @@
 <?php
 
 use App\Enums\RolesEnum;
+use App\Http\Controllers\AgreementController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\CareerController;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome')->name('welcome');
@@ -34,7 +36,10 @@ Route::middleware(['auth', 'role:' . RolesEnum::CAREER->value])
 Route::middleware(['auth', 'role:' . RolesEnum::AGREEMENTS->value])
     ->group(function () {
         Route::view('company', 'agreement-deparment.companies')->name('agreements.company');
-        Route::view('create/company', 'agreement-deparment.company-form')->name('create.company');
+        Route::view('company/create', 'agreement-deparment.company-form')->name('create.company');
+        // Formulario para crear pasantía para empresa
+        Route::get("intership/create/{companyId}", [AgreementController::class, "createIntership"])
+            ->name('create.intership');
     });
 
 Route::post('register/send', [StudentController::class, "create"])
