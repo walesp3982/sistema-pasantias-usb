@@ -6,7 +6,7 @@ use App\Enums\CareerEnum;
 use App\Models\Student;
 use Livewire\Component;
 use Livewire\WithPagination;
-class ShowStudents extends Component
+class PaginateStudents extends Component
 {
 
     use WithPagination;
@@ -18,7 +18,7 @@ class ShowStudents extends Component
     {
         $students = Student::where("career_id", $this->career_id)->paginate(10);
 
-        return view('livewire.career.show-students',
+        return view('livewire.career.paginate-students',
         ['students' => $students]);
     }
 }

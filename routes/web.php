@@ -31,6 +31,11 @@ Route::middleware(['auth', 'role:' . RolesEnum::CAREER->value])
         Route::view('students', 'career-departament.students')->name('career.students');
     });
 
+Route::middleware(['auth', 'role:' . RolesEnum::AGREEMENTS->value])
+    ->group(function () {
+        Route::view('company', 'agreement-deparment.companies')->name('agreements.company');
+    });
+
 Route::post('register/send', [StudentController::class, "create"])
     ->name('register.student.send');
 // Route::get('test', function () {
