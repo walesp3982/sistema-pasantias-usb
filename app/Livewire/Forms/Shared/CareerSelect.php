@@ -10,12 +10,8 @@ use Livewire\Attributes\Modelable;
 class CareerSelect extends Component
 {
     #[Modelable]
-    public $careerId;
+    public $career_id;
 
-
-    public function updatedCareerId($value) {
-        dd($value);
-    }
     public function render()
     {
         return view(

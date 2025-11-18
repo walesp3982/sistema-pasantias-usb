@@ -2,9 +2,7 @@
 
 namespace App\Models\Information;
 
-use App\Models\Company;
 use App\Models\Geography\Zone;
-use App\Models\Geography\Municipality;
 use App\Models\Postulation;
 use App\Models\Student;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
