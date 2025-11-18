@@ -81,7 +81,7 @@ new #[Layout('components.layouts.guest')] class extends Component {
             <div>
                 <label class="block text-blue-600 font-medium mb-1">Tipo de informe</label>
                 <select class="w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-300 focus:border-blue-300"
-                    wire:model.live="tipo_informe">
+                    wire:model="tipo_informe">
                     <option value="">Seleccione el tipo de informe</option>
                     <option value="1">Lorem</option>
                     <option value="2">Lorem</option>
@@ -91,7 +91,7 @@ new #[Layout('components.layouts.guest')] class extends Component {
             <div>
                 <label class="block text-blue-600 font-medium mb-1">Estudiante:</label>
                 <select class="w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-300 focus:border-blue-300"
-                    wire:model.live="informe_estudiante_id">
+                    wire:model="informe_estudiante_id">
                     <option value="">Nombre del estudiante</option>
                     <option value="1">Lorem</option>
                     <option value="2">Lorem</option>

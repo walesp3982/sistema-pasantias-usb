@@ -14,7 +14,7 @@ new #[Layout('components.layouts.guest')] class extends Component {
     public $last_name = '';
     public $semester = null;
     public $shift_id = null;
-    public $career_id = null;
+    public $career_id;
     public $ru = '';
 
     public string $email = '';
@@ -55,11 +55,6 @@ new #[Layout('components.layouts.guest')] class extends Component {
         $student = $service->create($validate);
         Auth::login($student->user);
         $this->redirect(route('dashboard'));
-    }
-
-    #[On('careerSelected')]
-    public function updateCareer($careerId) {
-        $this->career_id = $careerId;
     }
 
     public function updated($propertyName)
@@ -104,7 +99,7 @@ new #[Layout('components.layouts.guest')] class extends Component {
             placeholder="ej: 63872" type="number"></x-form.input>
         </div>
         <div>
-            <livewire:forms.shared.career-select :careerId="$career_id"/>
+            <livewire:forms.shared.career-select wire:model="career_id"/>
         </div>
         <div class="grid grid-cols-2 gap-4">
             <div>
