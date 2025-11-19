@@ -35,7 +35,7 @@ class CompanyService
         $company = $this->repository->get($id);
 
         if(is_null($company)) {
-            throw new \Exception("No se encontro la company con $id");
+            throw new \Exception("No se encontro la company con id=$id");
         }
 
         return $company;

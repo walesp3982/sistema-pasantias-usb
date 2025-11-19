@@ -58,7 +58,7 @@
 
     <!-- Contenido principal -->
     <main id="mainContent" class="w-full h-full pt-20 px-10 pb-20 transition-all duration-400
-         md:px-32 lg:px-40">
+         md:px-40 lg:px-60">
 
         {{ $slot }}
     </main>

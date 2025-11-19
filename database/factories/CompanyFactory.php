@@ -36,9 +36,14 @@ class CompanyFactory extends Factory
         ];
     }
 
-    public function withLocation(): static {
-        return $this->afterCreating(function (Company $company) {
-            $company->locations()->save(Location::factory()->make());
+    public function withLocation(int $number = 1): static {
+        return $this->afterCreating(function (Company $company) use ($number) {
+            if($number < 1) {
+                throw new \Exception("Numero menor a 1. Abortando...");
+            }
+            for($i = 1; $i <= $number; $i++) {
+                $company->locations()->save(Location::factory()->make());
+            }
         });
     }
 }

@@ -16,6 +16,7 @@ class StudentSeeder extends Seeder
         //Creamos 20 estudiante de ingenieria de sistemas
         $studentsSystem = Student::factory()
             ->count(20)
+            ->withLocation()
             ->career(CareerEnum::SISTEMAS)
             ->create();
 
@@ -28,6 +29,7 @@ class StudentSeeder extends Seeder
         // Creamos 15 estudiantes de psicomotricidad
         $studentPsicomotricidad = Student::factory()
             ->count(15)
+            ->withLocation()
             ->career(CareerEnum::PSICOMOTRICIDAD)
             ->create();
     }

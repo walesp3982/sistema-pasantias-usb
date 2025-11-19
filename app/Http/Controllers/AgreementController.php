@@ -17,7 +17,7 @@ class AgreementController extends Controller
 
         return view(
             "agreement-deparment.intership-form",
-            ['company' => $company]
+            ['company_id' => $company->id]
         );
     }
 }

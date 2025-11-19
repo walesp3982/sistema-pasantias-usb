@@ -15,7 +15,7 @@ class CompanySeeder extends Seeder
     public function run(): void
     {
         $companies = Company::factory()
-            ->withLocation()
+            ->withLocation(4)
             ->count(10)
             ->create();
     }

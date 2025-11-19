@@ -31,6 +31,7 @@ Route::middleware(['auth', 'role:' . RolesEnum::CAREER->value])
     ->group(function () {
         Route::view('interships', 'career-departament.intership')->name('career.intership');
         Route::view('students', 'career-departament.students')->name('career.students');
+        Route::get('students/{idStudent}', [CareerController::class, "showStudent"])->name('show.student');
     });
 
 Route::middleware(['auth', 'role:' . RolesEnum::AGREEMENTS->value])

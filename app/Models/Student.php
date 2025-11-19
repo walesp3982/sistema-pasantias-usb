@@ -7,6 +7,7 @@ use App\Models\Information\Career;
 use App\Models\Information\Location;
 use App\Models\Information\Management;
 use App\Models\Information\Phone;
+use App\Models\Information\Shift;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -48,5 +49,9 @@ class Student extends Model
 
     public function career() {
         return $this->belongsTo(Career::class);
+    }
+
+    public function shift() {
+        return $this->belongsTo(Shift::class);
     }
 }

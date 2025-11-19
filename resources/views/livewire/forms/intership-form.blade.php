@@ -1,34 +1,61 @@
 <?php
 
 use App\Models\Company;
-use App\Service\CompanyService;
+use App\Service\IntershipService;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
-use Livewire\Attributes\On;
 
 new #[Layout('components.layouts.app')] class extends Component {
 
-
-    private Company $company;
-
+    public int $company_id;
     public ?int $career_id;
-    protected $rules = [
+    public ?string $start_date;
+    public ?string $end_date;
+    public ?string $postulation_limit_date;
+    public ?string $entry_time;
+    public ?string $exit_time;
+    public ?int $location_id;
+    public ?int $phone_id;
+    public ?int $vacant;
 
+    protected $rules = [
+        'vacant' => ["required", "integer", "min:1"],
+        'company_id' => ["required", "integer", "exists:companies,id"],
+        'career_id' => ["required", "integer", "exists:careers,id"],
+        'start_date'=> ["required", "date", "before:end_date"],
+        'end_date' => ["required", "date", "after:start_date"],
+        'postulation_limit_date' => ["required", "date"],
+        'entry_time' => ["required", "date_format:H:i"],
+        'exit_time' => ["required", "date_format:H:i"],
+        'location_id' => ["required", "integer", "exists:locations,id"],
     ];
 
-    public function submit(CompanyService $service): void
+    public function getCompanyProperty()
+    {
+        return Company::findOrFail($this->company_id);
+    }
+
+    public function submit(IntershipService $service): void
     {
         $validate = $this->validate();
 
         $service->create($validate);
         session()->flash('message', 'Pasantía registrada correctamente');
-        $this->reset();
+
+        $this->reset([
+            'career_id', 'start_date', 'end_date', 
+            'postulation_limit_date', 'entry_time', 
+            'exit_time', 'location_id', 'vacant'
+        ]);
 
         $this->dispatch("reset-child-component");
+
+        // $this->redirect(route('agreements.company'));
     }
 
-    public function mount(Company $company) {
-        $this->company = $company;
+    public function mount(int $company_id) {
+        // $this->company = Company::findOrFail($company_id);
+        $this->company_id = $company_id;
     }
 }
  ?>
@@ -62,28 +89,30 @@ new #[Layout('components.layouts.app')] class extends Component {
         <div class="grid grid-cols-3 gap-2">
             <div class="col-span-1">
                 <x-form.label>Vacantes</x-form.label>
-                <x-form.input input="number" placeholder="2">
+                <x-form.input type="number" placeholder="2"
+                wire:model="vacant">
                 </x-form.input>
             </div>
             <div class="col-span-2">
                 <x-form.label>Carrera</x-form.label>
-                <livewire:forms.shared.career-select :careerId="$career_id">
-                </livewire:forms.shared.career-select>
+                <livewire:forms.shared.career-select wire:model="career_id" />
+
             </div>
         </div>
         <x-form.section>Configurar fechas</x-form.section>
         <div>
+            <x-form.label>Fecha límite de postulation </x-form.label>
+            <x-form.input type="date" wire:model="postulation_limit_date"></x-form.input>
+        </div>
+        <div>
             <x-form.label>Fecha de inicio</x-form.label>
-            <x-form.input type="date"></x-form.input>
+            <x-form.input type="date" wire:model="start_date"></x-form.input>
         </div>
         <div>
             <x-form.label>Fecha final</x-form.label>
-            <x-form.input type="date"></x-form.input>
+            <x-form.input type="date" wire:model="end_date"></x-form.input>
         </div>
-        <div>
-            <x-form.label>Fecha límite de postulation </x-form.label>
-            <x-form.input type="date"></x-form.input>
-        </div>
+        
 
         <x-form.section>
             Configurar horarios
@@ -91,26 +120,29 @@ new #[Layout('components.layouts.app')] class extends Component {
         <div class="grid grid-cols-2 gap-2">
             <div>
                 <x-form.label>Hora de entrada</x-form.label>
-                <x-form.input type="time"></x-form.input>
+                <x-form.input type="time" wire:model="entry_time"></x-form.input>
             </div>
             <div>
                 <x-form.label>Hora de salida</x-form.label>
-                <x-form.input type="time"></x-form.input>
+                <x-form.input type="time" wire:model="exit_time"></x-form.input>
             </div>
         </div>
 
         <div>
             <x-form.label>Ubicación</x-form.label>
+            <x-form.select wire:model="location_id">
+                <option value="">Seleccione una ubicación</option>
+                @foreach ($this->company->locations as $location)
+                    <option value="{{ $location->id }}">{{ $location->full_address }}</option>
+                @endforeach
+            </x-form.select>
         </div>
 
-        <div>
-            <x-form.label>Teléfono de contacto</x-form.label>
-        </div>
-
-        <div class="flex items-center justify-end">
+        <div class="mt-3 flex items-center justify-end">
             <x-ui.btn.primary>
                 Registrar Pasantía
             </x-ui.btn.primary>
+            
         </div>
 
     </form>

@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Database\Factories\LocationFactory;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 #[UseFactory(LocationFactory::class)]
 class Location extends Model
@@ -45,8 +46,23 @@ class Location extends Model
         return $this->through('zone')->has('municipality');
     }
 
-    public function getFullAddressAttribute() {
-        return "{$this->street} #{$this->number_door}, zona {$this->zone->name}";
+    protected function fullAddress():Attribute {
+        return Attribute::make(
+            get: function(){
+                if(!$this->zone) {
+                    "Algo salió mal";
+                }
+
+                return trim(sprintf(
+                    '%s, %s. %s #%s',
+                    $this->zone->municipality->name ?? '',
+                    $this->zone->name ?? '',
+                    $this->street ?? '',
+                    $this->number_door ?? ''
+
+            ));
+            } 
+        );
     }
 
     public function isStudentLocation() {

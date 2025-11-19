@@ -6,7 +6,9 @@ use App\Enums\CareerEnum;
 use App\Enums\RolesEnum;
 use App\Enums\ShiftEnum;
 use App\Models\Information\Career;
+use App\Models\Information\Location;
 use App\Models\Information\Shift;
+use App\Models\Student;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -61,6 +63,13 @@ class StudentFactory extends Factory
             return [
                 'shift_id' => $shift->value
             ];
+        });
+    }
+
+    public function withLocation(): static
+    {
+        return $this->afterCreating(function (Student $student)  {
+            $student->location()->save(Location::factory()->make());
         });
     }
 }
