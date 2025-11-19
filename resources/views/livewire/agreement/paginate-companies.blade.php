@@ -3,14 +3,9 @@
     <div class="mt-4"></div>
     <x-ui.section>
         @foreach ($companies as $company)
-            <p>{{ $company->name }}: {{ $company->sector->name }}</p>
-            <a href="{{ route("create.intership",
-            [
-                'companyId' => $company->id]) }}">
-                <button type="button">
-                    Crear pasantía
-                </button>
-            </a>
+            <x-agreemtent.company-block :company="$company">
+
+            </x-agreemtent.company-block>
         @endforeach
 
     </x-ui.section>

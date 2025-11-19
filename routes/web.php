@@ -24,7 +24,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'role:student'])->group(function () {
     Route::view('configuracion', 'config')->name('config');
-    Route::view('pasantias', 'estudiante.pasantias')->name('search.intership');
+    Route::get('pasantias', [StudentController::class,"showIntership"])->name('search.intership');
 });
 
 Route::middleware(['auth', 'role:' . RolesEnum::CAREER->value])
