@@ -16,7 +16,6 @@ class StudentService
     public function __construct(
         private readonly StudentRepositoryInterface $studentRepository,
         private readonly UserService $userService,
-        private readonly PhoneService $phoneService,
         private readonly LocationService $locationService
     ) {}
 
@@ -34,8 +33,8 @@ class StudentService
             $student = $this->studentRepository->create([
                 'first_name' => $data['first_name'],
                 'last_name' => $data['last_name'],
-                'identity_card' => $data['identity_card'],
                 'semester' => $data['semester'],
+                'ru' => $data['ru'],
                 'shift_id' => $data['shift_id'],
                 'career_id' => $data['career_id']
             ]);
@@ -76,5 +75,14 @@ class StudentService
 
             return $user;
         });
+    }
+
+    public function find(int $idStudent): Student {
+        $student = $this->studentRepository->get($idStudent);
+        if(is_null($student)) {
+            throw new \Exception("No se encontró al estudiante");
+        }
+
+        return $student;
     }
 }

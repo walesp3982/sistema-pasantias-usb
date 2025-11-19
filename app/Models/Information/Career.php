@@ -3,6 +3,7 @@
 namespace App\Models\Information;
 
 use App\Models\Postulation;
+use App\Models\Student;
 use Illuminate\Database\Eloquent\Model;
 
 class Career extends Model
@@ -16,5 +17,7 @@ class Career extends Model
     public function postulations() {
         return $this->belongsTo(Postulation::class);
     }
-
+    public function students() {
+        return $this->hasMany(Student::class);
+    }
 }

@@ -46,11 +46,11 @@ class PermissionSeeder extends Seeder
         $student = Role::create(['name' => RolesEnum::STUDENT->value]);
         $student->givePermissionTo(['create postulation', 'edit profile']);
 
-        $user = User::factory()->create([
-            'name' => 'estudiante prueba',
-            'email' => 'estudiante@gmail.com'
-        ]);
-        $user->assignRole($student);
+        // $user = User::factory()->create([
+        //     'name' => 'estudiante prueba',
+        //     'email' => 'estudiante@gmail.com'
+        // ]);
+        // $user->assignRole($student);
 
         $careerDept = Role::create(['name' => RolesEnum::CAREER->value]);
         $careerDept->givePermissionTo([
@@ -61,11 +61,11 @@ class PermissionSeeder extends Seeder
             'register reports',
             'show stadistics'
         ]);
-        $user = User::factory()->create([
-            'name' => 'dirección carrera',
-            'email' => 'career@gmail.com'
-        ]);
-        $user->assignRole($careerDept);
+        // $user = User::factory()->create([
+        //     'name' => 'dirección carrera',
+        //     'email' => 'career@gmail.com'
+        // ]);
+        // $user->assignRole($careerDept);
 
         $agreementsDept = Role::create(['name' => RolesEnum::AGREEMENTS->value]);
         $agreementsDept->givePermissionTo([

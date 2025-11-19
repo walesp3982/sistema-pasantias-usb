@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\InternStatusEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,7 +15,7 @@ return new class extends Migration
         Schema::create('interns', function(Blueprint $table) {
             $table->id();
             $table->foreignId('postulation_id')->constrained()->onDelete('cascade');
-            $table->enum('status', ['wait', 'active', 'finished', 'abandoned']);
+            $table->enum('status',InternStatusEnum::cases());
         });
 
         Schema::create('type_reports', function(Blueprint $table) {
@@ -26,11 +27,10 @@ return new class extends Migration
         Schema::create('reports', function(Blueprint $table) {
             $table->id();
             $table->string("descripcion");
-            $table->string("autor");
+            $table->foreignId("user_id")->constrained();
             $table->foreignId('type_report_id')->constrained()->onDelete('cascade');
             $table->date('date_create');
             $table->foreignId('intern_id')->constrained()->onDelete('cascade');
-            $table->foreignId('document_id')->constrained()->onDelete('cascade');
             $table->boolean('verify')->default(false);
         });
     }

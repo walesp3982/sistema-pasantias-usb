@@ -5,14 +5,15 @@ use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
 Route::middleware('guest')->group(function () {
-    Volt::route('register/student', 'pages.auth.register-student')
+    Volt::route('register/student', 'forms.student-form')
         ->name('register.student');
 
-    Volt::route('register/company', 'pages.auth.register-company')
+    Volt::route('register/company', 'forms.company-form')
         ->name('register.company');
     Volt::route('login', 'pages.auth.login')
         ->name('login');
-
+    Volt::route('intership', 'forms.intership-form');
+    Volt::route('postulation', "forms.postulation-form");
     Volt::route('forgot-password', 'pages.auth.forgot-password')
         ->name('password.request');
 
@@ -20,6 +21,12 @@ Route::middleware('guest')->group(function () {
         ->name('password.reset');
 });
 
+Route::middleware(['auth', 'role:agreements-departament'])->group(
+    function() {
+        Volt::route('intership/create', 'forms.postulations-form')
+            ->name("forms.postulations");
+    }
+);
 Route::middleware('auth')->group(function () {
     Volt::route('verify-email', 'pages.auth.verify-email')
         ->name('verification.notice');

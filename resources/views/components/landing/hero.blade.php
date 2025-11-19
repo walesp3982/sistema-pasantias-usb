@@ -1,5 +1,4 @@
 <section id="inicio" class="pt-40 pb-40 bg-gradient-to-br from-gray-100 to-blue-100">
-
     <div class="max-w-6xl mx-auto px-5 flex flex-col md:flex-row items-center justify-between">
     <!-- Contenido -->
     <div class="flex-1 md:pr-12 text-center md:text-left">
@@ -25,7 +24,7 @@
 
     <!-- Imagen -->
     <div class="flex-1 mt-10 md:mt-0 text-center">
-      <img src="{{ Vite::asset("resources/images/foto.jpeg") }}" alt="Sistema de Gestión de Pasantías" class="max-w-full rounded-lg shadow-xl">
+      <img src="{{ asset("images/foto.jpeg") }}" alt="Sistema de Gestión de Pasantías" class="max-w-full rounded-lg shadow-xl">
     </div>
   </div>
 </section>

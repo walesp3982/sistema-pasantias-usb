@@ -19,21 +19,12 @@ return new class extends Migration
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
             $table->string("name")->unique();
+            $table->string("email")->unique();
+            $table->string("name_manager");
             $table->foreignId("sector_id")
                 ->constrained()
                 ->onDelete('cascade');
-            $table->string("email")->unique();
             $table->timestamps();
-        });
-
-        Schema::create('company_location', function(Blueprint $table) {
-            $table->id();
-            $table->foreignId('location_id')->constrained()->onDelete('cascade');
-            $table->foreignId('company_id')->constrained()->onDelete('cascade');
-            $table->boolean('active')->default(true);
-            $table->string("name_administrador");
-            $table->foreignId('phone_id')->nullable()->constrained();
-            $table->index(["location_id", "company_id"]);
         });
     }
 
@@ -42,7 +33,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists("company_location");
+        Schema::dropIfExists("company_locations");
         Schema::dropIfExists('companies');
         Schema::dropIfExists('sectors');
     }

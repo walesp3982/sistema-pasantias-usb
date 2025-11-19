@@ -11,13 +11,6 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('phones', function (Blueprint $table) {
-            $table->id();
-            $table->morphs('phoneable');
-            $table->integer("code_number", false)->default(591);
-            $table->string("phone_number", 10);
-            $table->boolean("notifications");
-        });
         Schema::create('municipalities', function (Blueprint $table) {
             $table->id();
             $table->string("name");
@@ -38,6 +31,8 @@ return new class extends Migration
             $table->morphs('locatable');
             $table->string('reference')->nullable();
             $table->integer("number_door");
+            $table->string("phone_number",18)->unique();
+            $table->boolean("principal")->default(true);
         });
     }
 

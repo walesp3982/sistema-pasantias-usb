@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\StatusIntershipEnum;
 use App\Models\Information\Career;
 use App\Models\Information\Location;
 use Illuminate\Database\Eloquent\Attributes\Scope;
@@ -11,8 +12,28 @@ use Illuminate\Database\Eloquent\Model;
 class Intership extends Model
 {
     //
+    public $timestamps = true;
+
+    protected $fillable = [
+        'company_id',
+        'career_id',
+        'start_date',
+        'end_date',
+        'postulation_limit_date',
+        'entry_time',
+        'exit_time',
+        'vacant',
+        'location_id',
+        'status',
+    ];
     protected $casts = [
         "active" => "boolean",
+        "start_date" => 'date',
+        "end_date" => 'date',
+        "postulation_limit_date" => 'date',
+        "entry_time" => "datetime:H:i",
+        "exit_time" => "datetime:H:i",
+        "status" => StatusIntershipEnum::class,
     ];
 
     public function company() {
@@ -20,7 +41,7 @@ class Intership extends Model
     }
 
     public function career() {
-        return $this->hasOne(Career::class);
+        return $this->belongsTo(Career::class);
     }
 
     public function location() {

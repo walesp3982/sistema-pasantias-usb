@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script> </head>
+
+</head>
+<body>
+  <div class="min-h-screen flex items-center justify-center bg-gray-100">
+    <form method="POST"
+        class="bg-white shadow-lg rounded-lg p-10 w-full max-w-2xl">
+
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-blue-500 mb-2">Informe</h1>
+            <p class="text-gray-500">Ingrese los siguientes datos:</p>
+        </div>
+
+        <!--Datos del informe-->
+        <h2 class="text-xl font-medium text-blue-600 mb-4 pb-2 border-b-2 border-blue-500"> Datos del informe
+        </h2>
+
+        <div class="space-y-4">
+            <div>
+                <label class="block text-blue-600 font-medium mb-1">Nombre del informe</label>
+                <input class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none
+                focus:ring-2 focus:ring-blue-400" wire:model="informe_id" type="text" required>
+            </div>
+
+            <div>
+                <label class="block text-blue-600 font-medium mb-1">Descripcion del informe</label>
+                <input class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none
+                focus:ring-2 focus:ring-blue-400" wire:model="descripcion" type="text" required>
+            </div>
+
+            <div>
+                <label class="block text-blue-600 font-medium mb-1">Tipo de informe</label>
+                <select class="w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-300 focus:border-blue-300"
+                wire:model.live="tipo_informe">
+                    <option value="">Seleccione el tipo de informe</option>
+                    <option value="1">Lorem</option>
+                    <option value="2">Lorem</option>
+                    <option value="3">Lorem</option>
+                </select>
+            </div>
+             <div>
+                <label class="block text-blue-600 font-medium mb-1">Estudiante:</label>
+                <select class="w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-300 focus:border-blue-300"
+                wire:model.live="informe_estudiante_id">
+                    <option value="">Nombre del estudiante</option>
+                    <option value="1">Lorem</option>
+                    <option value="2">Lorem</option>
+                    <option value="3">Lorem</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="block text-blue-600 font-medium mb-1">Nombre del documento</label>
+                <input class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none
+                focus:ring-2 focus:ring-blue-400" wire:model="documento_id" type="text" required>
+            </div>
+    <div class="flex items-center gap-3">
+            <label class="cursor-pointer flex items-center gap-3 px-4 py-3 bg-blue-600 text-white font-medium rounded-lg shadow hover:bg-blue-700 transition">
+            <input type="file" class="hidden" id="documento">
+            <span>Subir documento</span>
+</label>
+
+</div>
+
+
+        </div>
+
+        <!-- Botón -->
+        <div class="flex justify-end mt-6">
+            <button type="submit"
+                class="px-4 py-2 bg-gray-800 text-white rounded-md text-xs font-semibold uppercase hover:bg-gray-700">
+                Subir informe
+            </button>
+        </div>
+
+    </form>
+</div>
+
+</body>
+</html>

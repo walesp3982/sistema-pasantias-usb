@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Models\Information\Location;
 use App\Repositories\Interfaces\LocationRepositoryInterface;
 use Illuminate\Support\Facades\DB;
 
@@ -10,7 +11,7 @@ class LocationService {
         private LocationRepositoryInterface $repository
     ){}
 
-    public function create(array $data) {
+    public function create(array $data):Location {
         return DB::transaction(function() use ($data) {
             $location = $this->repository->create([
                 'street' => $data['street'],
