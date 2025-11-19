@@ -3,23 +3,26 @@
 namespace App\Livewire\Forms\Shared;
 
 use App\Models\Information\Career;
+use Livewire\Attributes\Computed;
 use Livewire\Component;
+use Livewire\Attributes\Modelable;
+use Livewire\Attributes\On;
 
 class CareerSelect extends Component
 {
-    public $career_id = null;
-    public $careers;
+    #[Modelable]
+    public $career_id;
 
-    public function mount($careerId = null) {
-        $this->career_id = $careerId;
-        $this->careers = Career::orderBy('name')->get();
-    }
-    public function updatedCareerId($value) {
-        $this->dispatch('careerSelected', careerId: $value  );
-    }
 
+    #[On("reset-child-component")]
+    public function resetAll() {
+        $this->reset(['career_id']);
+    }
     public function render()
     {
-        return view('livewire.forms.shared.career-select');
+        return view(
+            'livewire.forms.shared.career-select',
+            ['careers' => Career::orderBy("name")->get()]
+        );
     }
 }

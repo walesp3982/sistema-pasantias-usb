@@ -15,99 +15,20 @@ class TypeSectorsSeeder extends Seeder
     {
         //
         $sectors = [
-            'Tecnología',
-            'Startup Tecnológica',
-            'Fintech',
-            'E-commerce',
-            'SaaS (Software as a Service)',
-            'Desarrollo de Software',
-            'Consultoría IT',
-            'Ciberseguridad',
-
-            'Financiero',
-            'Banca',
-            'Seguros',
-            'Inversiones',
-            'Contadora/Contabilidad',
-            'Auditoría',
-            'Asesoría Fiscal',
-
-            'Salud',
-            'Farmacéutica',
-            'Biotecnología',
-            'Clínicas y Hospitales',
-            'Laboratorios',
-            'Dispositivos Médicos',
-
+            'Tecnología y Software',
+            'Consultoría IT y Negocios',
+            'Finanzas y Contabilidad',
+            'Salud y Biotecnología',
             'Educación',
-            'EdTech',
-            'Capacitación Corporativa',
-            'Universidad/Instituto',
-
-            'Manufactura',
-            'Automotriz',
-            'Textil',
-            'Alimentos y Bebidas',
-            'Química',
-            'Construcción',
-            'Metalmecánica',
-
-            'Retail/Comercio',
-            'Supermercados',
-            'Tiendas Departamentales',
-            'Moda y Accesorios',
-
-            'Servicios',
-            'Consultoría de Negocios',
-            'Recursos Humanos',
+            'Manufactura e Industria',
             'Marketing y Publicidad',
-            'Agencia Digital',
-            'Relaciones Públicas',
-            'Legal/Jurídico',
+            'Legal y Jurídico',
             'Logística y Transporte',
-            'Courier/Mensajería',
-
-            'Inmobiliario',
-            'Desarrollo Inmobiliario',
-            'Administración de Propiedades',
-            'Bienes Raíces',
-
-            'Energía',
-            'Petróleo y Gas',
-            'Energías Renovables',
-            'Utilities/Servicios Públicos',
-
+            'Inmobiliario y Construcción',
             'Medios y Entretenimiento',
-            'Televisión',
-            'Radio',
-            'Producción Audiovisual',
-            'Editorial',
-            'Streaming',
-            'Gaming',
-
-            'Turismo y Hospitalidad',
-            'Hotelería',
-            'Agencia de Viajes',
-            'Restaurantes',
-            'Catering',
-
-            'Agricultura',
-            'Agroindustria',
-            'Ganadería',
-            'Pesca',
-
-            'Telecomunicaciones',
-            'Operador Móvil',
-            'ISP (Proveedor de Internet)',
-
-            'Minería',
-            'Investigación y Desarrollo',
-            'ONG/Sin Fines de Lucro',
-            'Gobierno',
-            'Reportería/Medios de Comunicación',
-            'Otros',
+            'Turismo',
+            'Telecomunicaciones'
         ];
-
         foreach ($sectors as $sector) {
             DB::table('sectors')->insert([
                 'name' => $sector

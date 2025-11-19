@@ -45,8 +45,8 @@
                 class=" top-5 left-5 text-3xl text-blue-600 bg-white border-2 border-gray-300 px-2 py-2 rounded-lg cursor-pointer z-[1000] shadow-md hover:bg-blue-600 hover:text-white transition-all">
                 <i class="fa-solid fa-bars"></i>
             </div>
-            <div>
-                <img src="{{ asset("images/logo-usb.png") }}" alt="" class="hidden h-12 w-auto ml-5 md:block">
+            <div class="ml-2">
+                <x-navigation.logo></x-navigation.logo>
             </div>
             <div class="hidden md:block">
                 <h1 class="text-xl text-blue-600 pl-5 mb-1">Universidad Salesiana de Bolivia</h1>
@@ -58,7 +58,7 @@
 
     <!-- Contenido principal -->
     <main id="mainContent" class="w-full h-full pt-20 px-10 pb-20 transition-all duration-400
-         md:px-32 lg:px-40">
+         md:px-40 lg:px-60">
 
         {{ $slot }}
     </main>

@@ -3,11 +3,14 @@
         <i class="fas fa-briefcase mr-2"></i>Pasantías Disponibles
     </h1>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-6">
 
+        @foreach ($interships as $intership)
+            <x-student.postulation :intership="$intership"></x-student.postulation>
+        @endforeach
+        {{-- <x-card.postulation></x-card.postulation>
         <x-card.postulation></x-card.postulation>
-        <x-card.postulation></x-card.postulation>
-        <x-card.postulation></x-card.postulation>
+        <x-card.postulation></x-card.postulation> --}}
 
     </div>
 

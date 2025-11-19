@@ -2,9 +2,7 @@
 
 namespace App\Service;
 
-use App\Repositories\CompanyLocationRepository;
 use App\Repositories\CompanyRepository;
-use App\Repositories\PhoneRepository;
 use Illuminate\Support\Facades\DB;
 
 class CompanyService
@@ -12,8 +10,6 @@ class CompanyService
     public function __construct(
         private CompanyRepository $repository,
         private LocationService $locationService,
-        private PhoneService $phoneService,
-        private CompanyLocationRepository $companyLocationRepository
     ) {}
     public function create(array $data)
     {
@@ -21,25 +17,28 @@ class CompanyService
             $company = $this->repository->create([
                 "name" => $data["name"],
                 "email" => $data["email"],
-                "sector_id" => $data["sector_id"]
+                "sector_id" => $data["sector_id"],
+                "name_manager" => $data["name_manager"]
             ]);
 
-            $locationcompany = $this->companyLocationRepository->create([
-                'company_id' => $company->id,
-                'name_administrador' => $data['name_administrador'],
-                'principal' => true,
-            ]);
-
-            $locationcompany->location()->create([
+            $company->locations()->create([
                 'street' => $data['street'],
                 'zone_id' => $data['zone_id'],
                 'reference' => $data['reference'],
-                'number_door' => $data['number_door']
-            ]);
-
-            $locationcompany->phone()->create([
-                "phone_number" => $data["phone_number"]
+                'number_door' => $data['number_door'],
+                'phone_number' => $data["phone_number"]
             ]);
         });
+    }
+
+    public function find(int $id) {
+        $company = $this->repository->get($id);
+
+        if(is_null($company)) {
+            throw new \Exception("No se encontro la company con id=$id");
+        }
+
+        return $company;
+
     }
 }

@@ -16,6 +16,12 @@ return new class extends Migration
             $table->boolean('active')->default(true);
             $table->softDeletes();
         });
+
+        Schema::create('career_departaments', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('career_id')->constrained()->onDelete('cascade');
+        });
     }
 
     /**

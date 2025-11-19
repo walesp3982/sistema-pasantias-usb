@@ -15,8 +15,12 @@ class Location extends Component
     public $number_door = null;
 
     public $reference = null;
+
+    public $phone_number = null;
+
     public $municipios = [];
     public $zonas = [];
+
     public function mount() {
         $this->municipios = Municipality::orderBy("name")->get();
         $this->zonas = collect();
@@ -36,6 +40,7 @@ class Location extends Component
             'street' => $this->street,
             'number_door' => $this->number_door,
             'reference' => $this->reference,
+            'phone_number' => $this->phone_number
         ]);
     }
 
@@ -47,6 +52,7 @@ class Location extends Component
             'street',
             'number_door',
             'reference',
+            'phone_number'
         ]);
     }
     public function render()

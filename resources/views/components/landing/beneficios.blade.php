@@ -67,11 +67,6 @@
                     </ul>
                 </div>
 
-                <a href="{{ route('register.company') }}">
-                    <button class="w-full text-center bg-blue-600 py-2 px-4 mt-4 text-white">
-                        Formulario Empresa
-                    </button>
-                </a>
             </div>
 
             <!-- Universidad -->

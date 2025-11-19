@@ -26,7 +26,7 @@ return new class extends Migration
             $table->integer("vacant");
             $table->foreignId('location_id')
                 ->constrained();
-            $table->enum('status', StatePostulationEnum::cases());
+            $table->enum('status', StatusIntershipEnum::cases());
             $table->timestamps();
         });
 

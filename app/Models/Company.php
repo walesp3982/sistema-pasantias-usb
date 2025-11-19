@@ -3,21 +3,27 @@
 namespace App\Models;
 
 use App\Models\Files\Picture;
+use App\Models\Information\Location;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Company extends Model
 {
     //
+    use HasFactory;
     public $timestamps = true;
     
     protected $fillable = [
         'name',
         'sector_id',
         'email',
+        'name_manager',
     ];
+
     public function locations() {
-        return $this->hasMany(CompanyLocation::class);
+        return $this->morphMany(Location::class,'locatable');
     }
+
 
     public function sector() {
         return $this->belongsTo(Sector::class);

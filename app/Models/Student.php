@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use App\Models\Files\Document;
+use App\Models\Information\Career;
 use App\Models\Information\Location;
 use App\Models\Information\Management;
 use App\Models\Information\Phone;
+use App\Models\Information\Shift;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -13,6 +16,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Student extends Model
 {
+    use HasFactory;
     protected $table = 'students';
 
     public $timestamps = true;
@@ -31,10 +35,6 @@ class Student extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function phone() {
-        return $this->morphTo(Phone::class);
-    }
-
     public function location() {
         return $this->morphOne(Location::class, 'locatable');
     }
@@ -45,5 +45,13 @@ class Student extends Model
 
     public function getFullNameAttribute(): string {
         return trim("{$this->first_name} {$this->last_name}");
+    }
+
+    public function career() {
+        return $this->belongsTo(Career::class);
+    }
+
+    public function shift() {
+        return $this->belongsTo(Shift::class);
     }
 }

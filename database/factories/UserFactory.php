@@ -2,6 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Enums\CareerEnum;
+use App\Enums\RolesEnum;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -40,5 +43,15 @@ class UserFactory extends Factory
         return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
         ]);
+    }
+
+    public function asCareerDepartament(CareerEnum $career): static
+    {
+        return $this->afterCreating(function (User $user) use ($career) {
+            $user->assignRole(RolesEnum::CAREER);
+            $user->careerDepartament()->create( 
+                ["career_id" => $career->value]
+            );
+        });
     }
 }

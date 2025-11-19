@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\StatusIntershipEnum;
+use App\Models\Intership;
 use App\Service\StudentService;
+use App\Service\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Throwable;
@@ -10,30 +13,21 @@ use Throwable;
 class StudentController extends Controller
 {
     public function __construct(
-        private StudentService $studentService
+        private StudentService $studentService,
+        private UserService $userService
     ) {
 
     }
-    public function create(Request $request) {
-        $validated = $request->validate([
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'confirmed'],
-            'career_id' => 'required|exists:careers,id',
-            'shift_id' => 'required|exists:shifts,id',
-            'semester' => 'required|integer|min:1|max:10',
-            'code_phone' => 'required|integer|max:10',
-            'phone' => 'required|integer|max:20',
-            'municipio_id' => 'required|exists:municipalities,id',
-            'zona_id' => 'required|exists:zones,id',
-            'number_door' => 'required|integer',
-            'street' => 'required|string',
-            'identity_card' => 'required|integer'
-        ]);
+    public function showIntership() {
+        $user = $this->userService->get(Auth::id());
 
-        $student = $this->studentService->create($validated);
-        Auth::login($student->user);
-        return redirect()->route('dashboard');
+        $student = $user->student;
+
+        $interships = Intership::where('career_id', "=", $student->career_id)
+            ->where("status", "=", StatusIntershipEnum::PENDING)
+            ->get();
+
+
+        return view('estudiante.pasantias', ["interships" => $interships]);
     }
 }

@@ -20,18 +20,11 @@ return new class extends Migration
             $table->id();
             $table->string("name")->unique();
             $table->string("email")->unique();
+            $table->string("name_manager");
             $table->foreignId("sector_id")
                 ->constrained()
                 ->onDelete('cascade');
             $table->timestamps();
-        });
-
-        Schema::create('company_locations', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('company_id')->constrained()->onDelete('cascade');
-            $table->boolean('active')->default(true);
-            $table->string("name_administrador");
-            $table->boolean("principal");
         });
     }
 

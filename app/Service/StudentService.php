@@ -76,4 +76,13 @@ class StudentService
             return $user;
         });
     }
+
+    public function find(int $idStudent): Student {
+        $student = $this->studentRepository->get($idStudent);
+        if(is_null($student)) {
+            throw new \Exception("No se encontró al estudiante");
+        }
+
+        return $student;
+    }
 }
