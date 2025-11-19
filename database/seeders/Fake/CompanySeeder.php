@@ -16,7 +16,7 @@ class CompanySeeder extends Seeder
     {
         $companies = Company::factory()
             ->withLocation(4)
-            ->count(6)
+            ->count(20)
             ->create();
     }
 }
