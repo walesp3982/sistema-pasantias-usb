@@ -18,7 +18,7 @@ class IntershipRepository implements IntershipRepositoryInterface
     }
 
     public function find($id):?Intership {
-        return $this->model->find($id)->first();
+        return $this->model->find($id);
     }
 
     public function create(array $data):Intership {

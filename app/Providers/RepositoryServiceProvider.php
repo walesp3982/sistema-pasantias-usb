@@ -8,6 +8,7 @@ use App\Repositories\Interfaces\IntershipRepositoryInterface;
 use App\Repositories\Interfaces\LocationRepositoryInterface;
 use App\Repositories\Interfaces\PhoneRepositoryInterface;
 use App\Repositories\Interfaces\PictureRepositoryInterface;
+use App\Repositories\Interfaces\PostulationRepositoryInterface;
 use App\Repositories\Interfaces\StudentRepositoryInterface;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use App\Repositories\IntershipRepository;
@@ -48,6 +49,10 @@ class RepositoryServiceProvider extends ServiceProvider
         );
         $this->app->bind(
             IntershipRepositoryInterface::class,
+            IntershipRepository::class
+        );
+        $this->app->bind(
+            PostulationRepositoryInterface::class,
             IntershipRepository::class
         );
     }

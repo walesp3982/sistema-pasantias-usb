@@ -9,6 +9,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Postulation extends Model
 {
+    public $timestamps = true;
+
+    protected $fillable = [
+        "student_id",
+        "intership_id",
+        "status",
+    ];
+
+    protected function casts(): array
+    {
+        return [
+            'status' => StatePostulationEnum::class,
+        ];
+    }
     //
     public function student() {
         return $this->belongsTo(Student::class);
@@ -25,11 +39,5 @@ class Postulation extends Model
     public function intership() {
         return $this->belongsTo(Intership::class);
     }
-
-    protected function casts(): array
-    {
-        return [
-            'status' => StatePostulationEnum::class,
-        ];
-    }
+  
 }

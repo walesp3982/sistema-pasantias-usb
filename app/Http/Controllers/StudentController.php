@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\StatusIntershipEnum;
 use App\Models\Intership;
+use App\Models\Postulation;
 use App\Service\StudentService;
 use App\Service\UserService;
 use Illuminate\Http\Request;
@@ -27,7 +28,12 @@ class StudentController extends Controller
             ->where("status", "=", StatusIntershipEnum::PENDING)
             ->get();
 
+        $postulation = Postulation::where("student_id", "=", $student->id )
+            ->where("status");
+        return view('student.pasantias', ["interships" => $interships]);
+    }
 
-        return view('estudiante.pasantias', ["interships" => $interships]);
+    public function getStatus() {
+        return view("student.status");
     }
 }
