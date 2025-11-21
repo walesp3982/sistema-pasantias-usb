@@ -1,26 +1,29 @@
-<div class=" bg-white p-4">
+<div class=" bg-white">
     <!-- Checkbox oculto -->
+
     <input type="checkbox" id="empresa{{ $company->id }}" class="hidden peer" />
+    <div class="p-4 border-y">
+        <!-- ENCABEZADO -->
+        <label for="empresa{{ $company->id }}" class="flex items-center justify-between cursor-pointer">
+            <!--logo empresa -->
+            <div class="flex items-center space-x-3">
+                <img class="w-12 h-12 rounded-full" src="{{asset("images/default/avatar_default.webp")}}" alt="logo" />
+                <!--nombre de la empresa-->
+                <span class="font-semibold text-lg">{{$company->name}}</span>
+            </div>
 
-    <!-- ENCABEZADO -->
-    <label for="empresa{{ $company->id }}" class="flex items-center justify-between cursor-pointer">
-        <!--logo empresa -->
-        <div class="flex items-center space-x-3">
-            <img class="w-12 h-12 rounded-full" src="{{asset("images/default/avatar_default.webp")}}" alt="logo" />
-            <!--nombre de la empresa-->
-            <span class="font-semibold text-lg">{{$company->name}}</span>
-        </div>
-
-        <!--Icono de la flecha-->
-        <div class="triangle"></div>
-    </label>
-
+            <!--Icono de la flecha-->
+            <div class="">
+                <i class="fa-solid fa-caret-down"></i>
+            </div>
+        </label>
+    </div>
     <!--linea que divide el contenido-->
-    <div class="border-t my-3"></div>
+    {{-- <div class="border-t my-3"></div> --}}
 
     <!--contenido oculto-->
     <div class="hidden peer-checked:block space-y-2">
-        <div class="flex flex-row justify-between items-stretch gap-2">
+        <div class="flex flex-row justify-between items-stretch gap-2 py-2">
             <div class="flex-1 bg-blue-50 p-4 rounded-lg ">
                 <p>
                     <span class="font-semibold">Sector: </span>
