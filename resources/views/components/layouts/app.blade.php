@@ -57,8 +57,8 @@
     </header>
 
     <!-- Contenido principal -->
-    <main id="mainContent" class="w-full h-full pt-20 px-10 pb-20 transition-all duration-400
-         md:px-40 lg:px-60">
+    <main id="mainContent" class="w-full h-full pt-20 px-32 pb-20 transition-all duration-400
+         lg:px-60">
 
         {{ $slot }}
     </main>

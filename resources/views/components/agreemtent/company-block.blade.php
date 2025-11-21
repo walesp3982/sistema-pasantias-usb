@@ -20,8 +20,8 @@
 
     <!--contenido oculto-->
     <div class="hidden peer-checked:block space-y-2">
-        <div class="grid grid-cols-5">
-            <div class="col-span-4">
+        <div class="flex flex-row justify-between items-stretch gap-2">
+            <div class="flex-1 bg-blue-50 p-4 rounded-lg ">
                 <p>
                     <span class="font-semibold">Sector: </span>
                     {{ $company->sector->name }}
@@ -29,21 +29,32 @@
                 <p>
                     <span class="font-semibold">Número de pasantías: </span>{{ $company->interships->count() }}
                 </p>
-                {{-- <p>
-                    <span class="font-semibold">Cantidad de pasantes:</span>12
-                </p> --}}
             </div>
-            <div class="col-span-1">
-                <a href="{{ route("create.intership", ['companyId' => $company->id]) }}">
-                    <button class="mt-3 px-4 py-2 border border-gray-700 rounded hover:bg-gray-200">
-                        Crear pasantía
-                    </button>
-                </a>
-                <a href="">
-                    <button class="mt-3 px-4 py-2 border border-gray-700 rounded hover:bg-gray-200">
-                        Más info
-                    </button>
-                </a>
+            <div class="">
+                <div class="grid grid-rows-2 gap-2">
+                    <div>
+                        <a href="{{ route("create.intership", ['companyId' => $company->id]) }}">
+                            <x-ui.btn.info>
+                                <x-slot:icon>
+                                    <i class="fa fa-plus"></i>
+                                </x-slot:icon>
+                                Agregar Pasantía
+                            </x-ui.btn.info>
+                        </a>
+                    </div>
+                    <div>
+                        <a href="">
+                            <x-ui.btn.info>
+                                <x-slot:icon>
+                                    <i class="fa-solid fa-info"></i>
+                                </x-slot:icon>
+                                Más Info
+                            </x-ui.btn.info>
+                        </a>
+                    </div>
+                </div>
+
+
             </div>
         </div>
     </div>
