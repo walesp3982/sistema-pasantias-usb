@@ -40,6 +40,6 @@ class PostulationRepository implements PostulationRepositoryInterface
         return $this->model
             ->where('intership_id', $idIntership)
             ->where("status", StatePostulationEnum::ACCEPT)
-            ->all();
+            ->get();
     }
 }

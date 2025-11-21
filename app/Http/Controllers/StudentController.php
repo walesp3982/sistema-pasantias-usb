@@ -28,9 +28,25 @@ class StudentController extends Controller
             ->where("status", "=", StatusIntershipEnum::PENDING)
             ->get();
 
-        $postulation = Postulation::where("student_id", "=", $student->id )
-            ->where("status");
         return view('student.pasantias', ["interships" => $interships]);
+    }
+
+    public function submitIntership(int $idIntership) {
+        $user = $this->userService->get(Auth::id());
+
+        $student = $user->student;
+
+        try {
+            $this
+                ->studentService
+                ->postulation($student->id, $idIntership);
+        } catch(Throwable $err) {
+            return redirect()
+                ->route("search.intership")
+                ->with('error', $err->getMessage());
+        }
+        return redirect("student.status")
+            ->with('success', 'Postulación realizada con éxito');
     }
 
     public function getStatus() {

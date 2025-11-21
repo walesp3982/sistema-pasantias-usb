@@ -15,6 +15,7 @@ use App\Repositories\IntershipRepository;
 use App\Repositories\LocationRepository;
 use App\Repositories\PhoneRepository;
 use App\Repositories\PictureRepository;
+use App\Repositories\PostulationRepository;
 use App\Repositories\StudentRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Support\ServiceProvider;
@@ -53,7 +54,7 @@ class RepositoryServiceProvider extends ServiceProvider
         );
         $this->app->bind(
             PostulationRepositoryInterface::class,
-            IntershipRepository::class
+            PostulationRepository::class
         );
     }
 

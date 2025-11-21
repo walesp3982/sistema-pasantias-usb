@@ -1,4 +1,10 @@
 <x-app-layout>
+
+    @session('error')
+        <x-ui.notif.error>
+            {{ session('error') }}
+        </x-ui.notif.error>
+    @endsession
     <h1 class="text-3xl font-bold text-center text-blue-600 mb-8">
         <i class="fas fa-briefcase mr-2"></i>Pasantías Disponibles
     </h1>

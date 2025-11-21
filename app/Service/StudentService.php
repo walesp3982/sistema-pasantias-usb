@@ -9,6 +9,7 @@ use App\Repositories\Interfaces\StudentRepositoryInterface;
 use App\Service\UserService;
 use App\Models\User;
 use App\Models\Student;
+use App\Repositories\Interfaces\IntershipRepositoryInterface;
 use App\Repositories\Interfaces\PostulationRepositoryInterface;
 use App\Repositories\IntershipRepository;
 use App\Repositories\PhoneRepository;
@@ -21,7 +22,7 @@ class StudentService
         private readonly StudentRepositoryInterface $studentRepository,
         private readonly UserService $userService,
         private readonly PostulationRepositoryInterface $postulationRepository,
-        private readonly IntershipRepository $intershipRepository
+        private readonly IntershipRepositoryInterface $intershipRepository
     ) {}
 
     public function create(array $data):Student

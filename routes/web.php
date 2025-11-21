@@ -25,6 +25,9 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'role:student'])->group(function () {
     Route::view('configuracion', 'config')->name('config');
     Route::get('pasantias', [StudentController::class,"showIntership"])->name('search.intership');
+    Route::get("student/status")->name("student.status");
+    Route::post('student/postulate/{idIntership}', [StudentController::class, "submitIntership"])
+        ->name('student.postulate');
 });
 
 Route::middleware(['auth', 'role:' . RolesEnum::CAREER->value])
@@ -41,11 +44,6 @@ Route::middleware(['auth', 'role:' . RolesEnum::AGREEMENTS->value])
         // Formulario para crear pasantía para empresa
         Route::get("intership/create/{companyId}", [AgreementController::class, "createIntership"])
             ->name('create.intership');
-    });
-
-Route::middleware(['auth', 'role:' . RolesEnum::STUDENT->value])
-    ->group(function () {
-        Route::get("student/status");
     });
 // Route::get('test', function () {
 //     return $asdf;
