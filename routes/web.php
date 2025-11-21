@@ -43,8 +43,10 @@ Route::middleware(['auth', 'role:' . RolesEnum::AGREEMENTS->value])
             ->name('create.intership');
     });
 
-Route::post('register/send', [StudentController::class, "create"])
-    ->name('register.student.send');
+Route::middleware(['auth', 'role:' . RolesEnum::STUDENT->value])
+    ->group(function () {
+        Route::get("student/status");
+    });
 // Route::get('test', function () {
 //     return $asdf;
 // });
