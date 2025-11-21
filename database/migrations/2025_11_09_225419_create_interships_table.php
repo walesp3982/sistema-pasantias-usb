@@ -42,6 +42,7 @@ return new class extends Migration
             $table->enum('status', StatePostulationEnum::cases())
                 ->default(StatePostulationEnum::CREATED);
             $table->timestamps();
+            $table->unique(['student_id', 'intership_id'], 'student_intership_unique');
         });
 
         Schema::create('document_postulations', function(Blueprint $table) {

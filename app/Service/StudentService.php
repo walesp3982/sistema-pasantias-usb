@@ -71,18 +71,29 @@ class StudentService
     public function postulation(int $idStudent, int $idIntership) {
         $student = $this->studentRepository->get($idStudent);
 
+        // Verificamos que el estudiante exista
         if(is_null($student)) {
             throw new \Exception("No se encontró al estudiante");
         }
 
         $intership = $this->intershipRepository->find($idIntership);
 
+        // Verificamos que la pasantía exista
         if(is_null($intership)) {
             throw new \Exception("No existe la pasantía al postularse");
         }
+
+        // Verificamos que el estudiante no haya postulado ya a esa pasantía
+        $existingPostulation = $this
+            ->postulationRepository
+            ->getStudentIntershipPostulation($student->id, $intership->id);
+        if(!is_null($existingPostulation)) {
+            throw new \Exception("El estudiante ya ha postulado a esta pasantía");
+        }
+        
         $actualPostulations = $this
             ->postulationRepository
-            ->getByIntershipAccepted($intership->id);
+            ->getPostulationsIntershipAccepted($intership->id);
         
         if($actualPostulations->count() >= $intership->vacant) {
             throw new \Exception("Ya no existen vacantes para la postulation");
