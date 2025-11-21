@@ -25,7 +25,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'role:student'])->group(function () {
     Route::view('configuracion', 'config')->name('config');
     Route::get('pasantias', [StudentController::class,"showIntership"])->name('search.intership');
-    Route::get("student/status")->name("student.status");
+    Route::get("student/status", [StudentController::class, "getStatus"])->name("student.status");
     Route::post('student/postulate/{idIntership}', [StudentController::class, "submitIntership"])
         ->name('student.postulate');
 });

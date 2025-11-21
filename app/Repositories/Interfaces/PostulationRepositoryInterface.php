@@ -14,4 +14,6 @@ interface PostulationRepositoryInterface {
     public function getPostulationsIntershipAccepted(int $idIntership): Collection;
 
     public function getStudentIntershipPostulation(int $idStudent, int $idIntership): ?Postulation;
+
+    public function getStudentPostulation(int $idStudent);
 }

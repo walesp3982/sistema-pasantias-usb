@@ -34,4 +34,17 @@ class IntershipRepository implements IntershipRepositoryInterface
     public function delete(int $id): bool {
         return $this->delete($id);
     }
+
+    public function enableByCareer(int $career_id):Collection {
+        return $this->model->where("career_id", $career_id)
+            ->get();
+    }
+    public function getStudentEnabledInterships(int $career_id, $studentIntershipsPostulations) {
+        return $this->model
+            ->where("career_id", $career_id)
+            ->whereNotIn("id", $studentIntershipsPostulations)
+            ->get();
+    }
+
+
 }

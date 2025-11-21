@@ -12,6 +12,10 @@ interface IntershipRepositoryInterface {
     public function create(array $data): Intership;
     public function update(int $id, array $data): bool;
     public function delete(int $id): bool;
+
+    public function enableByCareer(int $career_id): Collection;
+
+    public function getStudentEnabledInterships(int $career_id, $studentIntershipsPostulations);
 }
 
 ?>

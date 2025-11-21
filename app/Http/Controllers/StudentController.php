@@ -24,9 +24,7 @@ class StudentController extends Controller
 
         $student = $user->student;
 
-        $interships = Intership::where('career_id', "=", $student->career_id)
-            ->where("status", "=", StatusIntershipEnum::PENDING)
-            ->get();
+        $interships = $this->studentService->enableInterships($student->id);
 
         return view('student.pasantias', ["interships" => $interships]);
     }
@@ -45,7 +43,7 @@ class StudentController extends Controller
                 ->route("search.intership")
                 ->with('error', $err->getMessage());
         }
-        return redirect("student.status")
+        return redirect()->route('student.status')
             ->with('success', 'Postulación realizada con éxito');
     }
 

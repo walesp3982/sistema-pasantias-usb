@@ -32,10 +32,6 @@ class StudentRepository implements StudentRepositoryInterface {
         return $students;
     }
 
-    public function findById(string $id): Student|null {
-        return new Student;
-    }
-
     public function paginate(int $perPage = 15): LengthAwarePaginator {
         return $this->model->latest()->paginate($perPage);
     }

@@ -70,7 +70,6 @@ class StudentService
 
     public function postulation(int $idStudent, int $idIntership) {
         $student = $this->studentRepository->get($idStudent);
-
         // Verificamos que el estudiante exista
         if(is_null($student)) {
             throw new \Exception("No se encontró al estudiante");
@@ -90,7 +89,7 @@ class StudentService
         if(!is_null($existingPostulation)) {
             throw new \Exception("El estudiante ya ha postulado a esta pasantía");
         }
-        
+
         $actualPostulations = $this
             ->postulationRepository
             ->getPostulationsIntershipAccepted($intership->id);
@@ -104,5 +103,24 @@ class StudentService
             "intership_id" => $intership->id,
             "status" => StatePostulationEnum::CREATED
         ]);
+    }
+
+    public function enableInterships(int $idStudent) {
+        
+        $student = $this->studentRepository->get($idStudent);
+
+        if(is_null($student)) {
+            throw new \Exception("No se encontró el estudiante");
+        }
+        $intershipsPostulate = $this->postulationRepository->getStudentPostulation($student->id);
+        //dd($student->id);
+
+        $interships=$this
+            ->intershipRepository
+            ->getStudentEnabledInterships(
+                $student->career_id, 
+                $intershipsPostulate);
+
+        return $interships;
     }
 }

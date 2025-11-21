@@ -13,6 +13,10 @@
                     Buscar pasantías
                 </x-navigation.navside.option>
 
+                <x-navigation.navside.option icon="fa-solid fa-file-lines" href="{{ route('student.status') }}">
+                    Postulaciones
+                </x-navigation.navside.option>
+
                 <x-navigation.navside.option icon="fa-solid fa-list-check" href="#">
                     Seguimiento
                 </x-navigation.navside.option>

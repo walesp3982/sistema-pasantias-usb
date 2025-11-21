@@ -48,4 +48,11 @@ class PostulationRepository implements PostulationRepositoryInterface
             ->where('intership_id', $idIntership)
             ->first();
     }
+
+    public function getStudentPostulation(int $idStudent) {
+        return $this->model
+            ->where('student_id', $idStudent)
+            ->pluck('intership_id')
+            ->unique();
+    }
 }
