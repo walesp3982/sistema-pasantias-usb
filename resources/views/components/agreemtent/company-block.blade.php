@@ -6,7 +6,7 @@
     <label for="empresa{{ $company->id }}" class="flex items-center justify-between cursor-pointer">
         <!--logo empresa -->
         <div class="flex items-center space-x-3">
-            <img class="w-12 h-12 rounded-full border-2 border-black" src="{{asset("images/default/avatar_default.webp")}}" alt="logo" />
+            <img class="w-12 h-12 rounded-full" src="{{asset("images/default/avatar_default.webp")}}" alt="logo" />
             <!--nombre de la empresa-->
             <span class="font-semibold text-lg">{{$company->name}}</span>
         </div>
