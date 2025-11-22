@@ -13,8 +13,6 @@ enum StatePostulationEnum: string
 
     case ACCEPT = 'accept';
 
-    case CLOSED = 'closed';
-
     public function label(): string {
         return match($this) {
             static::CREATED => "Creado",

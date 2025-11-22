@@ -43,11 +43,25 @@ class StudentController extends Controller
                 ->route("search.internship")
                 ->with('error', $err->getMessage());
         }
-        return redirect()->route('student.status')
+        return redirect()->route('student.postulations')
             ->with('success', 'Postulación realizada con éxito');
     }
 
-    public function getStatus() {
-        return view("student.status");
+    public function getPostulations() {
+        $student = $this->userService->get(Auth::id())->student;
+
+        try {
+            $createdPostulations = $this
+                ->studentService
+                ->getPostulationCreated($student->id);
+            $sendPostulations = $this
+                ->studentService
+                ->getPostulationSend($student->id);
+        } catch (Throwable $th) {
+            //throw $th;
+        }
+
+        return view('student.postulations', 
+        compact('createdPostulations', 'sendPostulations'));
     }
 }

@@ -56,5 +56,22 @@ class PostulationRepository implements PostulationRepositoryInterface
             ->unique()
             ->toArray();
     }
+
+    public function getPostulationsCreatedStudent(int $student_id):Collection {
+        return $this->model
+            ->with('internship.company', 'internship.location.zone.municipality')
+            ->where('student_id', $student_id)
+            ->where('status', StatePostulationEnum::CREATED)
+            ->get();
+    }
+
+    public function getPostulationsSendStudent(int $student_id): Collection {
+        return $this->model
+            ->with('internship.company','internship.location.zone.municipality')
+            ->where('student_id', $student_id)
+            ->where('status', StatePostulationEnum::SEND)
+            ->get();
+        
+    }
     
 }

@@ -17,5 +17,8 @@ interface PostulationRepositoryInterface {
 
     public function getStudentPostulation(int $idStudent);
 
+    public function getPostulationsCreatedStudent(int $student_id): Collection;
+
+    public function getPostulationsSendStudent(int $student_id): Collection;
 
 }

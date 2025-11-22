@@ -163,6 +163,24 @@ class StudentService
         return $internshipsFiltered;
     }
 
+    public function getPostulationCreated(int $idStudent) {
+        if(is_null($this->studentRepository->get($idStudent))) {
+            throw new \Exception("No se encontró al estudiante");
+        }
+
+        return $this->postulationRepository
+            ->getPostulationsCreatedStudent($idStudent);
+    }
+
+    public function getPostulationSend(int $idStudent) {
+        if(is_null($this->studentRepository->get($idStudent))) {
+            throw new \Exception("No se encontró al estudiante");
+        }
+
+        return $this->postulationRepository
+            ->getPostulationsSendStudent($idStudent);
+    }
+
     public function delete(int $idStudent): void
     {
         $student = $this->studentRepository->get($idStudent);
