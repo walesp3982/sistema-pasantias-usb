@@ -10,13 +10,13 @@ class AgreementController extends Controller
     public function __construct(
         private CompanyService $companyService
     ) {}
-    public function createIntership(int $companyId)
+    public function createInternship(int $companyId)
     {
         // Solicitamos el id de la compañia
         $company = $this->companyService->find($companyId);
 
         return view(
-            "agreement-deparment.intership-form",
+            "agreement-deparment.internship-form",
             ['company_id' => $company->id]
         );
     }

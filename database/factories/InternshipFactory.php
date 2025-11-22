@@ -4,18 +4,17 @@ namespace Database\Factories;
 
 use App\Enums\CareerEnum;
 use App\Enums\ShiftEnum;
-use App\Enums\StatusIntershipEnum;
+use App\Enums\StatusInternshipEnum;
 use App\Models\Company;
 use App\Models\Information\Career;
 use App\Models\Information\Location;
-use App\Models\Information\Shift;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Intership>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Internship>
  */
-class IntershipFactory extends Factory
+class InternshipFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -26,13 +25,14 @@ class IntershipFactory extends Factory
     public function setEntryTime(ShiftEnum $enum): Carbon
     {
         $hour = match ($enum) {
-            ShiftEnum::MORNING => $this->faker->numberBetween(7, 8),
-            ShiftEnum::AFTERNOON => $this->faker->numberBetween(2, 3),
-            ShiftEnum::NIGHT => $this->faker->numberBetween(18, 19)
+            ShiftEnum::MORNING => 7,
+            ShiftEnum::AFTERNOON => 14,
+            ShiftEnum::NIGHT => 18
         };
 
-        $minutes = 15 * $this->faker->numberBetween(0, 3);
+        $minutes = 15 * $this->faker->numberBetween(0, 4);
         $time = Carbon::createFromTime($hour, $minutes, 0);
+        $time->addMinutes($minutes);
         return $time;
     }
 
@@ -70,7 +70,7 @@ class IntershipFactory extends Factory
             'start_date' => $start_date,
             'end_date' => $end_date,
             'vacant' => $this->faker->numberBetween(4, 10),
-            'status' => StatusIntershipEnum::PENDING,
+            'status' => StatusInternshipEnum::PENDING,
             'career_id' => Career::inRandomOrder()->first()->id,
         ];
     }

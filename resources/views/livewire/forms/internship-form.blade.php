@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\Company;
-use App\Service\IntershipService;
+use App\Service\InternshipService;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
 
@@ -35,7 +35,7 @@ new #[Layout('components.layouts.app')] class extends Component {
         return Company::findOrFail($this->company_id);
     }
 
-    public function submit(IntershipService $service): void
+    public function submit(InternshipService $service): void
     {
         $validate = $this->validate();
 

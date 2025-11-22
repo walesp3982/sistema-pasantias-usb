@@ -32,10 +32,6 @@ class StudentRepository implements StudentRepositoryInterface {
         return $students;
     }
 
-    public function findById(string $id): Student|null {
-        return new Student;
-    }
-
     public function paginate(int $perPage = 15): LengthAwarePaginator {
         return $this->model->latest()->paginate($perPage);
     }
@@ -49,5 +45,10 @@ class StudentRepository implements StudentRepositoryInterface {
     public function findByRu(int $ru): ?Student {
         $student = $this->model->where('ru', "=", $ru)->first();
         return $student;
+    }
+
+    public function delete(int $id): bool {
+        $student = $this->model->find($id);
+        return $student->delete();
     }
 }

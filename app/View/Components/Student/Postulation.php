@@ -2,7 +2,7 @@
 
 namespace App\View\Components\Student;
 
-use App\Models\Intership;
+use App\Models\Internship;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
@@ -12,11 +12,11 @@ class Postulation extends Component
     /**
      * Create a new component instance.
      */
-    public Intership $intership;
-    public function __construct(Intership $intership)
+    public Internship $internship;
+    public function __construct(Internship $internship)
     {
         //
-        $this->intership = $intership;
+        $this->internship = $internship;
     }
 
     /**

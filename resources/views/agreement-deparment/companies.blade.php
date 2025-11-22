@@ -6,11 +6,14 @@
                     Empresas
                 </x-ui.title>
                 <a href="{{ route('create.company') }}">
-                    <x-ui.btn.primary>
-                        <i class="fa-solid fa-plus"></i> Empresa
-                    </x-ui.btn.primary>
+                    <x-ui.btn.info>
+                        <x-slot:icon>
+                            <i class="fa-solid fa-plus"></i>
+                        </x-slot:icon>
+                        Agregar nueva empresa
+                    </x-ui.btn.info>
                 </a>
-                
+
             </div>
 
         </x-ui.section>
