@@ -12,7 +12,7 @@
     <div class="">
         <div class="grid grid-rows-2 gap-2">
             <div>
-                <a href="http://localhost:8000/intership/create/10">
+                <a href="http://localhost:8000/internship/create/10">
                     <button
                         class="px-4 py-2 w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow transition flex items-center lg:justify-between justify-center gap-2 focus:bg-blue-400"
                     >

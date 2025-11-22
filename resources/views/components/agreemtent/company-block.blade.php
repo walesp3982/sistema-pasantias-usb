@@ -30,13 +30,13 @@
                     {{ $company->sector->name }}
                 </p>
                 <p>
-                    <span class="font-semibold">Número de pasantías: </span>{{ $company->interships->count() }}
+                    <span class="font-semibold">Número de pasantías: </span>{{ $company->internships->count() }}
                 </p>
             </div>
             <div class="">
                 <div class="grid grid-rows-2 gap-2">
                     <div>
-                        <a href="{{ route("create.intership", ['companyId' => $company->id]) }}">
+                        <a href="{{ route("create.internship", ['companyId' => $company->id]) }}">
                             <x-ui.btn.info>
                                 <x-slot:icon>
                                     <i class="fa fa-plus"></i>

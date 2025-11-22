@@ -10,9 +10,9 @@ use App\Repositories\Interfaces\StudentRepositoryInterface;
 use App\Service\UserService;
 use App\Models\User;
 use App\Models\Student;
-use App\Repositories\Interfaces\IntershipRepositoryInterface;
+use App\Repositories\Interfaces\InternshipRepositoryInterface;
 use App\Repositories\Interfaces\PostulationRepositoryInterface;
-use App\Repositories\IntershipRepository;
+use App\Repositories\InternshipRepository;
 use App\Repositories\PhoneRepository;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
@@ -24,7 +24,7 @@ class StudentService
         private readonly StudentRepositoryInterface $studentRepository,
         private readonly UserService $userService,
         private readonly PostulationRepositoryInterface $postulationRepository,
-        private readonly IntershipRepositoryInterface $intershipRepository
+        private readonly InternshipRepositoryInterface $internshipRepository
     ) {}
 
     public function create(array $data): Student
@@ -71,7 +71,7 @@ class StudentService
         return $student;
     }
 
-    public function postulation(int $idStudent, int $idIntership)
+    public function postulation(int $idStudent, int $idInternship)
     {
         $student = $this->studentRepository->get($idStudent);
         // Verificamos que el estudiante exista
@@ -79,38 +79,38 @@ class StudentService
             throw new \Exception("No se encontró al estudiante");
         }
 
-        $intership = $this->intershipRepository->find($idIntership);
+        $internship = $this->internshipRepository->find($idInternship);
 
         // Verificamos que la pasantía exista
-        if (is_null($intership)) {
+        if (is_null($internship)) {
             throw new \Exception("No existe la pasantía al postularse");
         }
 
         // Verificamos que el estudiante no haya postulado ya a esa pasantía
         $existingPostulation = $this
             ->postulationRepository
-            ->getStudentIntershipPostulation($student->id, $intership->id);
+            ->getStudentInternshipPostulation($student->id, $internship->id);
         if (!is_null($existingPostulation)) {
             throw new \Exception("El estudiante ya ha postulado a esta pasantía");
         }
 
         $actualPostulations = $this
             ->postulationRepository
-            ->getPostulationsIntershipAccepted($intership->id);
+            ->getPostulationsInternshipAccepted($internship->id);
 
         // Verificamos que existan vacantes en la pasantía
-        if ($actualPostulations->count() >= $intership->vacant) {
+        if ($actualPostulations->count() >= $internship->vacant) {
             throw new \Exception("Ya no existen vacantes para la postulation");
         }
 
         $this->postulationRepository->create([
             "student_id" => $student->id,
-            "intership_id" => $intership->id,
+            "internship_id" => $internship->id,
             "status" => StatePostulationEnum::CREATED
         ]);
     }
 
-    public function enableInterships(int $idStudent)
+    public function enableInternships(int $idStudent)
     {
 
         $student = $this->studentRepository->get($idStudent);
@@ -128,39 +128,39 @@ class StudentService
 
         $shiftEnum = $student->shift->id;
 
-        $beforeInterships = new Collection();
-        $afterIntership = new Collection();
+        $beforeInternships = new Collection();
+        $afterInternship = new Collection();
         switch ($shiftEnum) {
             case (ShiftEnum::MORNING):
-                $beforeInterships = $this
-                    ->intershipRepository
-                    ->getIntershipsAfter($exit_time, $min_default);
+                $beforeInternships = $this
+                    ->internshipRepository
+                    ->getInternshipsAfter($exit_time, $min_default);
                 break;
             case (ShiftEnum::AFTERNOON):
-                $beforeInterships = $this
-                    ->intershipRepository
-                    ->getIntershipsAfter($exit_time, $min_default);
-                $afterIntership = $this
-                    ->intershipRepository
-                    ->getIntershipsBefore($entry_time ,$min_default);
+                $beforeInternships = $this
+                    ->internshipRepository
+                    ->getInternshipsAfter($exit_time, $min_default);
+                $afterInternship = $this
+                    ->internshipRepository
+                    ->getInternshipsBefore($entry_time ,$min_default);
                     break;
             case (ShiftEnum::NIGHT):
-                $afterIntership = $this
-                    ->intershipRepository
-                    ->getIntershipsBefore($entry_time, $min_default);
+                $afterInternship = $this
+                    ->internshipRepository
+                    ->getInternshipsBefore($entry_time, $min_default);
                 break;
         }
-        $intershipsAll = $afterIntership
-            ->merge($beforeInterships)
+        $internshipsAll = $afterInternship
+            ->merge($beforeInternships)
             ->unique("id");
         
-        $intershipsIds = $this->postulationRepository->getStudentPostulation($student->id);
+        $internshipsIds = $this->postulationRepository->getStudentPostulation($student->id);
 
-        $intershipsFiltered = $intershipsAll
-            ->whereNotIn('id', $intershipsIds)
+        $internshipsFiltered = $internshipsAll
+            ->whereNotIn('id', $internshipsIds)
             ->values();
 
-        return $intershipsFiltered;
+        return $internshipsFiltered;
     }
 
     public function delete(int $idStudent): void

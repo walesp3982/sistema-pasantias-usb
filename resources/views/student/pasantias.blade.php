@@ -12,8 +12,8 @@
 
     <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-6">
 
-        @foreach ($interships as $intership)
-            <x-student.postulation :intership="$intership"></x-student.postulation>
+        @foreach ($internships as $internship)
+            <x-student.postulation :internship="$internship"></x-student.postulation>
         @endforeach
         {{-- <x-card.postulation></x-card.postulation>
         <x-card.postulation></x-card.postulation>

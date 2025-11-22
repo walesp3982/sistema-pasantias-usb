@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use App\Enums\CareerEnum;
 use App\Enums\ShiftEnum;
-use App\Enums\StatusIntershipEnum;
+use App\Enums\StatusInternshipEnum;
 use App\Models\Company;
 use App\Models\Information\Career;
 use App\Models\Information\Location;
@@ -12,9 +12,9 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Intership>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Internship>
  */
-class IntershipFactory extends Factory
+class InternshipFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -70,7 +70,7 @@ class IntershipFactory extends Factory
             'start_date' => $start_date,
             'end_date' => $end_date,
             'vacant' => $this->faker->numberBetween(4, 10),
-            'status' => StatusIntershipEnum::PENDING,
+            'status' => StatusInternshipEnum::PENDING,
             'career_id' => Career::inRandomOrder()->first()->id,
         ];
     }

@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Enums\StatePostulationEnum;
-use App\Models\Intership;
+use App\Models\Internship;
 use App\Models\Student;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,7 +13,7 @@ class Postulation extends Model
 
     protected $fillable = [
         "student_id",
-        "intership_id",
+        "internship_id",
         "status",
     ];
 
@@ -29,15 +29,15 @@ class Postulation extends Model
     }
 
     public function intern() {
-        return $this->hasOne(Intership::class);
+        return $this->hasOne(Internship::class);
     }
     
     public function documents() {
         return $this->hasMany(DocumentPostulation::class);
     }
 
-    public function intership() {
-        return $this->belongsTo(Intership::class);
+    public function internship() {
+        return $this->belongsTo(Internship::class);
     }
   
 }

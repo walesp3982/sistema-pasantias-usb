@@ -13,7 +13,7 @@ use Database\Seeders\Core\TypeReportsSeeder;
 use Database\Seeders\Core\TypeSectorsSeeder;
 use Database\Seeders\Fake\CareerDepartamentSeeder;
 use Database\Seeders\Fake\CompanySeeder;
-use Database\Seeders\Fake\IntershipSeeder;
+use Database\Seeders\Fake\InternshipSeeder;
 use Database\Seeders\Fake\StudentSeeder;
 use Illuminate\Support\Facades\App;
 
@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
                 CareerDepartamentSeeder::class,
                 StudentSeeder::class,
                 CompanySeeder::class,
-                IntershipSeeder::class,
+                InternshipSeeder::class,
             ]);
         }
     }

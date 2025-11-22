@@ -35,24 +35,24 @@ class PostulationRepository implements PostulationRepositoryInterface
         return $this->model->find($id);
     }
 
-    public function getPostulationsIntershipAccepted(int $idIntership): Collection
+    public function getPostulationsInternshipAccepted(int $idInternship): Collection
     {
         return $this->model
-            ->where('intership_id', $idIntership)
+            ->where('internship_id', $idInternship)
             ->where("status", StatePostulationEnum::ACCEPT)
             ->get();
     }
-    public function getStudentIntershipPostulation(int $idStudent, int $idIntership): ?Postulation {
+    public function getStudentInternshipPostulation(int $idStudent, int $idInternship): ?Postulation {
         return $this->model
             ->where('student_id', $idStudent)
-            ->where('intership_id', $idIntership)
+            ->where('internship_id', $idInternship)
             ->first();
     }
 
     public function getStudentPostulation(int $idStudent) {
         return $this->model
             ->where('student_id', $idStudent)
-            ->pluck('intership_id')
+            ->pluck('internship_id')
             ->unique()
             ->toArray();
     }

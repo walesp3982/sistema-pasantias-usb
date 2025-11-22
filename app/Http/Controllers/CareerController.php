@@ -15,7 +15,7 @@ class CareerController extends Controller
     {
     }
     //
-    public function intershipCareer(int $companyId) {
+    public function internshipCareer(int $companyId) {
         // Solicitamos el id de la compañia
         $company = $this->companyService->find($companyId);
 
