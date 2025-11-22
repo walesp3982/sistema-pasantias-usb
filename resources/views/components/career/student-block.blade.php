@@ -64,7 +64,10 @@
                     <div>
                         <a href="{{ route('show.student', ["idStudent" => $student->id]) }}">
                             <x-ui.btn.info>
-                                <i class="fa fa-plus"></i> Info
+                                <x-slot:icon>
+                                    <i class="fa fa-plus"></i>
+                                </x-slot:icon>
+                                Info
                             </x-ui.btn.info>
                         </a>
                     </div>
