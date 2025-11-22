@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\StatusIntershipEnum;
-use App\Models\Intership;
+use App\Enums\StatusInternshipEnum;
+use App\Models\Internship;
 use App\Models\Postulation;
 use App\Service\StudentService;
 use App\Service\UserService;
@@ -19,17 +19,17 @@ class StudentController extends Controller
     ) {
 
     }
-    public function showIntership() {
+    public function showInternship() {
         $user = $this->userService->get(Auth::id());
 
         $student = $user->student;
 
-        $interships = $this->studentService->enableInterships($student->id);
+        $internships = $this->studentService->enableInternships($student->id);
 
-        return view('student.pasantias', ["interships" => $interships]);
+        return view('student.pasantias', ["internships" => $internships]);
     }
 
-    public function submitIntership(int $idIntership) {
+    public function submitInternship(int $idInternship) {
         $user = $this->userService->get(Auth::id());
 
         $student = $user->student;
@@ -37,10 +37,10 @@ class StudentController extends Controller
         try {
             $this
                 ->studentService
-                ->postulation($student->id, $idIntership);
+                ->postulation($student->id, $idInternship);
         } catch(Throwable $err) {
             return redirect()
-                ->route("search.intership")
+                ->route("search.internship")
                 ->with('error', $err->getMessage());
         }
         return redirect()->route('student.status')

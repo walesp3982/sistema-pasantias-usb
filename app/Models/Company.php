@@ -32,8 +32,8 @@ class Company extends Model
         return $this->hasOne(Picture::class);
     }
 
-    public function interships() {
-        return $this->hasMany(Intership::class);
+    public function internships() {
+        return $this->hasMany(Internship::class);
     }
 
     public function activeLocations() {

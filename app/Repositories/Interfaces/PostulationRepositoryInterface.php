@@ -11,9 +11,9 @@ interface PostulationRepositoryInterface {
     public function delete(int $id): bool;
     public function get(int $id): ?Postulation;
 
-    public function getPostulationsIntershipAccepted(int $idIntership): Collection;
+    public function getPostulationsInternshipAccepted(int $idInternship): Collection;
 
-    public function getStudentIntershipPostulation(int $idStudent, int $idIntership): ?Postulation;
+    public function getStudentInternshipPostulation(int $idStudent, int $idInternship): ?Postulation;
 
     public function getStudentPostulation(int $idStudent);
 

@@ -9,7 +9,7 @@
                 Inicio
             </x-navigation.navside.option>
             @role("student")
-                <x-navigation.navside.option icon="fa-solid fa-file-lines" href="{{ route('search.intership') }}">
+                <x-navigation.navside.option icon="fa-solid fa-file-lines" href="{{ route('search.internship') }}">
                     Buscar pasantías
                 </x-navigation.navside.option>
 
@@ -26,7 +26,7 @@
                 </x-navigation.navside.option>
             @endrole
             @role("carrer-department")
-            <x-navigation.navside.option icon="fa-solid fa-chart-line" href="{{ route('career.intership') }}">
+            <x-navigation.navside.option icon="fa-solid fa-chart-line" href="{{ route('career.internship') }}">
                     Pasantías
                 </x-navigation.navside.option>
 

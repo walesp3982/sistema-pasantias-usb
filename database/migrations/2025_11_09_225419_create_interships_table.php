@@ -1,7 +1,7 @@
 <?php
 
 use App\Enums\StatePostulationEnum;
-use App\Enums\StatusIntershipEnum;
+use App\Enums\StatusInternshipEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,7 +14,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('interships', function (Blueprint $table) {
+        Schema::create('internships', function (Blueprint $table) {
             $table->id();
             $table->foreignId('company_id')->constrained()->onDelete('cascade');
             $table->foreignId("career_id")->constrained()->onDelete('cascade');
@@ -26,7 +26,7 @@ return new class extends Migration
             $table->integer("vacant");
             $table->foreignId('location_id')
                 ->constrained();
-            $table->enum('status', StatusIntershipEnum::cases());
+            $table->enum('status', StatusInternshipEnum::cases());
             $table->timestamps();
         });
 
@@ -38,11 +38,11 @@ return new class extends Migration
         Schema::create('postulations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('student_id')->constrained()->onDelete('cascade');
-            $table->foreignId('intership_id')->constrained()->onDelete('cascade');
+            $table->foreignId('internship_id')->constrained()->onDelete('cascade');
             $table->enum('status', StatePostulationEnum::cases())
                 ->default(StatePostulationEnum::CREATED);
             $table->timestamps();
-            $table->unique(['student_id', 'intership_id'], 'student_intership_unique');
+            $table->unique(['student_id', 'internship_id'], 'student_internship_unique');
         });
 
         Schema::create('document_postulations', function(Blueprint $table) {
@@ -62,6 +62,6 @@ return new class extends Migration
         Schema::dropIfExists('document_postulations');
         Schema::dropIfExists('postulations');
         Schema::dropIfExists('type_document_postulations');
-        Schema::dropIfExists('interships');
+        Schema::dropIfExists('internships');
     }
 };

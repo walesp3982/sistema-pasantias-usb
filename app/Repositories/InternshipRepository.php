@@ -2,15 +2,15 @@
 
 namespace App\Repositories;
 
-use App\Models\Intership;
-use App\Repositories\Interfaces\IntershipRepositoryInterface;
+use App\Models\Internship;
+use App\Repositories\Interfaces\InternshipRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Pest\Support\Arr;
 
-class IntershipRepository implements IntershipRepositoryInterface
+class InternshipRepository implements InternshipRepositoryInterface
 {
     public function __construct(
-        private Intership $model
+        private Internship $model
     ) {}
 
     public function all(): Collection
@@ -18,21 +18,21 @@ class IntershipRepository implements IntershipRepositoryInterface
         return $this->model->all();
     }
 
-    public function find($id): ?Intership
+    public function find($id): ?Internship
     {
         return $this->model->find($id);
     }
 
-    public function create(array $data): Intership
+    public function create(array $data): Internship
     {
-        $intership = $this->model->create($data);
-        return $intership;
+        $internship = $this->model->create($data);
+        return $internship;
     }
 
     public function update(int $id, array $data): bool
     {
-        $intership = $this->model->findOrFail($id);
-        return $intership->update($data);
+        $internship = $this->model->findOrFail($id);
+        return $internship->update($data);
     }
 
     public function delete(int $id): bool
@@ -45,16 +45,16 @@ class IntershipRepository implements IntershipRepositoryInterface
         return $this->model->where("career_id", $career_id)
             ->get();
     }
-    public function getStudentEnabledInterships(int $career_id, $studentIntershipsPostulations)
+    public function getStudentEnabledInternships(int $career_id, $studentInternshipsPostulations)
     {
         return $this->model
             ->where("career_id", $career_id)
-            ->whereNotIn("id", $studentIntershipsPostulations)
+            ->whereNotIn("id", $studentInternshipsPostulations)
             ->get();
     }
 
 
-    public function getIntershipsBefore(string $time, int $minutes): Collection
+    public function getInternshipsBefore(string $time, int $minutes): Collection
     {
          $hours = floor($minutes / 60);
         $mins = $minutes % 60;
@@ -70,7 +70,7 @@ class IntershipRepository implements IntershipRepositoryInterface
         return $query->get();
     }
 
-    public function getIntershipsAfter(string $time, int $minutes): Collection
+    public function getInternshipsAfter(string $time, int $minutes): Collection
     {
         $hours = floor($minutes / 60);
         $mins = $minutes % 60;

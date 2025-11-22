@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Enums\StatusIntershipEnum;
+use App\Enums\StatusInternshipEnum;
 use App\Models\Information\Career;
 use App\Models\Information\Location;
 use Illuminate\Database\Eloquent\Attributes\Scope;
@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Intership extends Model
+class Internship extends Model
 {
     use HasFactory;
     //
@@ -35,7 +35,7 @@ class Intership extends Model
         "postulation_limit_date" => 'date',
         "entry_time" => "datetime:H:i",
         "exit_time" => "datetime:H:i",
-        "status" => StatusIntershipEnum::class,
+        "status" => StatusInternshipEnum::class,
     ];
 
     public function company() {

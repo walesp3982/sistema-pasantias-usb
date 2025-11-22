@@ -2,14 +2,14 @@
 
 namespace App\Service;
 
-use App\Enums\StatusIntershipEnum;
-use App\Repositories\IntershipRepository;
+use App\Enums\StatusInternshipEnum;
+use App\Repositories\InternshipRepository;
 use Illuminate\Support\Facades\DB;
 
-class IntershipService
+class InternshipService
 {
     public function __construct(
-        private IntershipRepository $repository
+        private InternshipRepository $repository
     ) {}
 
     public function create(array $data) {
@@ -25,7 +25,7 @@ class IntershipService
                     "exit_time" => $data["exit_time"],
                     "vacant" => $data["vacant"],
                     "location_id" => $data["location_id"],
-                    "status" => StatusIntershipEnum::PENDING,
+                    "status" => StatusInternshipEnum::PENDING,
                 ]);
 
                 return $company;

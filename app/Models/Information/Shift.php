@@ -3,7 +3,7 @@
 namespace App\Models\Information;
 
 use App\Enums\ShiftEnum;
-use App\Models\Intership;
+use App\Models\Internship;
 use App\Models\Student;
 use Illuminate\Database\Eloquent\Model;
 
