@@ -27,7 +27,8 @@
     </div>
 
     <div class="flex justify-between mt-5">
-        <form method="POST" action="{{ route('student.postulate', ['idIntership' => $intership->id]) }}">
+        <form method="POST" action="{{ route('student.postulate', ['idIntership' => $intership->id]) }}"
+            onsubmit="return confirm('¿Estás seguro de que deseas postularse?')">
             @csrf
             <button
                 class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition flex items-center text-sm">
