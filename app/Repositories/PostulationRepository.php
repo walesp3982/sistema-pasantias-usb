@@ -53,6 +53,8 @@ class PostulationRepository implements PostulationRepositoryInterface
         return $this->model
             ->where('student_id', $idStudent)
             ->pluck('intership_id')
-            ->unique();
+            ->unique()
+            ->toArray();
     }
+    
 }

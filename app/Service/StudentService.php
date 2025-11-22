@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Enums\RolesEnum;
+use App\Enums\ShiftEnum;
 use App\Enums\StatePostulationEnum;
 use App\Models\Postulation;
 use App\Repositories\Interfaces\StudentRepositoryInterface;
@@ -13,6 +14,7 @@ use App\Repositories\Interfaces\IntershipRepositoryInterface;
 use App\Repositories\Interfaces\PostulationRepositoryInterface;
 use App\Repositories\IntershipRepository;
 use App\Repositories\PhoneRepository;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -25,7 +27,7 @@ class StudentService
         private readonly IntershipRepositoryInterface $intershipRepository
     ) {}
 
-    public function create(array $data):Student
+    public function create(array $data): Student
     {
 
         if ($this->studentRepository->findByName(
@@ -59,26 +61,28 @@ class StudentService
     }
 
 
-    public function find(int $idStudent): Student {
+    public function find(int $idStudent): Student
+    {
         $student = $this->studentRepository->get($idStudent);
-        if(is_null($student)) {
+        if (is_null($student)) {
             throw new \Exception("No se encontró al estudiante");
         }
 
         return $student;
     }
 
-    public function postulation(int $idStudent, int $idIntership) {
+    public function postulation(int $idStudent, int $idIntership)
+    {
         $student = $this->studentRepository->get($idStudent);
         // Verificamos que el estudiante exista
-        if(is_null($student)) {
+        if (is_null($student)) {
             throw new \Exception("No se encontró al estudiante");
         }
 
         $intership = $this->intershipRepository->find($idIntership);
 
         // Verificamos que la pasantía exista
-        if(is_null($intership)) {
+        if (is_null($intership)) {
             throw new \Exception("No existe la pasantía al postularse");
         }
 
@@ -86,15 +90,16 @@ class StudentService
         $existingPostulation = $this
             ->postulationRepository
             ->getStudentIntershipPostulation($student->id, $intership->id);
-        if(!is_null($existingPostulation)) {
+        if (!is_null($existingPostulation)) {
             throw new \Exception("El estudiante ya ha postulado a esta pasantía");
         }
 
         $actualPostulations = $this
             ->postulationRepository
             ->getPostulationsIntershipAccepted($intership->id);
-        
-        if($actualPostulations->count() >= $intership->vacant) {
+
+        // Verificamos que existan vacantes en la pasantía
+        if ($actualPostulations->count() >= $intership->vacant) {
             throw new \Exception("Ya no existen vacantes para la postulation");
         }
 
@@ -105,22 +110,56 @@ class StudentService
         ]);
     }
 
-    public function enableInterships(int $idStudent) {
-        
+    public function enableInterships(int $idStudent)
+    {
+
         $student = $this->studentRepository->get($idStudent);
 
-        if(is_null($student)) {
+        if (is_null($student)) {
             throw new \Exception("No se encontró el estudiante");
         }
-        $intershipsPostulate = $this->postulationRepository->getStudentPostulation($student->id);
         //dd($student->id);
 
-        $interships=$this
-            ->intershipRepository
-            ->getStudentEnabledInterships(
-                $student->career_id, 
-                $intershipsPostulate);
+        $entry_time = $student->shift->entry_time;
+        $exit_time = $student->shift->exit_time;
 
-        return $interships;
+        // Espacio entre la U y la pasantía de 45 minutos
+        $min_default = 45;
+
+        $shiftEnum = $student->shift->id;
+
+        $beforeInterships = new Collection();
+        $afterIntership = new Collection();
+        switch ($shiftEnum) {
+            case (ShiftEnum::MORNING):
+                $beforeInterships = $this
+                    ->intershipRepository
+                    ->getIntershipsAfter($exit_time, $min_default);
+                break;
+            case (ShiftEnum::AFTERNOON):
+                $beforeInterships = $this
+                    ->intershipRepository
+                    ->getIntershipsAfter($exit_time, $min_default);
+                $afterIntership = $this
+                    ->intershipRepository
+                    ->getIntershipsBefore($entry_time ,$min_default);
+                    break;
+            case (ShiftEnum::NIGHT):
+                $afterIntership = $this
+                    ->intershipRepository
+                    ->getIntershipsBefore($entry_time, $min_default);
+                break;
+        }
+        $intershipsAll = $afterIntership
+            ->merge($beforeInterships)
+            ->unique("id");
+        
+        $intershipsIds = $this->postulationRepository->getStudentPostulation($student->id);
+
+        $intershipsFiltered = $intershipsAll
+            ->whereNotIn('id', $intershipsIds)
+            ->values();
+
+        return $intershipsFiltered;
     }
 }

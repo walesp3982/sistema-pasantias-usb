@@ -8,7 +8,6 @@ use App\Enums\StatusIntershipEnum;
 use App\Models\Company;
 use App\Models\Information\Career;
 use App\Models\Information\Location;
-use App\Models\Information\Shift;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 
@@ -26,13 +25,14 @@ class IntershipFactory extends Factory
     public function setEntryTime(ShiftEnum $enum): Carbon
     {
         $hour = match ($enum) {
-            ShiftEnum::MORNING => $this->faker->numberBetween(7, 8),
-            ShiftEnum::AFTERNOON => $this->faker->numberBetween(2, 3),
-            ShiftEnum::NIGHT => $this->faker->numberBetween(18, 19)
+            ShiftEnum::MORNING => 7,
+            ShiftEnum::AFTERNOON => 14,
+            ShiftEnum::NIGHT => 18
         };
 
-        $minutes = 15 * $this->faker->numberBetween(0, 3);
+        $minutes = 15 * $this->faker->numberBetween(0, 4);
         $time = Carbon::createFromTime($hour, $minutes, 0);
+        $time->addMinutes($minutes);
         return $time;
     }
 

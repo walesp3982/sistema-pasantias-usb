@@ -5,7 +5,8 @@ namespace App\Repositories\Interfaces;
 use App\Models\Intership;
 use Illuminate\Database\Eloquent\Collection;
 
-interface IntershipRepositoryInterface {
+interface IntershipRepositoryInterface
+{
     // Define los métodos que el repositorio debe implementar
     public function all(): Collection;
     public function find(int $id): ?Intership;
@@ -16,6 +17,8 @@ interface IntershipRepositoryInterface {
     public function enableByCareer(int $career_id): Collection;
 
     public function getStudentEnabledInterships(int $career_id, $studentIntershipsPostulations);
-}
 
-?>
+    public function getIntershipsBefore(string $time, int $minutes): Collection;
+
+    public function getIntershipsAfter(string $time, int $minutes): Collection;
+}
