@@ -46,4 +46,9 @@ class StudentRepository implements StudentRepositoryInterface {
         $student = $this->model->where('ru', "=", $ru)->first();
         return $student;
     }
+
+    public function delete(int $id): bool {
+        $student = $this->model->find($id);
+        return $student->delete();
+    }
 }

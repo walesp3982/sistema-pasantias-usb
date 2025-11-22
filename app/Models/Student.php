@@ -10,6 +10,7 @@ use App\Models\Information\Phone;
 use App\Models\Information\Shift;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property-read string $full_name
@@ -17,6 +18,7 @@ use Illuminate\Database\Eloquent\Model;
 class Student extends Model
 {
     use HasFactory;
+    use SoftDeletes;
     protected $table = 'students';
 
     public $timestamps = true;

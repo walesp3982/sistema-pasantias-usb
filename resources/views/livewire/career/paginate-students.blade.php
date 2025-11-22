@@ -1,4 +1,9 @@
 <div>
+    <div class="mb-6">
+        {{ $students->links() }}
+    </div>
+    
+
     <x-ui.section>
 
         @foreach ($students as $student)
@@ -8,7 +13,5 @@
         @endforeach
 
     </x-ui.section>
-    {{ $students->links('components.pagination.principal') }}
-
     {{-- Be like water. --}}
 </div>

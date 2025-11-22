@@ -36,6 +36,7 @@ return new class extends Migration
             $table->integer('semester');
             $table->foreignId("career_id")->constrained()->onDelete('cascade');
             $table->foreignId("shift_id")->constrained()->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
 

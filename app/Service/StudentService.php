@@ -162,4 +162,23 @@ class StudentService
 
         return $intershipsFiltered;
     }
+
+    public function delete(int $idStudent): void
+    {
+        $student = $this->studentRepository->get($idStudent);
+        if (is_null($student)) {
+            throw new \Exception("No se encontró al estudiante");
+        }
+
+        DB::transaction(function () use ($student) {
+            // Eliminamos las postulaciones del estudiante
+            // $this->postulationRepository->delete($student->id);
+
+            // Eliminamos el usuario asociado al estudiante
+            $this->userService->delete($student->user_id);
+
+            // Finalmente, eliminamos el estudiante
+            $this->studentRepository->delete($student->id);
+        });
+    }
 }

@@ -34,4 +34,15 @@ class CareerController extends Controller
         return view("career-departament.info-student", 
         ["student" => $student]);        
     }
+
+    public function deleteStudent(int $idStudent) {
+        try {
+            $this->studentService->delete($idStudent);
+            return redirect()->route('career.students')
+                ->with('success', 'Estudiante eliminado correctamente.');
+        } catch (Throwable $err) {
+            return redirect()->route('career.students')
+                ->with('error', 'Error al eliminar el estudiante: ' . $err->getMessage());
+        }
+    }
 }

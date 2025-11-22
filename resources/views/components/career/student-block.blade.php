@@ -69,14 +69,17 @@
                         </a>
                     </div>
                     <div>
-                        <a href="">
+                        <form action="{{ route('delete.student', ['idStudent' => $student->id]) }}" method="POST" 
+                            onsubmit="return confirm('¿Estás seguro de que deseas eliminar este estudiante?');">
+                            @csrf
+                            @method('DELETE')
                             <x-ui.btn.danger>
                                 <x-slot:icon>
                                     <i class="fa fa-trash"></i>
                                 </x-slot:icon>
                                 Eliminar
                             </x-ui.btn.danger>
-                        </a>
+                        </form>
                     </div>
 
                 </div>

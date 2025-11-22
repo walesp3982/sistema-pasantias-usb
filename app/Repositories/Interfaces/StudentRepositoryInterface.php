@@ -18,4 +18,6 @@ interface StudentRepositoryInterface {
     public function paginate(int $perPage = 15): LengthAwarePaginator;
 
     public function create(array $dataStudent): Student;
+
+    public function delete(int $id): bool;
 }
