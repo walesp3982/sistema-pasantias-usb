@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Service\CompanyService;
+use App\Service\ReportsService;
 use App\Service\StudentService;
 use Illuminate\Http\Request;
 use Throwable;
@@ -11,7 +12,8 @@ class CareerController extends Controller
 {
     public function __construct(
         private CompanyService $companyService,
-        private StudentService $studentService)
+        private StudentService $studentService,
+        private ReportsService $reportsService)
     {
     }
     //
@@ -21,6 +23,12 @@ class CareerController extends Controller
 
         return view("agreement-deparment.company-form",
             ['company' => $company]);
+
+    }
+
+    public function invitationInternship(int $internshipId) {
+        // Solicitamos el id de la compañia
+        return $this->reportsService->generateConvocatoria($internshipId);
 
     }
 

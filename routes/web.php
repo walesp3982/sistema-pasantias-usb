@@ -24,7 +24,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'role:student'])->group(function () {
     Route::view('configuracion', 'config')->name('config');
-    Route::get('pasantias', [StudentController::class,"showInternship"])->name('search.internship');
+    Route::get('pasantias', [StudentController::class, "showInternship"])->name('search.internship');
     Route::get("student/postulations", [StudentController::class, "getPostulations"])->name("student.postulations");
     Route::post('student/postulate/{idInternship}', [StudentController::class, "submitInternship"])
         ->name('student.postulate');
@@ -47,6 +47,10 @@ Route::middleware(['auth', 'role:' . RolesEnum::AGREEMENTS->value])
         Route::get("internship/create/{companyId}", [AgreementController::class, "createInternship"])
             ->name('create.internship');
     });
+
+Route::get('convocatoria/internship/{internshipId}', [CareerController::class, 'invitationInternship'])
+    ->name('invitation.internship');
+
 // Route::get('test', function () {
 //     return $asdf;
 // });
