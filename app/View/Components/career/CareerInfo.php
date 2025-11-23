@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components\career;
+namespace App\View\Components\Career;
 
 use App\Service\UserService;
 use Closure;
