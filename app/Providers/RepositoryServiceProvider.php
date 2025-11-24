@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\DocumentPostulation;
+use App\Repositories\DocumentPostulationRepository;
 use App\Repositories\DocumentRepository;
+use App\Repositories\Interfaces\DocumentPostulationRepositoryInterface;
 use App\Repositories\Interfaces\DocumentRepositoryInterface;
 use App\Repositories\Interfaces\InternshipRepositoryInterface;
 use App\Repositories\Interfaces\LocationRepositoryInterface;
@@ -55,6 +58,10 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             PostulationRepositoryInterface::class,
             PostulationRepository::class
+        );
+        $this->app->bind(
+            DocumentPostulationRepositoryInterface::class,
+            DocumentPostulationRepository::class
         );
     }
 
