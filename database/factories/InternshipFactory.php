@@ -8,6 +8,7 @@ use App\Enums\StatusInternshipEnum;
 use App\Models\Company;
 use App\Models\Information\Career;
 use App\Models\Information\Location;
+use App\Models\Internship;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 
@@ -22,18 +23,21 @@ class InternshipFactory extends Factory
      * @return array<string, mixed>
      */
 
-    public function setEntryTime(ShiftEnum $enum): Carbon
+
+    /**
+     * @return \Illuminate\Support\Carbon
+     */
+    public function setEntryTime(ShiftEnum $enum)
     {
         $hour = match ($enum) {
-            ShiftEnum::MORNING => 7,
-            ShiftEnum::AFTERNOON => 14,
-            ShiftEnum::NIGHT => 18
+            ShiftEnum::MORNING => $this->faker->numberBetween(7, 8),
+            ShiftEnum::AFTERNOON => $this->faker->numberBetween(14, 15),
+            ShiftEnum::NIGHT => $this->faker->numberBetween(18, 19)
         };
 
-        $minutes = 15 * $this->faker->numberBetween(0, 4);
-        $time = Carbon::createFromTime($hour, $minutes, 0);
-        $time->addMinutes($minutes);
-        return $time;
+        $minutes = 15 * $this->faker->numberBetween(0, 3);
+        $entry_time = Carbon::createFromTime($hour, $minutes, 0);
+        return $entry_time;
     }
 
     public function setExitTime(Carbon $entry_time)
@@ -59,13 +63,16 @@ class InternshipFactory extends Factory
             $this->faker->numberBetween(12, 24)
         );
 
+        /** @var \Illuminate\Support\Carbon $entry_time */
+        $entry_time = $this->setEntryTime($this->faker->randomElement(ShiftEnum::cases()));
+        $exit_time = $entry_time->copy()->addHours(4);
 
         return [
             //
             'company_id' => $company->id,
-            'location_id' => $location->id,
-            'entry_time' => "",
-            'exit_time' => "",
+            'location_id' => $location?->id,
+            'entry_time' => $entry_time,
+            'exit_time' => $exit_time,
             'postulation_limit_date' => $postulation_limit_data,
             'start_date' => $start_date,
             'end_date' => $end_date,
@@ -93,11 +100,27 @@ class InternshipFactory extends Factory
         });
     }
 
-    public function stateCareer(CareerEnum $enum) {
+    public function stateCareer(CareerEnum $enum)
+    {
         return $this->state(function ($array) use ($enum) {
             return [
                 "career_id" => $enum->value
             ];
+        });
+    }
+
+    public function configure(): static
+    {
+        return $this->afterMaking(function (Internship $internship) {
+            // Si ya tiene company_id asignado (por relación), buscar location de esa company
+            if ($internship->company_id) {
+                $location = Location::where('locatable_id', $internship->company_id)
+                    ->where("locatable_type", Company::class)
+                    ->inRandomOrder()
+                    ->first();
+
+                $internship->location_id = $location?->id;
+            }
         });
     }
 }
