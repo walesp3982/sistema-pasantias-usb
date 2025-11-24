@@ -95,8 +95,20 @@ class StudentController extends Controller
         ]);
     }
 
-    public function updatePostulation(int $idPostulation, Request $request) {
+    public function uploadDocuments(int $idPostulation, Request $request) {
         //
-        return "<b>hecho</b>";
+        $validate = $request->validate([
+            "typeDoc" => "required|integer|min:1|max:4",
+            "document" => "required|file|mimes:pdf",
+        ]
+        );
+
+        $this->studentService->saveDocumentPostulation(
+            $idPostulation,
+            $validate["typeDoc"],
+            $validate["document"]
+        );
+
+        return redirect()->back();
     }
 }

@@ -28,4 +28,8 @@ class DocumentPostulationRepository implements DocumentPostulationRepositoryInte
             ->where("type_document_postulation_id", $enum)
             ->first();
     }
+
+    public function create(array $data): DocumentPostulation {
+        return $this->model->create($data);
+    }
 }

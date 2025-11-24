@@ -17,7 +17,9 @@ class Document extends Model
         'extension',
         'path',
         'size',
-        'user_id'
+        'user_id',
+        'documentable_type',
+        'documentable_id'
     ];
     public function user() {
         return $this->belongsTo(User::class);

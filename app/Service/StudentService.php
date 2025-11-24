@@ -6,6 +6,7 @@ use App\Enums\DocPostulationEnum;
 use App\Enums\RolesEnum;
 use App\Enums\ShiftEnum;
 use App\Enums\StatePostulationEnum;
+use App\Models\DocumentPostulation;
 use App\Models\Information\TypeDocumentPostulation;
 use App\Models\Postulation;
 use App\Repositories\Interfaces\StudentRepositoryInterface;
@@ -17,6 +18,7 @@ use App\Repositories\Interfaces\InternshipRepositoryInterface;
 use App\Repositories\Interfaces\PostulationRepositoryInterface;
 use App\Repositories\InternshipRepository;
 use App\Repositories\PhoneRepository;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -26,6 +28,7 @@ class StudentService
     public function __construct(
         private readonly StudentRepositoryInterface $studentRepository,
         private readonly UserService $userService,
+        private readonly DocumentService $docService,
         private readonly PostulationRepositoryInterface $postulationRepository,
         private readonly InternshipRepositoryInterface $internshipRepository,
         private readonly DocumentPostulationRepositoryInterface $documentPostulationRepository,
@@ -256,5 +259,22 @@ class StudentService
 
     public function getDocuments() {
         return TypeDocumentPostulation::all();
+    }
+
+    public function saveDocumentPostulation(int $idPostulation, int $typeDoc, UploadedFile $file) {
+        DB::transaction(
+            function () use ($idPostulation, $typeDoc, $file) {
+                $doc = $this->documentPostulationRepository->create([
+                    'postulation_id' => $idPostulation,
+                    'type_document_postulation_id' => $typeDoc,
+                    'verify' => true
+                ]);
+                $this->docService->
+                    save($file, 
+                        DocumentPostulation::class, 
+                        $doc->id );
+                
+            }
+        );
     }
 }

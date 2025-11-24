@@ -73,7 +73,7 @@
         <form action="{{ route('student.postulation.upload-documents', $postulation->id) }}" method="POST"
             enctype="multipart/form-data" class="mt-4">
             @csrf
-            <x-form.select id="typeDocument">
+            <x-form.select id="typeDoc" name="typeDoc">
                 @foreach ($select as $option)
                     <option value="{{ $option->id }}">{{ $option->name }}</option>
                 @endforeach
