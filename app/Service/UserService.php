@@ -90,4 +90,10 @@ class UserService
         $career = $user->careerDepartament->career;
         return $career;
     }
+
+    public function delete(int $id) {
+        return DB::transaction((function () use ($id) {
+            $this->repository->delete($id);
+        }));
+    }
 }

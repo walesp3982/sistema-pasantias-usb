@@ -19,7 +19,7 @@ class PermissionSeeder extends Seeder
 
         // Crear permisos y guardar referencias
         $permissions = [
-            'register intership',
+            'register internship',
             'register company',
             'register student',
             'create postulation',
@@ -27,13 +27,13 @@ class PermissionSeeder extends Seeder
             'accept postulation',
             'register reports',
             'edit profile',
-            'publish intership',
+            'publish internship',
             'show stadistics',
             'register agreements company',
             'register career',
             'register members career',
             'register members agreement',
-            'assign interships student'
+            'assign internships student'
         ];
 
         // Crear roles y asignar permisos por ID
@@ -55,7 +55,7 @@ class PermissionSeeder extends Seeder
         $careerDept = Role::create(['name' => RolesEnum::CAREER->value]);
         $careerDept->givePermissionTo([
             'register student',
-            'publish intership',
+            'publish internship',
             'verify postulation',
             'accept postulation',
             'register reports',
@@ -71,7 +71,7 @@ class PermissionSeeder extends Seeder
         $agreementsDept->givePermissionTo([
             'register company',
             'register agreements company',
-            'register intership',
+            'register internship',
             'show stadistics'
         ]);
         $user = User::factory()->create([

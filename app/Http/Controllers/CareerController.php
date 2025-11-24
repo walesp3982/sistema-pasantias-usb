@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Service\CompanyService;
+use App\Service\ReportsService;
 use App\Service\StudentService;
 use Illuminate\Http\Request;
 use Throwable;
@@ -11,16 +12,23 @@ class CareerController extends Controller
 {
     public function __construct(
         private CompanyService $companyService,
-        private StudentService $studentService)
+        private StudentService $studentService,
+        private ReportsService $reportsService)
     {
     }
     //
-    public function intershipCareer(int $companyId) {
+    public function internshipCareer(int $companyId) {
         // Solicitamos el id de la compañia
         $company = $this->companyService->find($companyId);
 
         return view("agreement-deparment.company-form",
             ['company' => $company]);
+
+    }
+
+    public function invitationInternship(int $internshipId) {
+        // Solicitamos el id de la compañia
+        return $this->reportsService->generateConvocatoria($internshipId);
 
     }
 
@@ -33,5 +41,16 @@ class CareerController extends Controller
 
         return view("career-departament.info-student", 
         ["student" => $student]);        
+    }
+
+    public function deleteStudent(int $idStudent) {
+        try {
+            $this->studentService->delete($idStudent);
+            return redirect()->route('career.students')
+                ->with('success', 'Estudiante eliminado correctamente.');
+        } catch (Throwable $err) {
+            return redirect()->route('career.students')
+                ->with('error', 'Error al eliminar el estudiante: ' . $err->getMessage());
+        }
     }
 }

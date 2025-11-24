@@ -1,0 +1,51 @@
+<div class="flex flex-row justify-between items-center gap-2">
+    <div class="">
+        <p>
+            <span class="font-semibold">Sector: </span>
+
+            Educación
+        </p>
+
+        <p><span class="font-semibold">Número de pasantías: </span>0</p>
+    </div>
+
+    <div class="">
+        <div class="grid grid-rows-2 gap-2">
+            <div>
+                <a href="http://localhost:8000/internship/create/10">
+                    <button
+                        class="px-4 py-2 w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow transition flex items-center lg:justify-between justify-center gap-2 focus:bg-blue-400"
+                    >
+                        <!--[if BLOCK]><![endif]-->
+                        <div>
+                            <i class="fa fa-plus"></i>
+                        </div>
+
+                        <!--[if ENDBLOCK]><![endif]-->
+
+                        <div class="hidden lg:block text-right">
+                            Agregar Pasantía
+                        </div>
+                    </button>
+                </a>
+            </div>
+
+            <div>
+                <a href="">
+                    <button
+                        class="px-4 py-2 w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow transition flex items-center lg:justify-between justify-center gap-2 focus:bg-blue-400"
+                    >
+                        <!--[if BLOCK]><![endif]-->
+                        <div>
+                            <i class="fa-solid fa-info"></i>
+                        </div>
+
+                        <!--[if ENDBLOCK]><![endif]-->
+
+                        <div class="hidden lg:block text-right">Más Info</div>
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

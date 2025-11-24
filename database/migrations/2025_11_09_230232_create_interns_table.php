@@ -15,7 +15,8 @@ return new class extends Migration
         Schema::create('interns', function(Blueprint $table) {
             $table->id();
             $table->foreignId('postulation_id')->constrained()->onDelete('cascade');
-            $table->enum('status',InternStatusEnum::cases());
+            $table->boolean('abandoned')->default(false);
+            $table->timestamps();
         });
 
         Schema::create('type_reports', function(Blueprint $table) {

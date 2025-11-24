@@ -2,18 +2,23 @@
 
 namespace App\Providers;
 
+use App\Models\DocumentPostulation;
+use App\Repositories\DocumentPostulationRepository;
 use App\Repositories\DocumentRepository;
+use App\Repositories\Interfaces\DocumentPostulationRepositoryInterface;
 use App\Repositories\Interfaces\DocumentRepositoryInterface;
-use App\Repositories\Interfaces\IntershipRepositoryInterface;
+use App\Repositories\Interfaces\InternshipRepositoryInterface;
 use App\Repositories\Interfaces\LocationRepositoryInterface;
 use App\Repositories\Interfaces\PhoneRepositoryInterface;
 use App\Repositories\Interfaces\PictureRepositoryInterface;
+use App\Repositories\Interfaces\PostulationRepositoryInterface;
 use App\Repositories\Interfaces\StudentRepositoryInterface;
 use App\Repositories\Interfaces\UserRepositoryInterface;
-use App\Repositories\IntershipRepository;
+use App\Repositories\InternshipRepository;
 use App\Repositories\LocationRepository;
 use App\Repositories\PhoneRepository;
 use App\Repositories\PictureRepository;
+use App\Repositories\PostulationRepository;
 use App\Repositories\StudentRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Support\ServiceProvider;
@@ -47,8 +52,16 @@ class RepositoryServiceProvider extends ServiceProvider
             LocationRepository::class
         );
         $this->app->bind(
-            IntershipRepositoryInterface::class,
-            IntershipRepository::class
+            InternshipRepositoryInterface::class,
+            InternshipRepository::class
+        );
+        $this->app->bind(
+            PostulationRepositoryInterface::class,
+            PostulationRepository::class
+        );
+        $this->app->bind(
+            DocumentPostulationRepositoryInterface::class,
+            DocumentPostulationRepository::class
         );
     }
 

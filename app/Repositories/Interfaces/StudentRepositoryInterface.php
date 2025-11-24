@@ -14,9 +14,10 @@ interface StudentRepositoryInterface {
     public function searchByName(string $name): Collection;
 
     public function findByName(string $firstName, string $lastName): bool;
-    public function findById(string $id): ?Student;
 
     public function paginate(int $perPage = 15): LengthAwarePaginator;
 
     public function create(array $dataStudent): Student;
+
+    public function delete(int $id): bool;
 }

@@ -1,7 +1,7 @@
 <div x-data="{isOpen{{ $student->id }}:false}">
 
     <!-- TARJETA PRINCIPAL -->
-    <div class="p-5 flex items-center justify-between border-t border-b">
+    <div class="p-5 flex items-center justify-between border-y">
         <!-- DATOS CENTRALES -->
         <!-- LOGO + BADGE -->
         <div class="">
@@ -14,9 +14,9 @@
                 <i class="fas fa-user-graduate"></i>
             </span> --}}
             <img id="userPhoto"
-            class="w-14 h-14 rounded-full cursor-pointer object-cover border-2 border-gray-300 hover:scale-105 transition-transform mx-auto"
-            src="{{ asset("images/default/avatar_default.webp")}}" alt="User">
-            
+                class="w-14 h-14 rounded-full cursor-pointer object-cover border-2 border-gray-300 hover:scale-105 transition-transform mx-auto"
+                src="{{ asset("images/default/avatar_default.webp")}}" alt="User">
+
         </div>
         <div class="flex-1 px-4">
             <h2 class="text-xl font-bold text-gray-800">{{ $student->full_name }}</h2>
@@ -40,7 +40,7 @@
     <div x-show="isOpen{{ $student->id }}" x-transition class="px-5 pb-5 border-t border-gray-200">
         <div class="pt-4">
 
-            <!-- DOS TARJETAS -->
+            <!-- UNA TARJETA -->
             <div class="grid grid-cols-4 gap-6 mb-4">
                 <div class="col-span-3 bg-blue-50 p-4 rounded-lg">
                     <div class="grid grid-cols-2">
@@ -60,13 +60,31 @@
                         </div>
                     </div>
                 </div>
-                <div class="">
-                    <a href="{{ route('show.student',["idStudent" => $student->id]) }}">
-                        <button
-                            class="px-4 py-2 w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow transition">
-                            Más info
-                        </button>
-                    </a>
+                <div class="grid grid-rows-2">
+                    <div>
+                        <a href="{{ route('show.student', ["idStudent" => $student->id]) }}">
+                            <x-ui.btn.info>
+                                <x-slot:icon>
+                                    <i class="fa fa-plus"></i>
+                                </x-slot:icon>
+                                Info
+                            </x-ui.btn.info>
+                        </a>
+                    </div>
+                    <div>
+                        <form action="{{ route('delete.student', ['idStudent' => $student->id]) }}" method="POST" 
+                            onsubmit="return confirm('¿Estás seguro de que deseas eliminar este estudiante?');">
+                            @csrf
+                            @method('DELETE')
+                            <x-ui.btn.danger>
+                                <x-slot:icon>
+                                    <i class="fa fa-trash"></i>
+                                </x-slot:icon>
+                                Eliminar
+                            </x-ui.btn.danger>
+                        </form>
+                    </div>
+
                 </div>
             </div>
         </div>

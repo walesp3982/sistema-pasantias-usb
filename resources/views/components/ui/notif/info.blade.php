@@ -1,5 +1,5 @@
 @props([
-    'title' => 'Advertencia',
+    'title' => 'Info',
     'message' => '',
     'dismissible' => false
 ])

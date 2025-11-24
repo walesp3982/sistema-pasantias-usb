@@ -19,7 +19,7 @@ class DocumentService
     private function fullPath(string $name, string $extension):string {
         return $this->path . $name . "." . $extension;
     }
-    public function save(UploadedFile $file): Document
+    public function save(UploadedFile $file, $class, $id): Document
     {
         /*
             Nota: Para subir archivos es necesario que
@@ -27,13 +27,13 @@ class DocumentService
         */
         $uuid = Str::uuid();
         $extension = $file->getClientOriginalExtension();
-        $name = $file->getClientOriginalName();
+        $name = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
         $size = $file->getSize();
         $user_id = Auth::id();
         if(is_null($user_id)) {
             throw new \Exception('Necesitas iniciar sesión para usar esto');
         }
-        $fileStorage = $uuid . '.' . $file->getClientOriginalExtension();
+        // $fileStorage = $uuid . '.' . $file->getClientOriginalExtension();
 
         $document = $this->documentRepository->create([
             'uuid' => $uuid,
@@ -42,11 +42,11 @@ class DocumentService
             'size' => $size,
             'user_id' => $user_id,
             'path' => $this->path,
-
+            'documentable_type' => $class,
+            'documentable_id' => $id
         ]);
 
-        $finalPath = $this->fullPath($uuid, $extension);
-        Storage::put($finalPath, $file);
+        Storage::putFileAs($this->path, $file, $uuid.'.'.$extension);
         return $document;
     }
 

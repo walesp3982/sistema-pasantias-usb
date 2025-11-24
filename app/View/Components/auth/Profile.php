@@ -9,7 +9,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Component;
 
-class profile extends Component
+class Profile extends Component
 {
     /**
      * Create a new component instance.

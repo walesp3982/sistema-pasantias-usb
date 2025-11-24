@@ -24,14 +24,22 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'role:student'])->group(function () {
     Route::view('configuracion', 'config')->name('config');
-    Route::get('pasantias', [StudentController::class,"showIntership"])->name('search.intership');
+    Route::get('pasantias', [StudentController::class, "showInternship"])->name('search.internship');
+    Route::get("student/postulations", [StudentController::class, "getPostulations"])->name("student.postulations");
+    Route::post('student/postulate/{idInternship}', [StudentController::class, "submitInternship"])
+        ->name('student.postulate');
+    Route::get('postulation/edit/{idPostulation}', [StudentController::class, 'editPostulation'] )->name('postulation.edit');
+    Route::post('postulation/upload-documents/{idPostulation}', [StudentController::class, 'uploadDocuments'])
+        ->name('student.postulation.upload-documents');
 });
 
 Route::middleware(['auth', 'role:' . RolesEnum::CAREER->value])
     ->group(function () {
-        Route::view('interships', 'career-departament.intership')->name('career.intership');
+        Route::view('internships', 'career-departament.internship')->name('career.internship');
         Route::view('students', 'career-departament.students')->name('career.students');
         Route::get('students/{idStudent}', [CareerController::class, "showStudent"])->name('show.student');
+        Route::delete('students/{idStudent}', [CareerController::class, "deleteStudent"])
+            ->name('delete.student');
     });
 
 Route::middleware(['auth', 'role:' . RolesEnum::AGREEMENTS->value])
@@ -39,12 +47,13 @@ Route::middleware(['auth', 'role:' . RolesEnum::AGREEMENTS->value])
         Route::view('company', 'agreement-deparment.companies')->name('agreements.company');
         Route::view('company/create', 'agreement-deparment.company-form')->name('create.company');
         // Formulario para crear pasantía para empresa
-        Route::get("intership/create/{companyId}", [AgreementController::class, "createIntership"])
-            ->name('create.intership');
+        Route::get("internship/create/{companyId}", [AgreementController::class, "createInternship"])
+            ->name('create.internship');
     });
 
-Route::post('register/send', [StudentController::class, "create"])
-    ->name('register.student.send');
+Route::get('convocatoria/internship/{internshipId}', [CareerController::class, 'invitationInternship'])
+    ->name('invitation.internship');
+
 // Route::get('test', function () {
 //     return $asdf;
 // });
