@@ -27,7 +27,7 @@ class DocumentService
         */
         $uuid = Str::uuid();
         $extension = $file->getClientOriginalExtension();
-        $name = $file->getClientOriginalName();
+        $name = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
         $size = $file->getSize();
         $user_id = Auth::id();
         if(is_null($user_id)) {
