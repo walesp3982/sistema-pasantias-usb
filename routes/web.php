@@ -28,6 +28,9 @@ Route::middleware(['auth', 'role:student'])->group(function () {
     Route::get("student/postulations", [StudentController::class, "getPostulations"])->name("student.postulations");
     Route::post('student/postulate/{idInternship}', [StudentController::class, "submitInternship"])
         ->name('student.postulate');
+    Route::get('postulation/edit/{idPostulation}', [StudentController::class, 'editPostulation'] )->name('postulation.edit');
+    Route::post('postulation/upload-documents/{idPostulation}', [StudentController::class, 'uploadDocuments'])
+        ->name('student.postulation.upload-documents');
 });
 
 Route::middleware(['auth', 'role:' . RolesEnum::CAREER->value])

@@ -2,14 +2,17 @@
 
 namespace App\Service;
 
+use App\Enums\DocPostulationEnum;
 use App\Enums\RolesEnum;
 use App\Enums\ShiftEnum;
 use App\Enums\StatePostulationEnum;
+use App\Models\Information\TypeDocumentPostulation;
 use App\Models\Postulation;
 use App\Repositories\Interfaces\StudentRepositoryInterface;
 use App\Service\UserService;
 use App\Models\User;
 use App\Models\Student;
+use App\Repositories\Interfaces\DocumentPostulationRepositoryInterface;
 use App\Repositories\Interfaces\InternshipRepositoryInterface;
 use App\Repositories\Interfaces\PostulationRepositoryInterface;
 use App\Repositories\InternshipRepository;
@@ -24,16 +27,20 @@ class StudentService
         private readonly StudentRepositoryInterface $studentRepository,
         private readonly UserService $userService,
         private readonly PostulationRepositoryInterface $postulationRepository,
-        private readonly InternshipRepositoryInterface $internshipRepository
-    ) {}
+        private readonly InternshipRepositoryInterface $internshipRepository,
+        private readonly DocumentPostulationRepositoryInterface $documentPostulationRepository,
+    ) {
+    }
 
     public function create(array $data): Student
     {
 
-        if ($this->studentRepository->findByName(
-            $data['first_name'],
-            $data['last_name']
-        )) {
+        if (
+            $this->studentRepository->findByName(
+                $data['first_name'],
+                $data['last_name']
+            )
+        ) {
             throw new \Exception("El estudiante ya ha sido registrado");
         }
 
@@ -142,8 +149,8 @@ class StudentService
                     ->getInternshipsAfter($exit_time, $min_default);
                 $afterInternship = $this
                     ->internshipRepository
-                    ->getInternshipsBefore($entry_time ,$min_default);
-                    break;
+                    ->getInternshipsBefore($entry_time, $min_default);
+                break;
             case (ShiftEnum::NIGHT):
                 $afterInternship = $this
                     ->internshipRepository
@@ -153,7 +160,7 @@ class StudentService
         $internshipsAll = $afterInternship
             ->merge($beforeInternships)
             ->unique("id");
-        
+
         $internshipsIds = $this->postulationRepository->getStudentPostulation($student->id);
 
         $internshipsFiltered = $internshipsAll
@@ -163,8 +170,9 @@ class StudentService
         return $internshipsFiltered;
     }
 
-    public function getPostulationCreated(int $idStudent) {
-        if(is_null($this->studentRepository->get($idStudent))) {
+    public function getPostulationCreated(int $idStudent)
+    {
+        if (is_null($this->studentRepository->get($idStudent))) {
             throw new \Exception("No se encontró al estudiante");
         }
 
@@ -172,8 +180,9 @@ class StudentService
             ->getPostulationsCreatedStudent($idStudent);
     }
 
-    public function getPostulationSend(int $idStudent) {
-        if(is_null($this->studentRepository->get($idStudent))) {
+    public function getPostulationSend(int $idStudent)
+    {
+        if (is_null($this->studentRepository->get($idStudent))) {
             throw new \Exception("No se encontró al estudiante");
         }
 
@@ -198,5 +207,54 @@ class StudentService
             // Finalmente, eliminamos el estudiante
             $this->studentRepository->delete($student->id);
         });
+    }
+
+    public function getPostulationById(int $idStudent, int $idPostulation)
+    {
+        $student = $this->studentRepository->get($idStudent);
+        if (is_null($student)) {
+            throw new \Exception("No se encontró al estudiante");
+        }
+
+        $postulation = $this->postulationRepository->get($idPostulation);
+        if (is_null($postulation) || $postulation->student_id !== $student->id) {
+            throw new \Exception("No se encontró la postulación para este estudiante");
+        }
+
+        return $postulation;
+    }
+
+
+    public function getDocumentPostulation(int $idPostulation)
+    {
+        $carnet = $this->documentPostulationRepository->find(
+            $idPostulation,
+            DocPostulationEnum::CARNET
+        );
+        $cv = $this->documentPostulationRepository->find(
+            $idPostulation,
+            DocPostulationEnum::CURRICULUM
+        );
+
+        $carta = $this->documentPostulationRepository->find(
+            $idPostulation,
+            DocPostulationEnum::CARTA
+        );
+
+        $historial = $this->documentPostulationRepository->find(
+            $idPostulation,
+            DocPostulationEnum::HISTORIAL
+        );
+
+        return new Collection([
+            'carnet' => ['data' => $carnet, 'type' => DocPostulationEnum::CARNET],
+            'cv' => ['data' => $cv, 'type' => DocPostulationEnum::CURRICULUM],
+            'carta' => ['data' => $carta, 'type' => DocPostulationEnum::CARTA],
+            'historial' => ['data' => $historial, 'type' => DocPostulationEnum::HISTORIAL]
+        ]);
+    }
+
+    public function getDocuments() {
+        return TypeDocumentPostulation::all();
     }
 }

@@ -64,4 +64,39 @@ class StudentController extends Controller
         return view('student.postulations', 
         compact('createdPostulations', 'sendPostulations'));
     }
+
+    public function editPostulation(int $idPostulation) {
+        $user = $this->userService->get(Auth::id());
+
+        $student = $user->student;
+
+        $postulation = $this
+            ->studentService
+            ->getPostulationById($student->id, $idPostulation);
+
+        
+        $documents = $this->studentService->getDocumentPostulation($idPostulation);
+        
+        $counter = 0;
+        foreach ($documents as $document) {
+            if ($document['data'] != null) {
+                $counter++;
+            }
+        }
+        $enable = $counter == 0 ? true : false;
+
+        $select = $this->studentService->getDocuments();
+
+        return view('student.edit-postulation', [
+            'postulation' => $postulation,
+            'documents' => $documents,
+            'enable' => $enable,
+            'select' => $select,
+        ]);
+    }
+
+    public function updatePostulation(int $idPostulation, Request $request) {
+        //
+        return "<b>hecho</b>";
+    }
 }

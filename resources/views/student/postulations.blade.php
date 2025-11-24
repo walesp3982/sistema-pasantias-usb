@@ -21,12 +21,15 @@
                             {{ $postulations->created_at->format('d/m/Y') }}</p>
                     </div>
                     <div class="flex flex-col gap-2 items-center justify-center">
-                        <x-ui.btn.info>
-                            <x-slot:icon>
-                                <i class="fas fa-plus-circle"></i>
-                            </x-slot:icon>
-                            Agregar Documentos
-                        </x-ui.btn.info>
+                        <a href="{{ route('postulation.edit', $postulations->id) }}">
+                            <x-ui.btn.info>
+                                <x-slot:icon>
+                                    <i class="fas fa-plus-circle"></i>
+                                </x-slot:icon>
+                                Agregar Documentos
+                            </x-ui.btn.info>
+                        </a>
+
                         <x-ui.btn.danger>
                             <x-slot:icon>
                                 <i class="fas fa-trash-alt"></i>
