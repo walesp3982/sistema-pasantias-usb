@@ -4,7 +4,8 @@ use App\Models\Company;
 use App\Service\InternshipService;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
-
+use App\Http\Requests\StoreInternshipRequest;
+use Illuminate\Validation\Rule;
 new #[Layout('components.layouts.app')] class extends Component {
 
     public int $company_id;
@@ -18,17 +19,15 @@ new #[Layout('components.layouts.app')] class extends Component {
     public ?int $phone_id;
     public ?int $vacant;
 
-    protected $rules = [
-        'vacant' => ["required", "integer", "min:1"],
-        'company_id' => ["required", "integer", "exists:companies,id"],
-        'career_id' => ["required", "integer", "exists:careers,id"],
-        'start_date'=> ["required", "date", "before:end_date"],
-        'end_date' => ["required", "date", "after:start_date"],
-        'postulation_limit_date' => ["required", "date"],
-        'entry_time' => ["required", "date_format:H:i"],
-        'exit_time' => ["required", "date_format:H:i"],
-        'location_id' => ["required", "integer", "exists:locations,id"],
+    protected $messages = [
+        'postulation_limit_date.after' => 'La fecha límite de postulación tiene que ser superior o igual a 7 días.',
+        'postulation_limit_date.required' => 'La fecha límite es obligatoria.',
     ];
+
+    public function getRules()
+    {
+        return (new StoreInternshipRequest())->rules();
+    }
 
     public function getCompanyProperty()
     {
@@ -37,15 +36,20 @@ new #[Layout('components.layouts.app')] class extends Component {
 
     public function submit(InternshipService $service): void
     {
-        $validate = $this->validate();
+        $validate = $this->validate($this->getRules());
 
         $service->create($validate);
         session()->flash('message', 'Pasantía registrada correctamente');
 
         $this->reset([
-            'career_id', 'start_date', 'end_date', 
-            'postulation_limit_date', 'entry_time', 
-            'exit_time', 'location_id', 'vacant'
+            'career_id',
+            'start_date',
+            'end_date',
+            'postulation_limit_date',
+            'entry_time',
+            'exit_time',
+            'location_id',
+            'vacant'
         ]);
 
         $this->dispatch("reset-child-component");
@@ -53,7 +57,8 @@ new #[Layout('components.layouts.app')] class extends Component {
         // $this->redirect(route('agreements.company'));
     }
 
-    public function mount(int $company_id) {
+    public function mount(int $company_id)
+    {
         // $this->company = Company::findOrFail($company_id);
         $this->company_id = $company_id;
     }
@@ -89,8 +94,7 @@ new #[Layout('components.layouts.app')] class extends Component {
         <div class="grid grid-cols-3 gap-2">
             <div class="col-span-1">
                 <x-form.label>Vacantes</x-form.label>
-                <x-form.input type="number" placeholder="2"
-                wire:model="vacant">
+                <x-form.input type="number" placeholder="2" wire:model="vacant">
                 </x-form.input>
             </div>
             <div class="col-span-2">
@@ -112,7 +116,7 @@ new #[Layout('components.layouts.app')] class extends Component {
             <x-form.label>Fecha final</x-form.label>
             <x-form.input type="date" wire:model="end_date"></x-form.input>
         </div>
-        
+
 
         <x-form.section>
             Configurar horarios
@@ -142,7 +146,7 @@ new #[Layout('components.layouts.app')] class extends Component {
             <x-ui.btn.primary>
                 Registrar Pasantía
             </x-ui.btn.primary>
-            
+
         </div>
 
     </form>
