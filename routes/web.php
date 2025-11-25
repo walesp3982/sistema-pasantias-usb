@@ -60,3 +60,12 @@ Route::get('convocatoria/internship/{internshipId}', [CareerController::class, '
 // Creando rutas para pruebas
 Route::view('prueba', 'prueba');
 require __DIR__ . '/auth.php';
+
+
+
+//PDF Generation  
+use App\Http\Controllers\pdfController;
+
+Route::get('/pdf/Asistencia', [pdfController::class, 'Asistencia']);
+Route::get('/pdf/ListaPostulantes', [pdfController::class, 'ListaPostulantes']);
+
