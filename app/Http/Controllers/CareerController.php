@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Service\CompanyService;
+use App\Service\InternshipService;
 use App\Service\ReportsService;
 use App\Service\StudentService;
 use Illuminate\Http\Request;
@@ -14,7 +15,8 @@ class CareerController extends Controller
     public function __construct(
         private CompanyService $companyService,
         private StudentService $studentService,
-        private ReportsService $reportsService)
+        private ReportsService $reportsService,
+        private InternshipService $internshipService)
     {
     }
     //
@@ -77,5 +79,14 @@ class CareerController extends Controller
         $this->studentService->restoreStudent($idStudent);
         return redirect()->route('career.students');
 
+    }
+
+    public function internships() {
+        $user = Auth::user(); 
+        $career_id = $user->careerDepartament->career_id;
+
+        $internships = $this->internshipService->getByCareerDetail($career_id);
+
+        return view('career-departament.internship', ['internships' => $internships]);
     }
 }

@@ -35,7 +35,7 @@ Route::middleware(['auth', 'role:student'])->group(function () {
 
 Route::middleware(['auth', 'role:' . RolesEnum::CAREER->value])
     ->group(function () {
-        Route::view('internships', 'career-departament.internship')->name('career.internship');
+        Route::get('internships', [CareerController::class, "internships"])->name('career.internship');
         Route::view('students', 'career-departament.students')->name('career.students');
         Route::get('students/{idStudent}', [CareerController::class, "showStudent"])->name('show.student');
         Route::delete('students/{idStudent}', [CareerController::class, "deleteStudent"])

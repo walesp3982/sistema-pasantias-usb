@@ -98,6 +98,30 @@ class InternshipFactory extends Factory
                 ->count($vacant)
                 ->for($model)
                 ->create();
+
+            $reject = $this->faker->numberBetween(0, 3);
+            Postulation::factory()
+                ->reject()
+                ->setCareer($career_id)
+                ->count($reject)
+                ->for($model)
+                ->create();
+
+            $send = $this->faker->numberBetween(0, $vacant);
+            Postulation::factory()
+                ->send()
+                ->setCareer($career_id)
+                ->count($send)
+                ->for($model)
+                ->create();
+
+            $verify = $this->faker->numberBetween(0, 5);
+            Postulation::factory()
+                ->verify()
+                ->setCareer($career_id)
+                ->count($verify)
+                ->for($model)
+                ->create();
         });
     }
 
@@ -124,6 +148,72 @@ class InternshipFactory extends Factory
                     ->accept()
                     ->setCareer($career_id)
                     ->count($vacant)
+                    ->for($model)
+                    ->create();
+
+                $reject = $this->faker->numberBetween(0, 3);
+                Postulation::factory()
+                    ->reject()
+                    ->setCareer($career_id)
+                    ->count($reject)
+                    ->for($model)
+                    ->create();
+
+                $verify = $this->faker->numberBetween(0, 5);
+                Postulation::factory()
+                    ->verify()
+                    ->setCareer($career_id)
+                    ->count($verify)
+                    ->for($model)
+                    ->create();
+
+                $send = $this->faker->numberBetween(0, $vacant);
+                Postulation::factory()
+                    ->send()
+                    ->setCareer($career_id)
+                    ->count($send)
+                    ->for($model)
+                    ->create();
+            }
+        });
+    }
+
+    public function started()
+    {
+        return $this->afterCreating(function ($model, $p1) { {
+                $vacant = $model->vacant;
+                $career_id = $model->career_id;
+
+
+                $accept = $this->faker->numberBetween(0, $vacant / 2);
+                Postulation::factory()
+                    ->accept()
+                    ->setCareer($career_id)
+                    ->count($accept)
+                    ->for($model)
+                    ->create();
+
+                $reject = $this->faker->numberBetween(0, 3);
+                Postulation::factory()
+                    ->reject()
+                    ->setCareer($career_id)
+                    ->count($reject)
+                    ->for($model)
+                    ->create();
+
+                $send = $this->faker->numberBetween(0, $vacant);
+                Postulation::factory()
+                    ->send()
+                    ->setCareer($career_id)
+                    ->count($send)
+                    ->for($model)
+                    ->create();
+
+                $verify = $this->faker->numberBetween(0, 5);
+                Postulation::factory()
+                    ->verify()
+                    ->setCareer($career_id)
+                    ->count($verify)
                     ->for($model)
                     ->create();
             }
@@ -170,27 +260,27 @@ class InternshipFactory extends Factory
                 $internship->location_id = $location?->id;
             }
         })->sequence(
-            function () {
-                $entry = $this->setEntryTime(ShiftEnum::MORNING);
-                return [
-                    'entry_time' => $entry,
-                    'exit_time' => $entry->copy()->addHours(4),
-                ];
-            },
-            function () {
-                $entry = $this->setEntryTime(ShiftEnum::AFTERNOON);
-                return [
-                    'entry_time' => $entry,
-                    'exit_time' => $entry->copy()->addHours(4),
-                ];
-            },
-            function () {
-                $entry = $this->setEntryTime(ShiftEnum::NIGHT);
-                return [
-                    'entry_time' => $entry,
-                    'exit_time' => $entry->copy()->addHours(4),
-                ];
-            }
-        );
+                function () {
+                    $entry = $this->setEntryTime(ShiftEnum::MORNING);
+                    return [
+                        'entry_time' => $entry,
+                        'exit_time' => $entry->copy()->addHours(4),
+                    ];
+                },
+                function () {
+                    $entry = $this->setEntryTime(ShiftEnum::AFTERNOON);
+                    return [
+                        'entry_time' => $entry,
+                        'exit_time' => $entry->copy()->addHours(4),
+                    ];
+                },
+                function () {
+                    $entry = $this->setEntryTime(ShiftEnum::NIGHT);
+                    return [
+                        'entry_time' => $entry,
+                        'exit_time' => $entry->copy()->addHours(4),
+                    ];
+                }
+            );
     }
 }

@@ -16,17 +16,17 @@ class CompanySeeder extends Seeder
     {
         Company::factory()
             ->withLocation(3)
-            ->withInternshipsWait(2)
+            ->withInternshipsWait(1)
             ->withInternshipsCurrent(2)
-            ->withInternshipsFinished(2)
+            ->withInternshipsFinished(1)
             ->create();
 
         Company::factory()
             ->withLocation(4)
-            ->withInternshipsCurrent(2)
-            ->withInternshipsFinished(2)
-            ->withInternshipsWait(3)
-            ->count(5)
+            ->withInternshipsCurrent(1)
+            ->withInternshipsFinished(1)
+            ->withInternshipsWait(1)
+            ->count(2)
             ->create();
     }
 }

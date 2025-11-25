@@ -54,6 +54,10 @@ class Internship extends Model
         return $this->belongsTo(Location::class);
     }
 
+    public function postulations() {
+        return $this->hasMany(Postulation::class);
+    }
+
     #[Scope]
     public function active(Builder $query) {
         return $query->where("active", true);
