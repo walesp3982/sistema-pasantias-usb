@@ -23,7 +23,7 @@ class PostulationFactory extends Factory
         return [
             //
             "student_id" => Student::factory(),
-            "intership_id" => Internship::factory(),
+            "internship_id" => null,
             "status" => StatePostulationEnum::CREATED,
         ];
     }
@@ -57,6 +57,13 @@ class PostulationFactory extends Factory
             return [
                 "status" => StatePostulationEnum::REJECT,
             ];
+        });
+    }
+
+    public function setCareer($career_id) {
+        return $this->afterCreating(function ($model, $p1) use ($career_id) {
+            $student = $model->student;
+            $student->update(['career_id' => $career_id]);
         });
     }
 }

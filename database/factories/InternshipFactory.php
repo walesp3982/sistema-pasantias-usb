@@ -9,6 +9,8 @@ use App\Models\Company;
 use App\Models\Information\Career;
 use App\Models\Information\Location;
 use App\Models\Internship;
+use App\Models\Postulation;
+use App\Models\Student;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 
@@ -17,11 +19,7 @@ use Illuminate\Support\Carbon;
  */
 class InternshipFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+
 
 
     /**
@@ -45,6 +43,11 @@ class InternshipFactory extends Factory
         return $entry_time->addHours(4);
     }
 
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
     public function definition(): array
     {
         $company = Company::inRandomOrder()->first();
@@ -63,50 +66,67 @@ class InternshipFactory extends Factory
             $this->faker->numberBetween(12, 24)
         );
 
-        /** @var \Illuminate\Support\Carbon $entry_time */
-        $entry_time = $this->setEntryTime($this->faker->randomElement(ShiftEnum::cases()));
-        $exit_time = $entry_time->copy()->addHours(4);
-
         return [
             //
             'company_id' => $company->id,
             'location_id' => $location?->id,
-            'entry_time' => $entry_time,
-            'exit_time' => $exit_time,
             'postulation_limit_date' => $postulation_limit_data,
             'start_date' => $start_date,
             'end_date' => $end_date,
             'vacant' => $this->faker->numberBetween(4, 10),
-            'status' => StatusInternshipEnum::PENDING,
             'career_id' => Career::inRandomOrder()->first()->id,
         ];
     }
-
-    public function finishedIntership() {
+    public function finished()
+    {
         return $this->state(function ($array) {
-            $end_date = now()->subDays($this->faker->numberBetween(10,30));
-            $start_date = $end_date->copy()->subMonths($this->faker->numberBetween(12,16));
-            $postulation_data = $start_date->copy()->subWeeks($this->faker->numberBetween(1,2));
+            $end_date = now()->subDays($this->faker->numberBetween(10, 30));
+            $start_date = $end_date->copy()->subMonths($this->faker->numberBetween(12, 16));
+            $postulation_data = $start_date->copy()->subWeeks($this->faker->numberBetween(1, 2));
             return [
                 'end_date' => $end_date,
                 'start_date' => $start_date,
                 'postulation_limit_date' => $postulation_data,
             ];
-        })->afterCreating( function ($model) {
+        })->afterCreating(function ($model) {
             $vacant = $model->vacant;
             $career_id = $model->career_id;
-            
+
+            Postulation::factory()
+                ->accept()
+                ->setCareer($career_id)
+                ->count($vacant)
+                ->for($model)
+                ->create();
         });
     }
 
-    public function currentIntership() {
+    public function current()
+    {
         return $this->state(function ($array) {
-            $period = $this->faker->numberBetween(12,24);
-            $monthsafter = $period - $this->faker->numberBetween(4,8);
-            
+            $period = $this->faker->numberBetween(12, 24);
+            $monthsafter = $period - $this->faker->numberBetween(4, 8);
+
             $start_date = now()->subMonths($monthsafter);
-            $postulation_date = $start_date->copy()->subWeeks($this->faker->numberBetween(1,2));
+            $postulation_date = $start_date->copy()->subWeeks($this->faker->numberBetween(1, 2));
             $end_date = $start_date->copy()->addMonths($period);
+
+            return [
+                'postulation_limit_date' => $postulation_date,
+                'start_date' => $start_date,
+                'end_date' => $end_date,
+            ];
+        })->afterCreating(function ($model, $p1) { {
+                $vacant = $model->vacant;
+                $career_id = $model->career_id;
+
+                Postulation::factory()
+                    ->accept()
+                    ->setCareer($career_id)
+                    ->count($vacant)
+                    ->for($model)
+                    ->create();
+            }
         });
     }
 
@@ -149,6 +169,28 @@ class InternshipFactory extends Factory
 
                 $internship->location_id = $location?->id;
             }
-        });
+        })->sequence(
+            function () {
+                $entry = $this->setEntryTime(ShiftEnum::MORNING);
+                return [
+                    'entry_time' => $entry,
+                    'exit_time' => $entry->copy()->addHours(4),
+                ];
+            },
+            function () {
+                $entry = $this->setEntryTime(ShiftEnum::AFTERNOON);
+                return [
+                    'entry_time' => $entry,
+                    'exit_time' => $entry->copy()->addHours(4),
+                ];
+            },
+            function () {
+                $entry = $this->setEntryTime(ShiftEnum::NIGHT);
+                return [
+                    'entry_time' => $entry,
+                    'exit_time' => $entry->copy()->addHours(4),
+                ];
+            }
+        );;
     }
 }

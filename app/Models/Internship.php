@@ -30,7 +30,7 @@ class Internship extends Model
         'exit_time',
         'vacant',
         'location_id',
-        'status',
+        'suspend',
     ];
     protected $casts = [
         "active" => "boolean",
@@ -39,7 +39,7 @@ class Internship extends Model
         "postulation_limit_date" => 'date',
         "entry_time" => "datetime:H:i",
         "exit_time" => "datetime:H:i",
-        "status" => StatusInternshipEnum::class,
+        //"status" => StatusInternshipEnum::class,
     ];
 
     public function company() {
