@@ -82,6 +82,34 @@ class InternshipFactory extends Factory
         ];
     }
 
+    public function finishedIntership() {
+        return $this->state(function ($array) {
+            $end_date = now()->subDays($this->faker->numberBetween(10,30));
+            $start_date = $end_date->copy()->subMonths($this->faker->numberBetween(12,16));
+            $postulation_data = $start_date->copy()->subWeeks($this->faker->numberBetween(1,2));
+            return [
+                'end_date' => $end_date,
+                'start_date' => $start_date,
+                'postulation_limit_date' => $postulation_data,
+            ];
+        })->afterCreating( function ($model) {
+            $vacant = $model->vacant;
+            $career_id = $model->career_id;
+            
+        });
+    }
+
+    public function currentIntership() {
+        return $this->state(function ($array) {
+            $period = $this->faker->numberBetween(12,24);
+            $monthsafter = $period - $this->faker->numberBetween(4,8);
+            
+            $start_date = now()->subMonths($monthsafter);
+            $postulation_date = $start_date->copy()->subWeeks($this->faker->numberBetween(1,2));
+            $end_date = $start_date->copy()->addMonths($period);
+        });
+    }
+
     public function stateHours(ShiftEnum $enum)
     {
         return $this->state(function ($array) use ($enum) {
