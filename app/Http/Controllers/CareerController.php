@@ -16,37 +16,45 @@ class CareerController extends Controller
         private CompanyService $companyService,
         private StudentService $studentService,
         private ReportsService $reportsService,
-        private InternshipService $internshipService)
-    {
+        private InternshipService $internshipService
+    ) {
     }
     //
-    public function internshipCareer(int $companyId) {
+    public function internshipCareer(int $companyId)
+    {
         // Solicitamos el id de la compañia
         $company = $this->companyService->find($companyId);
 
-        return view("agreement-deparment.company-form",
-            ['company' => $company]);
+        return view(
+            "agreement-deparment.company-form",
+            ['company' => $company]
+        );
 
     }
 
-    public function invitationInternship(int $internshipId) {
+    public function invitationInternship(int $internshipId)
+    {
         // Solicitamos el id de la compañia
         return $this->reportsService->generateConvocatoria($internshipId);
 
     }
 
-    public function showStudent(int $idStudent) {
+    public function showStudent(int $idStudent)
+    {
         try {
             $student = $this->studentService->find($idStudent);
-        } catch(Throwable $err) {
+        } catch (Throwable $err) {
             return redirect()->route('login');
         }
 
-        return view("career-departament.info-student", 
-        ["student" => $student]);        
+        return view(
+            "career-departament.info-student",
+            ["student" => $student]
+        );
     }
 
-    public function deleteStudent(int $idStudent) {
+    public function deleteStudent(int $idStudent)
+    {
         try {
             $this->studentService->delete($idStudent);
             return redirect()->route('career.students')
@@ -57,36 +65,50 @@ class CareerController extends Controller
         }
     }
 
-    public function getStudentDelete() {
-        $user = Auth::user();   
+    public function getStudentDelete()
+    {
+        $user = Auth::user();
         try {
-            if($user->careerDepartament() == null) {
+            if ($user->careerDepartament() == null) {
                 throw new \Exception('No tiene este rol');
             }
             $career_id = $user->careerDepartament->career_id;
 
             $studentDelete = $this->studentService->getStudentsDelete($career_id);
 
-            return view('career-departament.students-inactive',
-                ['students' => $studentDelete]);
-        } catch(Throwable $err) {
+            return view(
+                'career-departament.students-inactive',
+                ['students' => $studentDelete]
+            );
+        } catch (Throwable $err) {
             redirect()->route('welcome');
         }
-    
+
     }
 
-    public function restoreStudent(int $idStudent) {
+    public function restoreStudent(int $idStudent)
+    {
         $this->studentService->restoreStudent($idStudent);
         return redirect()->route('career.students');
 
     }
 
-    public function internships() {
-        $user = Auth::user(); 
+    public function internships()
+    {
+        $user = Auth::user();
         $career_id = $user->careerDepartament->career_id;
 
-        $internships = $this->internshipService->getByCareerDetail($career_id);
+        $internships = $this->internshipService->getCareerDetailWait($career_id);
+        $internshipCurrents = $this->internshipService->getCareerDetailCurrent($career_id);
+        $internshipFinished = $this->internshipService->getCareerDetailFinished($career_id);
 
-        return view('career-departament.internship', ['internships' => $internships]);
+        return view(
+            'career-departament.internship',
+            [
+                'internships' => $internships,
+                'internshipFinished' => $internshipFinished,
+                'internshipCurrents' => $internshipCurrents
+            ]
+        );
     }
 }

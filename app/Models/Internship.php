@@ -62,4 +62,20 @@ class Internship extends Model
     public function active(Builder $query) {
         return $query->where("active", true);
     }
+    
+    #[Scope]
+    protected function finished(Builder $query) {
+        return $query->whereDate("end_date", "<", now());
+    }
+
+    #[Scope]
+    protected function wait(Builder $query) {
+        return $query->whereDate("start_date", ">", now());
+    }
+
+    #[Scope]
+    protected function current(Builder $query) {
+        return $query->whereDate("start_date", "<", now())
+            ->whereDate("end_date", ">", now());
+    }
 }

@@ -106,4 +106,52 @@ class InternshipRepository implements InternshipRepositoryInterface
             ->limit(30)
             ->get();
     }
+
+    public function getCareerDetailWait(int $career_id): Collection
+    {
+        return Internship::where("career_id", $career_id)
+            ->wait()
+            ->withCount(relations:
+                [
+                    "postulations as accept_count" => fn($q) => $q->where('status', StatePostulationEnum::ACCEPT),
+                    "postulations as verify_count" => fn($q) => $q->where("status", StatePostulationEnum::VERIFY),
+                    "postulations as reject_count" => fn($q) => $q->where("status", StatePostulationEnum::REJECT),
+                    "postulations as send_count" => fn($q) => $q->where("status", StatePostulationEnum::SEND),
+                ])
+            ->latest()
+            ->limit(30)
+            ->get();
+    }
+
+    public function getCareerDetailCurrent(int $career_id): Collection
+    {
+        return Internship::where("career_id", $career_id)
+            ->current()
+            ->withCount(relations:
+                [
+                    "postulations as accept_count" => fn($q) => $q->where('status', StatePostulationEnum::ACCEPT),
+                    "postulations as verify_count" => fn($q) => $q->where("status", StatePostulationEnum::VERIFY),
+                    "postulations as reject_count" => fn($q) => $q->where("status", StatePostulationEnum::REJECT),
+                    "postulations as send_count" => fn($q) => $q->where("status", StatePostulationEnum::SEND),
+                ])
+            ->latest()
+            ->limit(30)
+            ->get();
+    }
+
+    public function getCareerDetailFinished(int $career_id): Collection
+    {
+        return Internship::where("career_id", $career_id)
+            ->finished()
+            ->withCount(relations:
+                [
+                    "postulations as accept_count" => fn($q) => $q->where('status', StatePostulationEnum::ACCEPT),
+                    "postulations as verify_count" => fn($q) => $q->where("status", StatePostulationEnum::VERIFY),
+                    "postulations as reject_count" => fn($q) => $q->where("status", StatePostulationEnum::REJECT),
+                    "postulations as send_count" => fn($q) => $q->where("status", StatePostulationEnum::SEND),
+                ])
+            ->latest()
+            ->limit(30)
+            ->get();
+    }
 }

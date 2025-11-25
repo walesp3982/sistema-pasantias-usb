@@ -39,4 +39,19 @@ class InternshipService
 
         return $interships;
     }
+
+    public function getCareerDetailWait(int $career_id): Collection {
+        $interships = $this->repository->getCareerDetailWait($career_id);
+        return $interships;
+    }
+
+    public function getCareerDetailCurrent(int $career_id): Collection{
+        $interships = $this->repository->getCareerDetailCurrent($career_id);
+        return $interships;
+    }
+
+    public function getCareerDetailFinished(int $career_id): Collection{
+        $interships = $this->repository->getCareerDetailFinished($career_id);
+        return $interships;
+    }
 }
