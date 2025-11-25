@@ -5,10 +5,12 @@ namespace App\Models;
 use App\Enums\StatePostulationEnum;
 use App\Models\Internship;
 use App\Models\Student;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Postulation extends Model
 {
+    use HasFactory;
     public $timestamps = true;
 
     protected $fillable = [
@@ -31,7 +33,7 @@ class Postulation extends Model
     public function intern() {
         return $this->hasOne(Internship::class);
     }
-    
+
     public function documents() {
         return $this->hasMany(DocumentPostulation::class);
     }
@@ -39,5 +41,5 @@ class Postulation extends Model
     public function internship() {
         return $this->belongsTo(Internship::class);
     }
-  
+
 }

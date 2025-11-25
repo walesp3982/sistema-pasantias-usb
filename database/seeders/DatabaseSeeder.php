@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Student;
 use App\Models\User;
 use Database\Seeders\Core\CareersSeeder;
 use Database\Seeders\Core\GeographySeeder;
@@ -38,8 +39,8 @@ class DatabaseSeeder extends Seeder
         if(App::environment("local")) {
             $this->call([
                 CareerDepartamentSeeder::class,
-                StudentSeeder::class,
                 CompanySeeder::class,
+                StudentSeeder::class,
                 InternshipSeeder::class,
             ]);
         }
