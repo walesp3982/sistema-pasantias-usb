@@ -22,7 +22,7 @@ class PostulationFactory extends Factory
     {
         return [
             //
-            "student_id" => Student::factory(),
+            "student_id" => Student::factory()->withLocation(),
             "internship_id" => null,
             "status" => StatePostulationEnum::CREATED,
         ];

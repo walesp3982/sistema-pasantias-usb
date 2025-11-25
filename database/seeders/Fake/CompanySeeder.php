@@ -21,12 +21,12 @@ class CompanySeeder extends Seeder
             ->withInternshipsFinished(2)
             ->create();
 
-        $companies = Company::factory()
+        Company::factory()
             ->withLocation(4)
             ->withInternshipsCurrent(2)
             ->withInternshipsFinished(2)
             ->withInternshipsWait(3)
-            ->count(10)
+            ->count(5)
             ->create();
     }
 }

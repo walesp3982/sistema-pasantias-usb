@@ -29,8 +29,8 @@ class InternshipFactory extends Factory
     {
         $hour = match ($enum) {
             ShiftEnum::MORNING => $this->faker->numberBetween(7, 8),
-            ShiftEnum::AFTERNOON => $this->faker->numberBetween(14, 15),
-            ShiftEnum::NIGHT => $this->faker->numberBetween(18, 19)
+            ShiftEnum::AFTERNOON => $this->faker->numberBetween(13, 14),
+            ShiftEnum::NIGHT => $this->faker->numberBetween(19, 20)
         };
 
         $minutes = 15 * $this->faker->numberBetween(0, 3);
@@ -73,7 +73,7 @@ class InternshipFactory extends Factory
             'postulation_limit_date' => $postulation_limit_data,
             'start_date' => $start_date,
             'end_date' => $end_date,
-            'vacant' => $this->faker->numberBetween(4, 10),
+            'vacant' => $this->faker->numberBetween(3, 6),
             'career_id' => Career::inRandomOrder()->first()->id,
         ];
     }
@@ -191,6 +191,6 @@ class InternshipFactory extends Factory
                     'exit_time' => $entry->copy()->addHours(4),
                 ];
             }
-        );;
+        );
     }
 }
