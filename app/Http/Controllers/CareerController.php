@@ -6,6 +6,7 @@ use App\Service\CompanyService;
 use App\Service\ReportsService;
 use App\Service\StudentService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Throwable;
 
 class CareerController extends Controller
@@ -52,5 +53,29 @@ class CareerController extends Controller
             return redirect()->route('career.students')
                 ->with('error', 'Error al eliminar el estudiante: ' . $err->getMessage());
         }
+    }
+
+    public function getStudentDelete() {
+        $user = Auth::user();   
+        try {
+            if($user->careerDepartament() == null) {
+                throw new \Exception('No tiene este rol');
+            }
+            $career_id = $user->careerDepartament->career_id;
+
+            $studentDelete = $this->studentService->getStudentsDelete($career_id);
+
+            return view('career-departament.students-inactive',
+                ['students' => $studentDelete]);
+        } catch(Throwable $err) {
+            redirect()->route('welcome');
+        }
+    
+    }
+
+    public function restoreStudent(int $idStudent) {
+        $this->studentService->restoreStudent($idStudent);
+        return redirect()->route('career.students');
+
     }
 }

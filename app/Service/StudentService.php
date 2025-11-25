@@ -257,11 +257,13 @@ class StudentService
         ]);
     }
 
-    public function getDocuments() {
+    public function getDocuments()
+    {
         return TypeDocumentPostulation::all();
     }
 
-    public function saveDocumentPostulation(int $idPostulation, int $typeDoc, UploadedFile $file) {
+    public function saveDocumentPostulation(int $idPostulation, int $typeDoc, UploadedFile $file)
+    {
         DB::transaction(
             function () use ($idPostulation, $typeDoc, $file) {
                 $doc = $this->documentPostulationRepository->create([
@@ -270,11 +272,37 @@ class StudentService
                     'verify' => true
                 ]);
                 $this->docService->
-                    save($file, 
-                        DocumentPostulation::class, 
-                        $doc->id );
-                
+                    save(
+                        $file,
+                        DocumentPostulation::class,
+                        $doc->id
+                    );
+
             }
         );
+    }
+
+    public function getStudentsDelete(int $career_id): Collection
+    {
+        return $this->studentRepository->getStudentsDeletesCarreer($career_id);
+    }
+
+
+    public function getStudentTrashed(int $id)
+    {
+        $student = $this->studentRepository->getTrashed($id);
+        return $student;
+    }
+
+    public function restoreStudent(int $idStudent)
+    {
+        DB::transaction(function () use ($idStudent) {
+            $student = $this->getStudentTrashed($idStudent);
+
+            $student->restore();
+
+            $user = $student->user()->withTrashed()->first();
+            $user->restore();
+        });
     }
 }

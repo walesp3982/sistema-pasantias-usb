@@ -40,6 +40,8 @@ Route::middleware(['auth', 'role:' . RolesEnum::CAREER->value])
         Route::get('students/{idStudent}', [CareerController::class, "showStudent"])->name('show.student');
         Route::delete('students/{idStudent}', [CareerController::class, "deleteStudent"])
             ->name('delete.student');
+        Route::get('student/inactive',[CareerController::class, 'getStudentDelete'])->name('students.eliminate');
+        Route::post('student/restore/{idStudent}', [CareerController::class, 'restoreStudent'])->name('student.restore');
     });
 
 Route::middleware(['auth', 'role:' . RolesEnum::AGREEMENTS->value])
