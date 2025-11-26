@@ -112,6 +112,12 @@ class StudentController extends Controller
         return redirect()->back();
     }
 
+    public function deleteDocument(int $idDocument) {
+        $this->studentService->deleteDocPostulation($idDocument);
+
+        return redirect()->back();
+    }
+
     public function sendPostulation(int $idPostulation) {
 
         $this->studentService->submitPostulation($idPostulation);

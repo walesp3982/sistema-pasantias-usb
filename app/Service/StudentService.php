@@ -267,6 +267,12 @@ class StudentService
     {
         DB::transaction(
             function () use ($idPostulation, $typeDoc, $file) {
+
+                $doc = $this->documentPostulationRepository->find($idPostulation, DocPostulationEnum::from($typeDoc));
+
+                if(!is_null($doc)) {
+                    throw new Exception("El documento ya fue subido anteriormente eliminalo");
+                }
                 $doc = $this->documentPostulationRepository->create([
                     'postulation_id' => $idPostulation,
                     'type_document_postulation_id' => $typeDoc,
@@ -353,6 +359,26 @@ class StudentService
         $this->postulationRepository->update($idPostulation, [
             'status' => StatePostulationEnum::SEND
         ]);
+
+
+    }
+
+
+    public function deleteDocPostulation(int $idDocPostulation) {
+        try {
+            $doc = $this->documentPostulationRepository->get($idDocPostulation);
+
+            if(is_null($doc)) {
+                throw new \Exception("No se encontró el documento");
+            }
+
+            $this->docService->delete($doc->document->id);
+
+            $this->documentPostulationRepository->delete($idDocPostulation);
+
+
+
+        }
 
 
     }

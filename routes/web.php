@@ -33,7 +33,7 @@ Route::middleware(['auth', 'role:student'])->group(function () {
     Route::post('postulation/upload-documents/{idPostulation}', [StudentController::class, 'uploadDocuments'])
         ->name('student.postulation.upload-documents');
     Route::post('submit/postulation/{postulationId}', [StudentController::class, "sendPostulation"])->name('submit.postulation');
-
+    Route::delete("delete/docPostulation/{idDocument}", [StudentController::class, "deleteDocument"]);
 });
 
 Route::middleware(['auth', 'role:' . RolesEnum::CAREER->value])
