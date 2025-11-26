@@ -121,6 +121,7 @@ class CompanyFactory extends Factory
 
             // Crear internships
             Internship::factory()
+                ->started()
                 ->count($count)
                 ->stateCareer($enum)
                 ->for($company)

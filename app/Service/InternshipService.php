@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Enums\StatusInternshipEnum;
 use App\Repositories\InternshipRepository;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 
 class InternshipService
@@ -31,5 +32,26 @@ class InternshipService
                 return $company;
             }
         );
+    }
+
+    public function getByCareerDetail(int $career_id): Collection {
+        $interships = $this->repository->getCareerDetail($career_id);
+
+        return $interships;
+    }
+
+    public function getCareerDetailWait(int $career_id): Collection {
+        $interships = $this->repository->getCareerDetailWait($career_id);
+        return $interships;
+    }
+
+    public function getCareerDetailCurrent(int $career_id): Collection{
+        $interships = $this->repository->getCareerDetailCurrent($career_id);
+        return $interships;
+    }
+
+    public function getCareerDetailFinished(int $career_id): Collection{
+        $interships = $this->repository->getCareerDetailFinished($career_id);
+        return $interships;
     }
 }

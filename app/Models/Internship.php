@@ -39,6 +39,7 @@ class Internship extends Model
         "postulation_limit_date" => 'date',
         "entry_time" => "datetime:H:i",
         "exit_time" => "datetime:H:i",
+        "suspend" => "boolean",
         //"status" => StatusInternshipEnum::class,
     ];
 
@@ -54,8 +55,28 @@ class Internship extends Model
         return $this->belongsTo(Location::class);
     }
 
+    public function postulations() {
+        return $this->hasMany(Postulation::class);
+    }
+
     #[Scope]
     public function active(Builder $query) {
         return $query->where("active", true);
+    }
+    
+    #[Scope]
+    protected function finished(Builder $query) {
+        return $query->whereDate("end_date", "<", now());
+    }
+
+    #[Scope]
+    protected function wait(Builder $query) {
+        return $query->whereDate("start_date", ">", now());
+    }
+
+    #[Scope]
+    protected function current(Builder $query) {
+        return $query->whereDate("start_date", "<", now())
+            ->whereDate("end_date", ">", now());
     }
 }

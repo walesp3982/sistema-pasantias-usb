@@ -156,7 +156,7 @@
         <!-- Texto introductorio -->
         <div class="intro">
             La Universidad Salesiana de Bolivia convoca a todas las estudiantes 
-            de la carrera de {{ $carrera }}, interesadas en realizar Prácticas Pre-profesionales en los 
+            de la carrera de {{ $carrera }}, interesadas en realizar Prácticas Pre-profesionales en la 
             empresa <b>{{ $empresa }}</b>, presentar lo siguiente:
         </div>
 
