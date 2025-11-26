@@ -61,7 +61,7 @@ class StudentController extends Controller
             //throw $th;
         }
 
-        return view('student.postulations', 
+        return view('student.postulations',
         compact('createdPostulations', 'sendPostulations'));
     }
 
@@ -74,9 +74,9 @@ class StudentController extends Controller
             ->studentService
             ->getPostulationById($student->id, $idPostulation);
 
-        
+
         $documents = $this->studentService->getDocumentPostulation($idPostulation);
-        
+
         $counter = 0;
         foreach ($documents as $document) {
             if ($document['data'] != null) {
@@ -111,4 +111,13 @@ class StudentController extends Controller
 
         return redirect()->back();
     }
+
+    public function sendPostulation(int $idPostulation) {
+
+        $this->studentService->submitPostulation($idPostulation);
+
+        return redirect()->route('student.postulations');
+    }
+
+
 }

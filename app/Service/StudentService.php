@@ -341,4 +341,19 @@ class StudentService
 
         return $postulation;
     }
+
+    public function submitPostulation(int $idPostulation) {
+        $postulation = $this->postulationRepository->get($idPostulation);
+
+        if(is_null($postulation)) {
+            throw new \Exception("No se encontró la postulación");
+        }
+
+
+        $this->postulationRepository->update($idPostulation, [
+            'status' => StatePostulationEnum::SEND
+        ]);
+
+
+    }
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\AgreementController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\CareerController;
+use App\View\Components\Career\StudentDeleteBlock;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome')->name('welcome');
@@ -31,6 +32,8 @@ Route::middleware(['auth', 'role:student'])->group(function () {
     Route::get('postulation/edit/{idPostulation}', [StudentController::class, 'editPostulation'] )->name('postulation.edit');
     Route::post('postulation/upload-documents/{idPostulation}', [StudentController::class, 'uploadDocuments'])
         ->name('student.postulation.upload-documents');
+    Route::post('submit/postulation/{postulationId}', [StudentController::class, "sendPostulation"])->name('submit.postulation');
+
 });
 
 Route::middleware(['auth', 'role:' . RolesEnum::CAREER->value])
