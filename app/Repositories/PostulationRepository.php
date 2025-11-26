@@ -42,14 +42,16 @@ class PostulationRepository implements PostulationRepositoryInterface
             ->where("status", StatePostulationEnum::ACCEPT)
             ->get();
     }
-    public function getStudentInternshipPostulation(int $idStudent, int $idInternship): ?Postulation {
+    public function getStudentInternshipPostulation(int $idStudent, int $idInternship): ?Postulation
+    {
         return $this->model
             ->where('student_id', $idStudent)
             ->where('internship_id', $idInternship)
             ->first();
     }
 
-    public function getStudentPostulation(int $idStudent) {
+    public function getStudentPostulation(int $idStudent)
+    {
         return $this->model
             ->where('student_id', $idStudent)
             ->pluck('internship_id')
@@ -57,7 +59,8 @@ class PostulationRepository implements PostulationRepositoryInterface
             ->toArray();
     }
 
-    public function getPostulationsCreatedStudent(int $student_id):Collection {
+    public function getPostulationsCreatedStudent(int $student_id): Collection
+    {
         return $this->model
             ->with('internship.company', 'internship.location.zone.municipality')
             ->where('student_id', $student_id)
@@ -65,35 +68,38 @@ class PostulationRepository implements PostulationRepositoryInterface
             ->get();
     }
 
-    public function getPostulationsSendStudent(int $student_id): Collection {
+    public function getPostulationsSendStudent(int $student_id): Collection
+    {
         return $this->model
-            ->with('internship.company','internship.location.zone.municipality')
+            ->with('internship.company', 'internship.location.zone.municipality')
             ->where('student_id', $student_id)
             ->where('status', StatePostulationEnum::SEND)
             ->get();
-        
     }
 
-    public function getStudentActualInterships(int $idStudent) {
-        return Postulation::status(StatePostulationEnum::ACCEPT)
+    public function getStudentActualInterships(int $idStudent)
+    {
+        return Postulation::with('internship.company', 'internship.location.zone.municipality')
+            ->status(StatePostulationEnum::ACCEPT)
             ->current()
-            ->with('internship.company', 'internship.location.zone.municipality')
             ->where("student_id", $idStudent)
             ->first();
     }
 
-    public function getStudentFinishedInterships(int $idStudent) {
-        return Postulation::status(StatePostulationEnum::ACCEPT)
+    public function getStudentFinishedInterships(int $idStudent)
+    {
+        return Postulation::with('internship.company', 'internship.location.zone.municipality')
+            ->status(StatePostulationEnum::ACCEPT)
             ->finished()
-            ->with('internship.company', 'internship.location.zone.municipality')
             ->where("student_id", $idStudent)
             ->get();
     }
-    
-    public function getStudentWaitInterships(int $idStudent) {
-        return Postulation::status(StatePostulationEnum::ACCEPT)
+
+    public function getStudentWaitInterships(int $idStudent)
+    {
+        return Postulation::with('internship.company', 'internship.location.zone.municipality')
             ->wait()
-            ->with('internship.company', 'internship.location.zone.municipality')
+            ->status(StatePostulationEnum::ACCEPT)
             ->where("student_id", $idStudent)
             ->get();
     }

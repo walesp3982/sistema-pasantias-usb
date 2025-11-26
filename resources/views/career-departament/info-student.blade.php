@@ -178,6 +178,16 @@
                         </div>
                         <div class="space-y-2">
                             <div class="flex justify-between items-center p-2 hover:bg-white rounded transition-colors">
+                                <a href="{{ route('student.certificado', ['postulationId' => (int) $internship->id]) }}">
+                                    <x-ui.btn.info>
+                                        <x-slot:icon>
+                                            <i class="fa-solid fa-file"></i>
+                                        </x-slot:icon>
+                                        Generar Certificado
+                                    </x-ui.btn.info>
+                                </a>
+                            </div>
+                            <div class="flex justify-between items-center p-2 hover:bg-white rounded transition-colors">
                                 <span class="font-medium text-gray-700">Fecha de aceptación</span>
                                 <span class="text-gray-600">{{ $internship->updated_at }}</span>
                             </div>

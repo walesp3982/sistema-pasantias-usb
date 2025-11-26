@@ -335,4 +335,10 @@ class StudentService
         }
         return $this->postulationRepository->getStudentFinishedInterships($idStudent);
     }
+
+    public function getPostulation(int $idPostulation) {
+        $postulation = $this->postulationRepository->get($idPostulation);
+
+        return $postulation;
+    }
 }

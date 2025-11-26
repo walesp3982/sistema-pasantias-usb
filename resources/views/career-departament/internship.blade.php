@@ -21,7 +21,7 @@
                 </svg>
             </button>
         </div>
-        <div id="section-wait" class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-6 max-w-7xl mx-auto mb-3">
+        <div id="section-wait" class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-6 max-w-7xl mx-auto mb-3">
             @foreach ($internships as $internship)
             <div
                 class="bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
@@ -111,7 +111,7 @@
                 </svg>
             </button>
         </div>
-        <div id="section-current" class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-6 max-w-7xl mx-auto  mb-3">
+        <div id="section-current" class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-6 max-w-7xl mx-auto  mb-3">
             @foreach ($internshipCurrents as $internship)
             <div
                 class="bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
@@ -191,7 +191,8 @@
                 </svg>
             </button>
         </div>
-        <div id="section-finished" class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-6 max-w-7xl mx-auto  mb-3">
+        <div id="section-finished" class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1
+         gap-6 max-w-7xl mx-auto  mb-3">
             @foreach ($internshipFinished as $internship)
             <div
                 class="bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">

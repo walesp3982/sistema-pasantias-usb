@@ -41,7 +41,7 @@
       line-height: 1.1;
     }
 
-   
+
     /* Cuerpo de texto */
     .cuerpo {
       max-width: 70%;
@@ -92,20 +92,21 @@
 
     <!-- CUERPO DEL TEXTO -->
     <div class="cuerpo">
-      <p>Por medio del presente, la Carrera de Ingeniería de Sistemas hace constar que el(la) estudiante:</p>
+      <p>Por medio del presente, la Carrera de {{ $postulation->internship->career->name }} obtorga el presente reconocimiento
+        a el(la) estudiante:</p>
 
       <div class="nombre-estudiante">
-        JUAN CARLOS GARCÍA LÓPEZ
+        {{ strtoupper($postulation->student->first_name." ".$postulation->student->last_name) }}
       </div>
 
       <p>
         con Registro Universitario (RU)
-        <strong>20201234</strong>, ha cumplido satisfactoriamente el programa de
+        <strong>{{ $postulation->student->ru }}</strong>, ha cumplido satisfactoriamente el programa de
         pasantías académicas obligatorias en la empresa/institución
-        <strong>_______________________________________________</strong>, desde el
-        <strong>15 de mayo de 2025</strong> hasta el
-        <strong>15 de noviembre de 2025</strong>, completando un total de 
-        <strong>6 meses</strong> de trabajo práctico profesional.
+        <strong> {{ $postulation->internship->company->name }}</strong>, desde el
+        <strong> {{ $postulation->internship->start_date->translatedFormat('j \\d\\e F \\d\\e Y') }}</strong> hasta el
+        <strong> {{ $postulation->internship->end_date->translatedFormat('j \\d\\e F \\d\\e Y') }}</strong>, completando un total de
+        <strong> {{ $postulation->internship->start_date->diffInMonths($postulation->internship->end_date) }}</strong> de trabajo práctico profesional.
       </p>
     </div>
 
@@ -115,13 +116,13 @@
     <td class="firma">
       <p>-------------------------------------------</p>
       <p>Secretaria Academica</p>
-      <p>Ingeniería de Sistemas</p>
+      <p>{{$postulation->internship->career->name}}</p>
     </td>
 
     <td class="firma">
       <p>-------------------------------------------</p>
         <p>Dirección de Carrera</p>
-          <p>Ingeniería de Sistemas</p>
+          <p>{{ $postulation->internship->career->name }}</p>
      </td>
     </tr>
     </table>

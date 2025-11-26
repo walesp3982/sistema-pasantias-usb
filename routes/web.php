@@ -65,9 +65,10 @@ require __DIR__ . '/auth.php';
 
 
 
-//PDF Generation  
+//PDF Generation
 use App\Http\Controllers\pdfController;
 
-Route::get('/pdf/Certificado', [pdfController::class, 'Certificado']);
+Route::get('/pdf/Certificado/{postulationId}', [pdfController::class, 'Certificado'])
+    ->name('student.certificado');
 Route::get('/pdf/ListaDePostulantes', [pdfController::class, 'ListaPostulantes']);
 
