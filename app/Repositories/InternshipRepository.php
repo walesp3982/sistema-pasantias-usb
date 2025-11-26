@@ -154,4 +154,8 @@ class InternshipRepository implements InternshipRepositoryInterface
             ->limit(30)
             ->get();
     }
+
+    public function getEagerLoading(int $id): ?Internship {
+        return Internship::with('career', 'location.zone.municipality')->find($id);
+    }
 }

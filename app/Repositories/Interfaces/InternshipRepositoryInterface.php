@@ -29,4 +29,6 @@ interface InternshipRepositoryInterface
     public function getCareerDetailCurrent(int $career_id): Collection;
 
     public function getCareerDetailFinished(int $career_id): Collection;
+
+    public function getEagerLoading(int $id): ?Internship;
 }

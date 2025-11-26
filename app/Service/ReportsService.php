@@ -14,7 +14,7 @@ class ReportsService
 
     public function repositoryData(int $internship_id)
     {
-        $intership = $this->internshipRepository->find($internship_id);
+        $intership = $this->internshipRepository->getEagerLoading($internship_id);
 
         return $intership;
     }
