@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Service\CompanyService;
 use App\Service\InternshipService;
+use App\Service\PostulationService;
 use App\Service\ReportsService;
 use App\Service\StudentService;
 use Exception;
@@ -17,7 +18,8 @@ class CareerController extends Controller
         private CompanyService $companyService,
         private StudentService $studentService,
         private ReportsService $reportsService,
-        private InternshipService $internshipService
+        private InternshipService $internshipService,
+        private PostulationService $postulationService
     ) {
     }
     //
@@ -120,4 +122,6 @@ class CareerController extends Controller
             ]
         );
     }
+
+
 }

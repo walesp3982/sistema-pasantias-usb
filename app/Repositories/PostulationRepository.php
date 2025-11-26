@@ -77,6 +77,28 @@ class PostulationRepository implements PostulationRepositoryInterface
             ->get();
     }
 
+    /**
+     * Se obtiene las postulaciones send en pasantía que todavía no han empezado
+     * @param int $career_id
+     * @return Collection<int, Postulation>
+     */
+    public function getPostulationSendCareerEnable(int $career_id): Collection {
+        return $this->model
+            ->with("student", "intership.company", "intership.location.zone.municipality")
+            ->status(StatePostulationEnum::SEND)
+            ->wait()
+            ->where("career_id", $career_id)
+            ->latest()
+            ->get();
+    }
+
+    public function getPostulationSendStudentEnable(int $idPostulation): Collection {
+        return $this->model
+            ->find($idPostulation)
+            ->wait()
+            ->status(StatePostulationEnum::SEND)
+            ->get();
+    }
     public function getStudentActualInterships(int $idStudent)
     {
         return Postulation::with('internship.company', 'internship.location.zone.municipality')
