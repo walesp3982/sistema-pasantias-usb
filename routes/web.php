@@ -62,3 +62,12 @@ Route::get('pdf/internship/{internshipId}', [CareerController::class, 'invitatio
 // Creando rutas para pruebas
 Route::view('prueba', 'prueba');
 require __DIR__ . '/auth.php';
+
+
+
+//PDF Generation  
+use App\Http\Controllers\pdfController;
+
+Route::get('/pdf/Certificado', [pdfController::class, 'Certificado']);
+Route::get('/pdf/ListaDePostulantes', [pdfController::class, 'ListaPostulantes']);
+
