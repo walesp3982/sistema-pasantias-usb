@@ -63,6 +63,7 @@ class InternshipRepository implements InternshipRepositoryInterface
         $mins = $minutes % 60;
         $interval = sprintf('%02d:%02d:00', $hours, $mins);
         $query = $this->model
+            ->wait()
             ->whereRaw(
                 "exit_time <= SUBTIME(?, ?)",
                 [$time, $interval]
@@ -80,6 +81,7 @@ class InternshipRepository implements InternshipRepositoryInterface
         $interval = sprintf('%02d:%02d:00', $hours, $mins);
 
         $query = $this->model
+            ->wait()
             ->whereRaw(
                 "entry_time >= ADDTIME(?, ?)",
                 [(string) $time, $interval]
@@ -155,7 +157,8 @@ class InternshipRepository implements InternshipRepositoryInterface
             ->get();
     }
 
-    public function getEagerLoading(int $id): ?Internship {
+    public function getEagerLoading(int $id): ?Internship
+    {
         return Internship::with('career', 'location.zone.municipality')->find($id);
     }
 }
