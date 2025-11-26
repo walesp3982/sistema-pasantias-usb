@@ -14,6 +14,12 @@ class CompanyRepository implements CompanyRepositoryInterface {
         $company = $this->model->find($id);
         return $company;
     }
+    public function getWithLocation(int $id): Company|null {
+        return $this->model
+            ->with('locations.zone.municipality')
+            ->find($id);
+
+    }
     public function create(array $data): Company {
         $company = $this->model->create($data);
         return $company;
