@@ -39,6 +39,7 @@ class Internship extends Model
         "postulation_limit_date" => 'date',
         "entry_time" => "datetime:H:i",
         "exit_time" => "datetime:H:i",
+        "suspend" => "boolean",
         //"status" => StatusInternshipEnum::class,
     ];
 

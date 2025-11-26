@@ -53,8 +53,8 @@ Route::middleware(['auth', 'role:' . RolesEnum::AGREEMENTS->value])
             ->name('create.internship');
     });
 
-Route::get('convocatoria/internship/{internshipId}', [CareerController::class, 'invitationInternship'])
-    ->name('invitation.internship');
+Route::get('pdf/internship/{internshipId}', [CareerController::class, 'invitationInternship'])
+    ->name('pdf.internship');
 
 // Route::get('test', function () {
 //     return $asdf;
