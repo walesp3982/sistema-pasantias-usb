@@ -66,6 +66,6 @@ require __DIR__ . '/auth.php';
 //PDF Generation  
 use App\Http\Controllers\pdfController;
 
-Route::get('/pdf/Asistencia', [pdfController::class, 'Asistencia']);
-Route::get('/pdf/ListaPostulantes', [pdfController::class, 'ListaPostulantes']);
+Route::get('/pdf/Certificado', [pdfController::class, 'Certificado']);
+Route::get('/pdf/ListaDePostulantes', [pdfController::class, 'ListaPostulantes']);
 
