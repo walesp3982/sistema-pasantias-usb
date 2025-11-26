@@ -73,5 +73,28 @@ class PostulationRepository implements PostulationRepositoryInterface
             ->get();
         
     }
+
+    public function getStudentActualInterships(int $idStudent) {
+        return Postulation::status(StatePostulationEnum::ACCEPT)
+            ->current()
+            ->with('internship.company', 'internship.location.zone.municipality')
+            ->where("student_id", $idStudent)
+            ->first();
+    }
+
+    public function getStudentFinishedInterships(int $idStudent) {
+        return Postulation::status(StatePostulationEnum::ACCEPT)
+            ->finished()
+            ->with('internship.company', 'internship.location.zone.municipality')
+            ->where("student_id", $idStudent)
+            ->get();
+    }
     
+    public function getStudentWaitInterships(int $idStudent) {
+        return Postulation::status(StatePostulationEnum::ACCEPT)
+            ->wait()
+            ->with('internship.company', 'internship.location.zone.municipality')
+            ->where("student_id", $idStudent)
+            ->get();
+    }
 }

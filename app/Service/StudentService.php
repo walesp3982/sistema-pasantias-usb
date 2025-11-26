@@ -18,6 +18,7 @@ use App\Repositories\Interfaces\InternshipRepositoryInterface;
 use App\Repositories\Interfaces\PostulationRepositoryInterface;
 use App\Repositories\InternshipRepository;
 use App\Repositories\PhoneRepository;
+use Exception;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
@@ -304,5 +305,34 @@ class StudentService
             $user = $student->user()->withTrashed()->first();
             $user->restore();
         });
+    }
+
+
+    public function currentInternship(int $idStudent) {
+        $student = $this->studentRepository->get($idStudent);
+
+        if(!$student) {
+            throw new Exception('No es encontró al estudiante');
+        }
+        return $this->postulationRepository->getStudentActualInterships($idStudent);
+
+    }
+
+    public function waitInternship(int $idStudent) {
+        $student = $this->studentRepository->get($idStudent);
+
+        if(!$student) {
+            throw new Exception('No es encontró al estudiante');
+        }
+        return $this->postulationRepository->getStudentWaitInterships($idStudent);
+    }
+
+    public function finishedInternship(int $idStudent) {
+        $student = $this->studentRepository->get($idStudent);
+
+        if(!$student) {
+            throw new Exception('No es encontró al estudiante');
+        }
+        return $this->postulationRepository->getStudentFinishedInterships($idStudent);
     }
 }

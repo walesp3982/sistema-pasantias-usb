@@ -1,6 +1,6 @@
 <x-app-layout>
     <!-- Encabezado principal con foto de perfil -->
-    <div x-data="{ currentInternships: @json('internships ?? []') }">
+    <div>
         <div
             class="bg-white rounded-lg shadow-sm border border-gray-200 mb-6 p-6 transition-all duration-300 hover:shadow-md">
             <div class="flex items-start space-x-4">
@@ -117,11 +117,12 @@
             <div x-show="expanded" x-transition:enter="transition ease-out duration-300"
                 x-transition:enter-start="opacity-0 transform -translate-y-2"
                 x-transition:enter-end="opacity-100 transform translate-y-0">
-                <template x-for="pasantia in currentInternships" :key="pasantia.id">
+
+                @if($currentInternship !== null)
                     <div
                         class="mt-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-4 border-l-4 border-blue-500 hover:shadow-md transition-all duration-300">
                         <div class="flex items-center justify-between mb-3">
-                            <h3 class="font-semibold text-gray-800 text-lg" x-text="pasantia.empresa"></h3>
+                            <h3 class="font-semibold text-gray-800 text-lg">{{ $currentInternship->internship->company->name }}</h3>
                             <span class="bg-green-500 text-white px-2 py-1 rounded-full text-xs font-medium">
                                 Activa
                             </span>
@@ -129,19 +130,26 @@
                         <div class="space-y-2">
                             <div class="flex justify-between items-center p-2 hover:bg-white rounded transition-colors">
                                 <span class="font-medium text-gray-700">Fecha de aceptación</span>
-                                <span class="text-gray-600" x-text="pasantia.fechaAceptacion"></span>
+                                <span class="text-gray-600">{{ $currentInternship->updated_at->format("d/m/Y") }}</span>
                             </div>
                             <div class="flex justify-between items-center p-2 hover:bg-white rounded transition-colors">
                                 <span class="font-medium text-gray-700">Fecha de inicio</span>
-                                <span class="text-gray-600" x-text="pasantia.fechaInicio"></span>
+                                <span class="text-gray-600">{{ $currentInternship->internship->start_date->format("d/m/Y") }}</span>
                             </div>
                             <div class="flex justify-between items-center p-2 hover:bg-white rounded transition-colors">
                                 <span class="font-medium text-gray-700">Fecha de final</span>
-                                <span class="text-gray-600" x-text="pasantia.fechaFinal"></span>
+                                <span class="text-gray-600">{{  $currentInternship->internship->end_date->format("d/m/Y") }}</span>
+                            </div>
+                            <div class="flex justify-between items-center p-2 hover:bg-white rounded transition-colors">
+                                <span class="font-medium text-gray-700">Ubicación</span>
+                                <span class="text-gray-600">{{  $currentInternship->internship->location->full_address }}</span>
                             </div>
                         </div>
                     </div>
-                </template>
+                @else
+                    <x-ui.notif.info>El estudiante está cursando una pasantía actualmente</x-ui.notif.info>
+                @endif
+
             </div>
         </div>
 
@@ -151,7 +159,7 @@
             <div class="flex items-center justify-between cursor-pointer" @click="expanded = !expanded">
                 <h2 class="text-lg font-semibold text-blue-600 border-b-2 border-blue-100 pb-2 flex items-center">
                     <i class="fas fa-file-alt mr-2"></i>
-                    Postulaciones
+                    Pasantías anteriores
                 </h2>
                 <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"
                     :class="{ 'rotate-180': expanded }"></i>
@@ -159,27 +167,37 @@
             <div x-show="expanded" x-transition:enter="transition ease-out duration-300"
                 x-transition:enter-start="opacity-0 transform -translate-y-2"
                 x-transition:enter-end="opacity-100 transform translate-y-0">
-                <template x-for="postulacion in applications" :key="postulacion.id">
+                @forelse ($finishedInternship as $internship)
                     <div
-                        class="mt-4 bg-gradient-to-r from-yellow-50 to-amber-50 rounded-lg p-4 border-l-4 border-yellow-500 hover:shadow-md transition-all duration-300">
+                        class="mt-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-4 border-l-4 border-green-500 hover:shadow-md transition-all duration-300">
                         <div class="flex items-center justify-between mb-3">
-                            <h3 class="font-semibold text-gray-800 text-lg" x-text="postulacion.empresa"></h3>
-                            <span class="bg-yellow-500 text-white px-2 py-1 rounded-full text-xs font-medium">
-                                Pendiente
+                            <h3 class="font-semibold text-gray-800 text-lg">{{ $internship->internship->company->name }}</h3>
+                            <span class="bg-gray-500 text-white px-2 py-1 rounded-full text-xs font-medium">
+                                Completada
                             </span>
                         </div>
                         <div class="space-y-2">
                             <div class="flex justify-between items-center p-2 hover:bg-white rounded transition-colors">
-                                <span class="font-medium text-gray-700">Fecha de inicio</span>
-                                <span class="text-gray-600" x-text="postulacion.fechaInicio"></span>
+                                <span class="font-medium text-gray-700">Fecha de aceptación</span>
+                                <span class="text-gray-600">{{ $internship->updated_at }}</span>
                             </div>
                             <div class="flex justify-between items-center p-2 hover:bg-white rounded transition-colors">
                                 <span class="font-medium text-gray-700">Fecha de final</span>
-                                <span class="text-gray-600" x-text="postulacion.fechaFinal"></span>
+                                <span class="text-gray-600">{{ $internship->internship->end_date->format("d/m/Y") }}</span>
+                            </div>
+                            <div class="flex justify-between items-center p-2 hover:bg-white rounded transition-colors">
+                                <span class="font-medium text-gray-700">Fecha de inicio</span>
+                                <span class="text-gray-600">{{ $internship->internship->start_date->format("d/m/Y") }}</span>
+                            </div>
+                            <div class="flex justify-between items-center p-2 hover:bg-white rounded transition-colors">
+                                <span class="font-medium text-gray-700">Ubicación</span>
+                                <span class="text-gray-600">{{  $internship->internship->location->full_address }}</span>
                             </div>
                         </div>
                     </div>
-                </template>
+                @empty
+                    <x-ui.notif.info>El estudiante no ha cursado una pasantía actualmente</x-ui.notif.info>
+                @endforelse
                 <div class="flex justify-center mt-4 space-x-1">
                     <div class="w-2 h-2 bg-gray-400 rounded-full"></div>
                     <div class="w-2 h-2 bg-gray-400 rounded-full"></div>
@@ -190,11 +208,11 @@
 
         <!-- Pasantías anteriores -->
         <div class="bg-white rounded-lg shadow-sm border border-gray-200 mb-4 p-6 transition-all duration-300 hover:shadow-md"
-            x-data="{ expanded: false }">
+            x-data="{ expanded: true }">
             <div class="flex items-center justify-between cursor-pointer" @click="expanded = !expanded">
                 <h2 class="text-lg font-semibold text-blue-600 border-b-2 border-blue-100 pb-2 flex items-center">
                     <i class="fas fa-history mr-2"></i>
-                    Pasantías anteriores
+                    Pasantías pendientes
                 </h2>
                 <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"
                     :class="{ 'rotate-180': expanded }"></i>
@@ -202,31 +220,36 @@
             <div x-show="expanded" x-transition:enter="transition ease-out duration-300"
                 x-transition:enter-start="opacity-0 transform -translate-y-2"
                 x-transition:enter-end="opacity-100 transform translate-y-0">
-                <template x-for="pasantia in pastInternships" :key="pasantia.id">
+
+                @forelse ($waitInternship as $internship)
                     <div
-                        class="mt-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-4 border-l-4 border-green-500 hover:shadow-md transition-all duration-300">
+                        class="mt-4 bg-gradient-to-r from-yellow-50 to-amber-50 rounded-lg p-4 border-l-4 border-yellow-500 hover:shadow-md transition-all duration-300">
                         <div class="flex items-center justify-between mb-3">
-                            <h3 class="font-semibold text-gray-800 text-lg" x-text="pasantia.empresa"></h3>
-                            <span class="bg-gray-500 text-white px-2 py-1 rounded-full text-xs font-medium">
-                                Completada
+                            <h3 class="font-semibold text-gray-800 text-lg">{{ $internship->internship->company->name }}</h3>
+                            <span class="bg-yellow-500 text-white px-2 py-1 rounded-full text-xs font-medium">
+                                Pendiente
                             </span>
                         </div>
                         <div class="space-y-2">
                             <div class="flex justify-between items-center p-2 hover:bg-white rounded transition-colors">
-                                <span class="font-medium text-gray-700">Fecha de aceptación</span>
-                                <span class="text-gray-600" x-text="pasantia.fechaAceptacion"></span>
+                                <span class="font-medium text-gray-700">Fecha de inicio</span>
+                                <span class="text-gray-600">{{ $internship->internship->start_date->format("d/m/Y") }}</span>
                             </div>
                             <div class="flex justify-between items-center p-2 hover:bg-white rounded transition-colors">
                                 <span class="font-medium text-gray-700">Fecha de final</span>
-                                <span class="text-gray-600" x-text="pasantia.fechaFinal"></span>
+                                <span class="text-gray-600">{{  $internship->internship->end_date->format("d/m/Y") }}</span>
                             </div>
                             <div class="flex justify-between items-center p-2 hover:bg-white rounded transition-colors">
-                                <span class="font-medium text-gray-700">Fecha de inicio</span>
-                                <span class="text-gray-600" x-text="pasantia.fechaInicio"></span>
+                                <span class="font-medium text-gray-700">Ubicación</span>
+                                <span class="text-gray-600">{{  $internship->internship->location->full_address }}</span>
                             </div>
                         </div>
                     </div>
-                </template>
+                @empty
+                    <x-ui.notif.info>No se tiene pasantías anteriores registradas</x-ui.notif.info>
+                @endforelse
+
+
                 <div class="flex justify-center mt-4 space-x-1">
                     <div class="w-2 h-2 bg-gray-400 rounded-full"></div>
                     <div class="w-2 h-2 bg-gray-400 rounded-full"></div>

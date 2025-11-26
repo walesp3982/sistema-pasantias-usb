@@ -6,6 +6,7 @@ use App\Service\CompanyService;
 use App\Service\InternshipService;
 use App\Service\ReportsService;
 use App\Service\StudentService;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Throwable;
@@ -43,13 +44,21 @@ class CareerController extends Controller
     {
         try {
             $student = $this->studentService->find($idStudent);
+            $currentInternship = $this->studentService->currentInternship($idStudent);
+            $waitInternship = $this->studentService->waitInternship($idStudent);
+            $finishedInternship = $this->studentService->finishedInternship($idStudent);
         } catch (Throwable $err) {
             return redirect()->route('login');
         }
 
         return view(
             "career-departament.info-student",
-            ["student" => $student]
+            [
+                "student" => $student,
+                "currentInternship" => $currentInternship,
+                "waitInternship" => $waitInternship,
+                "finishedInternship" => $finishedInternship,
+            ]
         );
     }
 
