@@ -7,8 +7,6 @@ use App\Service\InternshipService;
 use App\Service\PostulationService;
 use App\Service\ReportsService;
 use App\Service\StudentService;
-use Exception;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Throwable;
 

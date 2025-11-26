@@ -2,10 +2,10 @@
 
 use App\Enums\RolesEnum;
 use App\Http\Controllers\AgreementController;
+use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\CareerController;
-use App\View\Components\Career\StudentDeleteBlock;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome')->name('welcome');
@@ -33,9 +33,13 @@ Route::middleware(['auth', 'role:student'])->group(function () {
     Route::post('postulation/upload-documents/{idPostulation}', [StudentController::class, 'uploadDocuments'])
         ->name('student.postulation.upload-documents');
     Route::post('submit/postulation/{postulationId}', [StudentController::class, "sendPostulation"])->name('submit.postulation');
-    Route::delete("delete/docPostulation/{idDocument}", [StudentController::class, "deleteDocument"]);
+    Route::delete("delete/docPostulation/{idDocument}", [StudentController::class, "deleteDocument"])->name("document.postulation.delete");
 });
 
+
+Route::middleware(['auth', 'role:'.RolesEnum::STUDENT->value.'|'.RolesEnum::CAREER->value])->group(function () {
+    Route::get('documentPostulation/{idDocumentPostulation}', [DocumentController::class, "showDocumentPostulation"] )->name('document.postulation.show'); 
+});
 Route::middleware(['auth', 'role:' . RolesEnum::CAREER->value])
     ->group(function () {
         Route::get('internships', [CareerController::class, "internships"])->name('career.internship');

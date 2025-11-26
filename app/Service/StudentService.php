@@ -18,7 +18,6 @@ use App\Repositories\Interfaces\InternshipRepositoryInterface;
 use App\Repositories\Interfaces\PostulationRepositoryInterface;
 use App\Repositories\InternshipRepository;
 use App\Repositories\PhoneRepository;
-use Exception;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
@@ -270,8 +269,8 @@ class StudentService
 
                 $doc = $this->documentPostulationRepository->find($idPostulation, DocPostulationEnum::from($typeDoc));
 
-                if(!is_null($doc)) {
-                    throw new Exception("El documento ya fue subido anteriormente eliminalo");
+                if (!is_null($doc)) {
+                    throw new \Exception("El documento ya fue subido anteriormente, elimina el anterior e intente de nuevo");
                 }
                 $doc = $this->documentPostulationRepository->create([
                     'postulation_id' => $idPostulation,
@@ -314,44 +313,49 @@ class StudentService
     }
 
 
-    public function currentInternship(int $idStudent) {
+    public function currentInternship(int $idStudent)
+    {
         $student = $this->studentRepository->get($idStudent);
 
-        if(!$student) {
-            throw new Exception('No es encontró al estudiante');
+        if (!$student) {
+            throw new \Exception('No es encontró al estudiante');
         }
         return $this->postulationRepository->getStudentActualInterships($idStudent);
 
     }
 
-    public function waitInternship(int $idStudent) {
+    public function waitInternship(int $idStudent)
+    {
         $student = $this->studentRepository->get($idStudent);
 
-        if(!$student) {
-            throw new Exception('No es encontró al estudiante');
+        if (!$student) {
+            throw new \Exception('No es encontró al estudiante');
         }
         return $this->postulationRepository->getStudentWaitInterships($idStudent);
     }
 
-    public function finishedInternship(int $idStudent) {
+    public function finishedInternship(int $idStudent)
+    {
         $student = $this->studentRepository->get($idStudent);
 
-        if(!$student) {
-            throw new Exception('No es encontró al estudiante');
+        if (!$student) {
+            throw new \Exception('No es encontró al estudiante');
         }
         return $this->postulationRepository->getStudentFinishedInterships($idStudent);
     }
 
-    public function getPostulation(int $idPostulation) {
+    public function getPostulation(int $idPostulation)
+    {
         $postulation = $this->postulationRepository->get($idPostulation);
 
         return $postulation;
     }
 
-    public function submitPostulation(int $idPostulation) {
+    public function submitPostulation(int $idPostulation)
+    {
         $postulation = $this->postulationRepository->get($idPostulation);
 
-        if(is_null($postulation)) {
+        if (is_null($postulation)) {
             throw new \Exception("No se encontró la postulación");
         }
 
@@ -364,22 +368,26 @@ class StudentService
     }
 
 
-    public function deleteDocPostulation(int $idDocPostulation) {
-        try {
-            $doc = $this->documentPostulationRepository->get($idDocPostulation);
-
-            if(is_null($doc)) {
-                throw new \Exception("No se encontró el documento");
-            }
-
-            $this->docService->delete($doc->document->id);
-
-            $this->documentPostulationRepository->delete($idDocPostulation);
-
-
-
+    public function deleteDocPostulation(int $idDocPostulation)
+    {
+        $doc = $this->documentPostulationRepository->get($idDocPostulation);
+        if (is_null($doc)) {
+            throw new \Exception("No se encontró el documento");
         }
 
+        $this->docService->delete($doc->document->id);
 
+        $this->documentPostulationRepository->delete($idDocPostulation);
+    }
+
+
+    public function getDocPostulation(int $idDocPostulation) {
+        $doc = $this->documentPostulationRepository->get($idDocPostulation);
+
+        if (is_null($doc)) { 
+            throw new \Exception("No se entontró el documento");
+        }
+
+        return $this->docService->showDocument($doc->document->id);
     }
 }
