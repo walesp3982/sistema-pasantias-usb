@@ -8,12 +8,15 @@
             </div>
 
             <div>
-                <x-ui.btn.info :disabled="$enable">
-                    <x-slot:icon>
-                        <i class="fa-solid fa-paper-plane"></i>
-                    </x-slot:icon>
-                    Enviar postulacion
-                </x-ui.btn.info>
+                <form action="{{ route('submit.postulation', ['postulationId' => $postulation->id]) }}" method="POST">
+                    @csrf
+                    <x-ui.btn.info :disabled="!$enable" type="submit">
+                        <x-slot:icon>
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </x-slot:icon>
+                        Enviar postulacion
+                    </x-ui.btn.info>
+                </form>
             </div>
 
         </div>
@@ -57,8 +60,56 @@
                                 <span class="text-red-600 font-semibold">Pendiente</span>
                             @endif
                         </td>
-                        <td class="p-2">
-                            <!-- Aquí puedes agregar botones o enlaces para acciones relacionadas con el documento -->
+                        <td class="flex flex-row p-2">
+                            <div class="grid grid-rows-2 gap-2">
+                                <div>
+                                    @if (!is_null($document["data"]))
+                                        <form
+                                            action="{{ route('document.postulation.delete', ['idDocument' => $document["data"]->id]) }}"
+                                            method="POST">
+                                            @csrf
+                                            @method("DELETE")
+                                            <x-ui.btn.danger type="submit">
+                                                <x-slot:icon>
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </x-slot:icon>
+                                                Eliminar documento
+                                            </x-ui.btn.danger>
+                                        </form>
+                                    @else
+                                        <a href="">
+                                            <x-ui.btn.danger disabled>
+                                                <x-slot:icon>
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </x-slot:icon>
+                                                Eliminar documento
+                                            </x-ui.btn.danger>
+                                        </a>
+                                    @endif
+                                </div>
+                                <div>
+                                    @if(!is_null($document["data"]))
+                                        <a
+                                            href="{{ route('document.postulation.show', ['idDocumentPostulation' => $document["data"]->id]) }}">
+                                            <x-ui.btn.info type="submit">
+                                                <x-slot:icon>
+                                                    <i class="fa-solid fa-eye"></i>
+                                                </x-slot:icon>
+                                                Mostrar documento
+                                            </x-ui.btn.info>
+                                        </a>
+                                    @else
+                                        <a href="">
+                                            <x-ui.btn.info type="submit" disabled>
+                                                <x-slot:icon>
+                                                    <i class="fa-solid fa-eye"></i>
+                                                </x-slot:icon>
+                                                Mostrar documento
+                                            </x-ui.btn.info>
+                                        </a>
+                                    @endif
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 @endforeach
@@ -67,6 +118,14 @@
     </x-ui.section>
 
     <x-ui.section>
+
+        @if (session('error'))
+            <x-ui.notif.danger>
+                {{ session('error') }}
+            </x-ui.notif.danger>
+        @endif
+
+        <div class="my-4"></div>
         <x-ui.title>
             Subir Documentos
         </x-ui.title>

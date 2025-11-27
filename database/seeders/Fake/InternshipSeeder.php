@@ -16,24 +16,23 @@ class InternshipSeeder extends Seeder
      */
     public function run(): void
     {
-        //
-        // Internship::factory()
-        //     ->count(4)
-        //     ->stateHours(ShiftEnum::AFTERNOON)
-        //     ->stateCareer(CareerEnum::SISTEMAS)
-        //     ->create();
+        Internship::factory()
+            ->count(4)
+            ->stateHours(ShiftEnum::AFTERNOON)
+            ->stateCareer(CareerEnum::SISTEMAS)
+            ->create();
 
 
-        // Internship::factory()
-        //     ->count(3)
-        //     ->stateHours(ShiftEnum::MORNING)
-        //     ->stateCareer(CareerEnum::SISTEMAS)
-        //     ->create();
+        Internship::factory()
+            ->count(3)
+            ->stateHours(ShiftEnum::MORNING)
+            ->stateCareer(CareerEnum::SISTEMAS)
+            ->create();
 
-        // Internship::factory()
-        //     ->count(5)
-        //     ->stateHours(ShiftEnum::NIGHT)
-        //     ->stateCareer(CareerEnum::SISTEMAS)
-        //     ->create();
+        Internship::factory()
+            ->count(5)
+            ->stateHours(ShiftEnum::NIGHT)
+            ->stateCareer(CareerEnum::SISTEMAS)
+            ->create();
     }
 }

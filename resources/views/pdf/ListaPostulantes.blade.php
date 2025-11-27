@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Lista de Postulantes</title>
@@ -9,55 +10,68 @@
             font-size: 12px;
             color: #000;
         }
+
         .header {
             margin-bottom: 15px;
         }
+
         .logo {
             width: 150px;
             height: 40px;
             float: left;
         }
+
         .titulo {
             font-size: 20px;
             font-weight: bold;
             letter-spacing: 1px;
-            padding-left: 240px;    
+            padding-left: 240px;
         }
+
         .subtitulo {
             font-size: 14px;
             font-weight: bold;
             padding-left: 300px;
             margin-bottom: 10px;
         }
+
         .info {
             margin-bottom: 15px;
             font-size: 12px;
         }
+
         .info p {
             margin: 2px 0;
         }
+
         table {
             width: 100%;
             border-collapse: collapse;
             font-size: 12px;
         }
-        th, td {
+
+        th,
+        td {
             border: 1px solid #000;
             padding: 6px;
         }
+
         th {
             background-color: #2231A8;
             color: #fff;
             text-align: center;
         }
+
         td {
             text-align: center;
         }
+
         .text-left {
             text-align: left;
         }
     </style>
 </head>
+
 <body>
 
     <div class="header">
@@ -67,8 +81,12 @@
     </div>
 
     <div class="info">
-        <p><strong>Dirección:</strong> Av. Heroínas #123, Cochabamba - Bolivia</p>
-        <p><strong>Horario:</strong> Lunes a Viernes de 08:30 a 18:30</p>
+        @php
+            $postulation = $postulations->first();
+        @endphp
+        
+        <p><strong>Dirección:</strong> {{$postulation->internship->location->full_address}}</p>
+        <p><strong>Horario:</strong> {{ $postulation->internship->entry_time->format("H:i") }} - {{ $postulation->internship->exit_time->format("H:i") }}</p>
         <p><strong>Fecha:</strong> {{ date('d/m/Y') }}</p>
     </div>
 
@@ -81,31 +99,17 @@
             </tr>
         </thead>
         <tbody>
+            {{  $i = 1 }}
+            @foreach ($postulations as $postulation)
                 <tr>
-                    <td> 1 </td>
-                    <td class="text-left">nombre</td>
-                    <td>ru</td>
+                    <td> {{ $i++ }} </td>
+                    <td class="text-left"> {{ $postulation->student->full_name }}</td>
+                    <td> {{ $postulation->student->ru }}</td>
                 </tr>
-                
-                <tr>
-                    <td> 2 </td>
-                    <td class="text-left">nombre</td>
-                    <td>ru</td>
-                </tr>
-                
-                <tr>
-                    <td> 3 </td>
-                    <td class="text-left">nombre</td>
-                    <td>ru</td>
-                </tr>
-                
-                <tr>
-                    <td> 4 </td>
-                    <td class="text-left">nombre</td>
-                    <td>ru</td>
-                </tr>
+            @endforeach
         </tbody>
     </table>
 
 </body>
+
 </html>

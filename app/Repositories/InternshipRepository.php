@@ -157,6 +157,33 @@ class InternshipRepository implements InternshipRepositoryInterface
             ->get();
     }
 
+    public function getCompanyDetailFinished(int $company_id): Collection
+    {
+        return Internship::hasCompany($company_id)
+            ->finished()
+            ->latest()
+            ->limit(30)
+            ->get();
+    }
+
+
+    public function getCompanyDetailCurrent(int $company_id): Collection
+    {
+        return Internship::hasCompany($company_id)
+            ->current()
+            ->latest()
+            ->limit(30)
+            ->get();
+    }
+
+    public function getCompanyDetailWait(int $company_id): Collection
+    {
+        return Internship::hasCompany($company_id)
+            ->wait()
+            ->latest()
+            ->limit(30)
+            ->get();
+    }
     public function getEagerLoading(int $id): ?Internship
     {
         return Internship::with('career', 'location.zone.municipality')->find($id);

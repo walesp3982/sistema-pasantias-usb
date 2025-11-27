@@ -20,7 +20,7 @@ class DocumentPostulationRepository implements DocumentPostulationRepositoryInte
     public function delete(int $id ): bool {
         $doc = $this->model->findOrFail($id);
 
-        return $doc->update();
+        return $doc->delete();
     }
 
     public function find(int $id_postulation, DocPostulationEnum $enum): ?DocumentPostulation {
