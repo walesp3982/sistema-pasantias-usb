@@ -38,9 +38,9 @@
                     Reportes
                 </x-navigation.navside.option>
             @endrole
-            <x-navigation.navside.option icon="fa-solid fa-gear" href="{{ route('config') }}">
+            {{-- <x-navigation.navside.option icon="fa-solid fa-gear" href="{{ route('config') }}">
                 Configuraciones
-            </x-navigation.navside.option>
+            </x-navigation.navside.option> --}}
         </ul>
     </div>
 
