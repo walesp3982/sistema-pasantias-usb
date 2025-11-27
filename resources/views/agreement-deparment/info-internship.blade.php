@@ -125,6 +125,11 @@
                     <i class="fas fa-paper-plane mr-3 text-blue-500"></i>
                     Postulaciones Enviadas
                 </h2>
+                <a href="{{ route('pdf.postulations', ['internshipId' => $internship->id]) }}">
+                    <x-ui.btn.info>
+                        Generar convocatoria
+                    </x-ui.btn.info>
+                </a>
                 <i class="fas fa-chevron-down text-gray-500 transition-transform duration-300"
                     :class="{ 'rotate-180': expanded }"></i>
             </div>

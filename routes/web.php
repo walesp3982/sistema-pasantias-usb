@@ -81,5 +81,6 @@ use App\Http\Controllers\pdfController;
 
 Route::get('/pdf/Certificado/{postulationId}', [pdfController::class, 'Certificado'])
     ->name('student.certificado');
-Route::get('/pdf/ListaDePostulantes', [pdfController::class, 'ListaPostulantes']);
+Route::get('/pdf/ListaDePostulantes/{internshipId}', [pdfController::class, 'ListaPostulantes'])
+    ->name('pdf.postulations');
 
