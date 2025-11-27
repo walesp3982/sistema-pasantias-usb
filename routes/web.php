@@ -21,10 +21,12 @@ Route::view('profile', 'profile')
 Route::middleware('auth')->group(function () {
     Route::get('imagenes/private/{id}', [ImageController::class, 'show'])
         ->name('private.image');
+    Route::view('configuracion', 'config')->name('config');
+    Route::get('students/{idStudent}', [CareerController::class, "showStudent"])->name('show.student');
 });
 
 Route::middleware(['auth', 'role:student'])->group(function () {
-    Route::view('configuracion', 'config')->name('config');
+    
     Route::get('pasantias', [StudentController::class, "showInternship"])->name('search.internship');
     Route::get("student/postulations", [StudentController::class, "getPostulations"])->name("student.postulations");
     Route::post('student/postulate/{idInternship}', [StudentController::class, "submitInternship"])
@@ -44,7 +46,7 @@ Route::middleware(['auth', 'role:' . RolesEnum::CAREER->value])
     ->group(function () {
         Route::get('internships', [CareerController::class, "internships"])->name('career.internship');
         Route::view('students', 'career-departament.students')->name('career.students');
-        Route::get('students/{idStudent}', [CareerController::class, "showStudent"])->name('show.student');
+        
         Route::delete('students/{idStudent}', [CareerController::class, "deleteStudent"])
             ->name('delete.student');
         Route::get('student/inactive',[CareerController::class, 'getStudentDelete'])->name('students.eliminate');
@@ -58,6 +60,8 @@ Route::middleware(['auth', 'role:' . RolesEnum::AGREEMENTS->value])
         // Formulario para crear pasantía para empresa
         Route::get("internship/create/{companyId}", [AgreementController::class, "createInternship"])
             ->name('create.internship');
+        Route::get('company/show/{companyId}', [AgreementController::class,'showCompany'])->name('show.company');
+        Route::get('showInternship/{idIntership}', [AgreementController::class, 'showInternship'])->name('internship.show');
     });
 
 Route::get('pdf/internship/{internshipId}', [CareerController::class, 'invitationInternship'])

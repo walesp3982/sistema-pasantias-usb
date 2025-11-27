@@ -83,7 +83,7 @@ class Internship extends Model
     #[Scope]
     protected function hasCompany(Builder $query, int $company_id) {
         return $query->whereHas('company', function (Builder $query) use($company_id) {
-            return $query->find($company_id);
+            return $query->where('id',$company_id);
         });
     }
 }

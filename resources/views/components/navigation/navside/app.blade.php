@@ -16,14 +16,6 @@
                 <x-navigation.navside.option icon="fa-solid fa-file-lines" href="{{ route('student.postulations') }}">
                     Postulaciones
                 </x-navigation.navside.option>
-
-                <x-navigation.navside.option icon="fa-solid fa-list-check" href="#">
-                    Seguimiento
-                </x-navigation.navside.option>
-
-                <x-navigation.navside.option icon="fa-solid fa-chart-line" href="#">
-                    Reportes
-                </x-navigation.navside.option>
             @endrole
             @role("carrer-department")
             <x-navigation.navside.option icon="fa-solid fa-chart-line" href="{{ route('career.internship') }}">
@@ -36,10 +28,6 @@
 
                 <x-navigation.navside.option icon="fa-solid fa-chart-line" href="#">
                     Evaluaciones 
-                </x-navigation.navside.option>
-
-                <x-navigation.navside.option icon="fa-solid fa-chart-line" href="#">
-                    Seguimiento pasantes
                 </x-navigation.navside.option>
             @endrole
             @role("agreements-departament")

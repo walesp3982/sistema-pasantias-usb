@@ -125,4 +125,18 @@ class PostulationRepository implements PostulationRepositoryInterface
             ->where("student_id", $idStudent)
             ->get();
     }
+
+    public function getPostulationAcceptByIntership(int $idIntership): Collection|null {
+        return $this->model
+            ->where("internship_id", $idIntership)
+            ->status(StatePostulationEnum::ACCEPT)
+            ->get();
+    }
+
+    public function getPostulationSendByIntership(int $idIntership): Collection|null {
+        return $this->model
+        ->where("internship_id", $idIntership)
+        ->status(StatePostulationEnum::SEND)
+        ->get();
+    }
 }

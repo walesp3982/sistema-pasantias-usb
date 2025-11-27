@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Repositories\CompanyRepository;
+use App\Repositories\InternshipRepository;
 use Illuminate\Support\Facades\DB;
 
 class CompanyService
@@ -10,6 +11,7 @@ class CompanyService
     public function __construct(
         private CompanyRepository $repository,
         private LocationService $locationService,
+        private InternshipRepository $internshipRepository,
     ) {}
     public function create(array $data)
     {
@@ -40,5 +42,44 @@ class CompanyService
 
         return $company;
 
+    }
+
+    public function getInternshipFinished(int $id) {
+        $company = $this->repository->get($id);
+
+        if(is_null($company)) {
+            throw new \Exception("No existe la compañia");
+        }
+
+        $internshipFinished = $this->internshipRepository
+            ->getCompanyDetailFinished($company->id);
+
+        return $internshipFinished;
+    }
+
+    public function getInternshipCurrent(int $id) {
+        $company = $this->repository->get($id);
+
+        if(is_null($company)) {
+            throw new \Exception("No existe la compañia");
+        }
+
+        $internshipCurrent = $this->internshipRepository
+            ->getCompanyDetailFinished($company->id);
+        
+        return $internshipCurrent;
+    }
+
+    public function getInternshipWait(int $id) {
+        $company = $this->repository->get($id);
+
+        if(is_null($company)) {
+            throw new \Exception("No existe la compañia");
+        }
+
+        $internshipWait = $this->internshipRepository
+        ->getCompanyDetailWait($company->id);
+
+        return $internshipWait;
     }
 }
