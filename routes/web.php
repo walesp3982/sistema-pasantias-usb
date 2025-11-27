@@ -51,6 +51,7 @@ Route::middleware(['auth', 'role:' . RolesEnum::CAREER->value])
             ->name('delete.student');
         Route::get('student/inactive',[CareerController::class, 'getStudentDelete'])->name('students.eliminate');
         Route::post('student/restore/{idStudent}', [CareerController::class, 'restoreStudent'])->name('student.restore');
+        Route::get('stadistics', [CareerController::class,'stadistics'])->name('stadistics');
     });
 
 Route::middleware(['auth', 'role:' . RolesEnum::AGREEMENTS->value])

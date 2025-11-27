@@ -121,5 +121,9 @@ class CareerController extends Controller
         );
     }
 
+    public function stadistics() {
+        return view('career-departament.stadistics');
+    }
+
 
 }

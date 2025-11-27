@@ -26,8 +26,8 @@
                     Estudiantes
                 </x-navigation.navside.option>
 
-                <x-navigation.navside.option icon="fa-solid fa-chart-line" href="#">
-                    Evaluaciones 
+                <x-navigation.navside.option icon="fa-solid fa-chart-line" href="{{ route('stadistics') }}">
+                    Estadísticas 
                 </x-navigation.navside.option>
             @endrole
             @role("agreements-departament")
