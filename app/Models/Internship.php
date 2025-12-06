@@ -30,7 +30,7 @@ class Internship extends Model
         'exit_time',
         'vacant',
         'location_id',
-        'status',
+        'suspend',
     ];
     protected $casts = [
         "active" => "boolean",
@@ -39,7 +39,8 @@ class Internship extends Model
         "postulation_limit_date" => 'date',
         "entry_time" => "datetime:H:i",
         "exit_time" => "datetime:H:i",
-        "status" => StatusInternshipEnum::class,
+        "suspend" => "boolean",
+        //"status" => StatusInternshipEnum::class,
     ];
 
     public function company() {
@@ -54,8 +55,35 @@ class Internship extends Model
         return $this->belongsTo(Location::class);
     }
 
+    public function postulations() {
+        return $this->hasMany(Postulation::class);
+    }
+
     #[Scope]
     public function active(Builder $query) {
         return $query->where("active", true);
+    }
+
+    #[Scope]
+    protected function finished(Builder $query) {
+        return $query->whereDate("end_date", "<", now());
+    }
+
+    #[Scope]
+    protected function wait(Builder $query) {
+        return $query->whereDate("start_date", ">", now());
+    }
+
+    #[Scope]
+    protected function current(Builder $query) {
+        return $query->whereDate("start_date", "<", now())
+            ->whereDate("end_date", ">", now());
+    }
+
+    #[Scope]
+    protected function hasCompany(Builder $query, int $company_id) {
+        return $query->whereHas('company', function (Builder $query) use($company_id) {
+            return $query->where('id',$company_id);
+        });
     }
 }

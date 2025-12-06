@@ -9,6 +9,7 @@ use App\Service\StudentService;
 use App\Service\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\VarDumper\Caster\RedisCaster;
 use Throwable;
 
 class StudentController extends Controller
@@ -61,7 +62,7 @@ class StudentController extends Controller
             //throw $th;
         }
 
-        return view('student.postulations', 
+        return view('student.postulations',
         compact('createdPostulations', 'sendPostulations'));
     }
 
@@ -74,12 +75,12 @@ class StudentController extends Controller
             ->studentService
             ->getPostulationById($student->id, $idPostulation);
 
-        
+
         $documents = $this->studentService->getDocumentPostulation($idPostulation);
-        
+
         $counter = 0;
         foreach ($documents as $document) {
-            if ($document['data'] != null) {
+            if ($document['data'] === null) {
                 $counter++;
             }
         }
@@ -103,12 +104,37 @@ class StudentController extends Controller
         ]
         );
 
-        $this->studentService->saveDocumentPostulation(
+        try {
+            $this->studentService->saveDocumentPostulation(
             $idPostulation,
             $validate["typeDoc"],
             $validate["document"]
         );
+        } catch (Throwable $th) {
+            return redirect()->back()->with("error", $th->getMessage());
+        }
+        
 
         return redirect()->back();
     }
+
+    public function deleteDocument(int $idDocument) {
+        $this->studentService->deleteDocPostulation($idDocument);
+
+        return redirect()->back();
+    }
+
+    public function sendPostulation(int $idPostulation) {
+
+        try {
+            $this->studentService->submitPostulation($idPostulation);
+        } catch (Throwable $th) {
+            return redirect()->back()->with("error", $th->getMessage());
+        }
+        
+
+        return redirect()->route('student.postulations');
+    }
+
+
 }

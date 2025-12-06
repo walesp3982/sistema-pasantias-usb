@@ -16,14 +16,6 @@
                 <x-navigation.navside.option icon="fa-solid fa-file-lines" href="{{ route('student.postulations') }}">
                     Postulaciones
                 </x-navigation.navside.option>
-
-                <x-navigation.navside.option icon="fa-solid fa-list-check" href="#">
-                    Seguimiento
-                </x-navigation.navside.option>
-
-                <x-navigation.navside.option icon="fa-solid fa-chart-line" href="#">
-                    Reportes
-                </x-navigation.navside.option>
             @endrole
             @role("carrer-department")
             <x-navigation.navside.option icon="fa-solid fa-chart-line" href="{{ route('career.internship') }}">
@@ -34,25 +26,21 @@
                     Estudiantes
                 </x-navigation.navside.option>
 
-                <x-navigation.navside.option icon="fa-solid fa-chart-line" href="#">
-                    Evaluaciones 
-                </x-navigation.navside.option>
-
-                <x-navigation.navside.option icon="fa-solid fa-chart-line" href="#">
-                    Seguimiento pasantes
+                <x-navigation.navside.option icon="fa-solid fa-chart-line" href="{{ route('stadistics') }}">
+                    Estadísticas
                 </x-navigation.navside.option>
             @endrole
             @role("agreements-departament")
                 <x-navigation.navside.option icon="fa-solid fa-chart-line" href="{{ route('agreements.company') }}">
                     Empresas Registradas
                 </x-navigation.navside.option>
-                <x-navigation.navside.option icon="fa-solid fa-chart-line" href="#">
+                {{-- <x-navigation.navside.option icon="fa-solid fa-chart-line" href="#">
                     Reportes
-                </x-navigation.navside.option>
+                </x-navigation.navside.option> --}}
             @endrole
-            <x-navigation.navside.option icon="fa-solid fa-gear" href="{{ route('config') }}">
+            {{-- <x-navigation.navside.option icon="fa-solid fa-gear" href="{{ route('config') }}">
                 Configuraciones
-            </x-navigation.navside.option>
+            </x-navigation.navside.option> --}}
         </ul>
     </div>
 

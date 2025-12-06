@@ -8,6 +8,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 interface CompanyRepositoryInterface {
     public function get(int $id): ?Company;
 
+    public function getWithLocation(int $id): ?Company;
     public function remove(int $id): bool;
 
     public function update(int $id, array $data): bool;

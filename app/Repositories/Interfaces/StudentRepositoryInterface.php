@@ -20,4 +20,8 @@ interface StudentRepositoryInterface {
     public function create(array $dataStudent): Student;
 
     public function delete(int $id): bool;
+
+    public function getStudentsDeletesCarreer(int $carrer_id): Collection;
+
+    public function getTrashed(int $id): ?Student;
 }

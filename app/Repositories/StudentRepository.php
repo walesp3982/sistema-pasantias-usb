@@ -51,4 +51,14 @@ class StudentRepository implements StudentRepositoryInterface {
         $student = $this->model->find($id);
         return $student->delete();
     }
+
+    public function getStudentsDeletesCarreer(int $carrer_id): Collection {
+       return $this->model
+            ->onlyTrashed()
+            ->where("career_id", $carrer_id)->get();
+    }
+
+    public function getTrashed(int $id): Student|null {
+        return $this->model->onlyTrashed()->find($id);
+    }
 }

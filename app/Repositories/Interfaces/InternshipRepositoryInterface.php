@@ -21,4 +21,20 @@ interface InternshipRepositoryInterface
     public function getInternshipsBefore(string $time, int $minutes): Collection;
 
     public function getInternshipsAfter(string $time, int $minutes): Collection;
+
+    public function getCareerDetail(int $career_id): Collection;
+
+    public function getCareerDetailWait(int $career_id): Collection;
+
+    public function getCareerDetailCurrent(int $career_id): Collection;
+
+    public function getCareerDetailFinished(int $career_id): Collection;
+
+    public function getEagerLoading(int $id): ?Internship;
+
+    public function getCompanyDetailFinished(int $company_id): Collection;
+
+    public function getCompanyDetailCurrent(int $company_id): Collection;
+
+    public function getCompanyDetailWait(int $company_id): Collection;
 }

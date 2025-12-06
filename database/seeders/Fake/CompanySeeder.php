@@ -14,9 +14,19 @@ class CompanySeeder extends Seeder
      */
     public function run(): void
     {
-        $companies = Company::factory()
+        Company::factory()
+            ->withLocation(3)
+            ->withInternshipsWait(1)
+            ->withInternshipsCurrent(2)
+            ->withInternshipsFinished(1)
+            ->create();
+
+        Company::factory()
             ->withLocation(4)
-            ->count(20)
+            ->withInternshipsCurrent(1)
+            ->withInternshipsFinished(1)
+            ->withInternshipsWait(1)
+            ->count(2)
             ->create();
     }
 }

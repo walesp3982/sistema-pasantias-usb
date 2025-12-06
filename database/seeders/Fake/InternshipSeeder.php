@@ -16,7 +16,6 @@ class InternshipSeeder extends Seeder
      */
     public function run(): void
     {
-        //
         Internship::factory()
             ->count(4)
             ->stateHours(ShiftEnum::AFTERNOON)

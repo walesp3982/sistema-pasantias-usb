@@ -64,11 +64,22 @@ class DocumentService
         return $path;
     }
 
+    public function showDocument(int $idDocument) {
+        $document = $this->documentRepository->get($idDocument);
+
+        $finalPath = $this->fullPath($document->uuid, $document->extension);
+        $originalName = $document->name.".".$document->extension;
+        return Storage::response($finalPath, $originalName,[
+            'Content-Type' => Storage::mimeType($finalPath),
+        ]);
+    }
+
     public function delete(int $idDocument) {
         $document = $this->documentRepository->get($idDocument);
 
         $finalPath = $this->fullPath($document->uuid, $document->extension);
-
+        //dd($finalPath);
+        $this->documentRepository->delete($idDocument);
         return Storage::delete($finalPath);
     }
 }

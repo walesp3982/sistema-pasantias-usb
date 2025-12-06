@@ -46,7 +46,7 @@
                         </a>
                     </div>
                     <div>
-                        <a href="">
+                        <a href="{{ route('show.company', ["companyId" => $company->id]) }}">
                             <x-ui.btn.info>
                                 <x-slot:icon>
                                     <i class="fa-solid fa-info"></i>

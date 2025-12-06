@@ -257,24 +257,137 @@ class StudentService
         ]);
     }
 
-    public function getDocuments() {
+    public function getDocuments()
+    {
         return TypeDocumentPostulation::all();
     }
 
-    public function saveDocumentPostulation(int $idPostulation, int $typeDoc, UploadedFile $file) {
+    public function saveDocumentPostulation(int $idPostulation, int $typeDoc, UploadedFile $file)
+    {
         DB::transaction(
             function () use ($idPostulation, $typeDoc, $file) {
+
+                $doc = $this->documentPostulationRepository->find($idPostulation, DocPostulationEnum::from($typeDoc));
+
+                if (!is_null($doc)) {
+                    throw new \Exception("El documento ya fue subido anteriormente, elimina el anterior e intente de nuevo");
+                }
                 $doc = $this->documentPostulationRepository->create([
                     'postulation_id' => $idPostulation,
                     'type_document_postulation_id' => $typeDoc,
                     'verify' => true
                 ]);
                 $this->docService->
-                    save($file, 
-                        DocumentPostulation::class, 
-                        $doc->id );
-                
+                    save(
+                        $file,
+                        DocumentPostulation::class,
+                        $doc->id
+                    );
+
             }
         );
+    }
+
+    public function getStudentsDelete(int $career_id): Collection
+    {
+        return $this->studentRepository->getStudentsDeletesCarreer($career_id);
+    }
+
+
+    public function getStudentTrashed(int $id)
+    {
+        $student = $this->studentRepository->getTrashed($id);
+        return $student;
+    }
+
+    public function restoreStudent(int $idStudent)
+    {
+        DB::transaction(function () use ($idStudent) {
+            $student = $this->getStudentTrashed($idStudent);
+
+            $student->restore();
+
+            $user = $student->user()->withTrashed()->first();
+            $user->restore();
+        });
+    }
+
+
+    public function currentInternship(int $idStudent)
+    {
+        $student = $this->studentRepository->get($idStudent);
+
+        if (!$student) {
+            throw new \Exception('No es encontró al estudiante');
+        }
+        return $this->postulationRepository->getStudentActualInterships($idStudent);
+
+    }
+
+    public function waitInternship(int $idStudent)
+    {
+        $student = $this->studentRepository->get($idStudent);
+
+        if (!$student) {
+            throw new \Exception('No es encontró al estudiante');
+        }
+        return $this->postulationRepository->getStudentWaitInterships($idStudent);
+    }
+
+    public function finishedInternship(int $idStudent)
+    {
+        $student = $this->studentRepository->get($idStudent);
+
+        if (!$student) {
+            throw new \Exception('No es encontró al estudiante');
+        }
+        return $this->postulationRepository->getStudentFinishedInterships($idStudent);
+    }
+
+    public function getPostulation(int $idPostulation)
+    {
+        $postulation = $this->postulationRepository->get($idPostulation);
+
+        return $postulation;
+    }
+
+    public function submitPostulation(int $idPostulation)
+    {
+        $postulation = $this->postulationRepository->get($idPostulation);
+
+        if (is_null($postulation)) {
+            throw new \Exception("No se encontró la postulación");
+        }
+
+
+        $this->postulationRepository->update($idPostulation, [
+            'status' => StatePostulationEnum::SEND
+        ]);
+
+
+    }
+
+
+    public function deleteDocPostulation(int $idDocPostulation)
+    {
+        $doc = $this->documentPostulationRepository->get($idDocPostulation);
+        if (is_null($doc)) {
+            throw new \Exception("No se encontró el documento");
+        }
+
+        $this->docService->delete($doc->document->id);
+
+        $this->documentPostulationRepository->delete($idDocPostulation);
+    }
+
+
+    public function getDocPostulation(int $idDocPostulation) {
+        $doc = $this->documentPostulationRepository->get($idDocPostulation);
+
+        if (is_null($doc)) { 
+            throw new \Exception("No se entontró el documento");
+        }
+
+        return $this->docService->showDocument($doc->document->id);
     }
 }

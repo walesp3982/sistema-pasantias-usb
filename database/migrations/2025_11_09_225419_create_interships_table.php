@@ -26,7 +26,7 @@ return new class extends Migration
             $table->integer("vacant");
             $table->foreignId('location_id')
                 ->constrained();
-            $table->enum('status', StatusInternshipEnum::cases());
+            $table->boolean('suspend')->default(false);
             $table->timestamps();
         });
 
@@ -38,7 +38,7 @@ return new class extends Migration
         Schema::create('postulations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('student_id')->constrained()->onDelete('cascade');
-            $table->foreignId('internship_id')->constrained()->onDelete('cascade');
+            $table->foreignId('internship_id')->nullable()->constrained()->onDelete('cascade');
             $table->enum('status', StatePostulationEnum::cases())
                 ->default(StatePostulationEnum::CREATED);
             $table->timestamps();
