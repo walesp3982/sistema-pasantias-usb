@@ -27,16 +27,16 @@
                 </x-navigation.navside.option>
 
                 <x-navigation.navside.option icon="fa-solid fa-chart-line" href="{{ route('stadistics') }}">
-                    Estadísticas 
+                    Estadísticas
                 </x-navigation.navside.option>
             @endrole
             @role("agreements-departament")
                 <x-navigation.navside.option icon="fa-solid fa-chart-line" href="{{ route('agreements.company') }}">
                     Empresas Registradas
                 </x-navigation.navside.option>
-                <x-navigation.navside.option icon="fa-solid fa-chart-line" href="#">
+                {{-- <x-navigation.navside.option icon="fa-solid fa-chart-line" href="#">
                     Reportes
-                </x-navigation.navside.option>
+                </x-navigation.navside.option> --}}
             @endrole
             {{-- <x-navigation.navside.option icon="fa-solid fa-gear" href="{{ route('config') }}">
                 Configuraciones
